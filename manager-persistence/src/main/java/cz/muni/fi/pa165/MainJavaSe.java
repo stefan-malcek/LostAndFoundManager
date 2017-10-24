@@ -20,7 +20,7 @@ public class MainJavaSe {
 
     public static void main(String[] args) throws SQLException {
         // The following line is here just to start up a in-memory database
-        new AnnotationConfigApplicationContext(InMemoryDatabaseSource.class);
+        new AnnotationConfigApplicationContext(PersistenceApplicationContext.class);
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
