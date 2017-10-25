@@ -5,7 +5,8 @@ package cz.muni.fi.pa165.tests;/*
  */
 
 import cz.muni.fi.pa165.PersistenceApplicationContext;
-import cz.muni.fi.pa165.entities.Temp;
+import cz.muni.fi.pa165.entities.User;
+import cz.muni.fi.pa165.enums.UserRole;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,23 +24,25 @@ import org.testng.annotations.Test;
  */
 @Test
 @ContextConfiguration(classes = {PersistenceApplicationContext.class})
-public class TempTest extends AbstractTestNGSpringContextTests {
+public class TestExample extends AbstractTestNGSpringContextTests {
+
+    private static final String USER_NAME = "Hello from DB!";
 
     @PersistenceUnit
     private EntityManagerFactory emf;
-    private static final String description = "Hello from DB!";
-
-    private Temp temp;
+    private User user;
 
     @BeforeClass
     public void setup() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        temp = new Temp();
-        temp.setDescription(description);
+        user = new User();
+        user.setName(USER_NAME);
+        user.setEmail("example@gmail.com");
+        user.setUserRole(UserRole.Administrator);
 
-        em.persist(temp);
+        em.persist(user);
         em.getTransaction().commit();
         em.close();
     }
@@ -48,10 +51,10 @@ public class TempTest extends AbstractTestNGSpringContextTests {
     public void testDescription() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Temp storedTemp = em.find(Temp.class, temp.getId());
+        User storedUser = em.find(User.class, user.getId());
         em.getTransaction().commit();
         em.close();
 
-        Assert.assertEquals(description, storedTemp.getDescription());
+        Assert.assertEquals(USER_NAME, storedUser.getName());
     }
 }

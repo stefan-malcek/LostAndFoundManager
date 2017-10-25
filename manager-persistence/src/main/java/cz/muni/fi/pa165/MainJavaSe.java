@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.muni.fi.pa165;
 
-import cz.muni.fi.pa165.entities.Temp;
+import cz.muni.fi.pa165.entities.User;
+import cz.muni.fi.pa165.enums.UserRole;
 import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,19 +21,21 @@ public class MainJavaSe {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
+                
+        User user = new User();
+        user.setName("temp name");
+        user.setEmail("example@gmail.com");
+        user.setUserRole(UserRole.Administrator);
         
-        Temp temp = new Temp();
-        temp.setDescription("Hello from DB.");
-        em.persist(temp);
-        
+        em.persist(user);
         em.getTransaction().commit();
         em.close();
         
         em = emf.createEntityManager();
         em.getTransaction().begin();
-        Temp storedTemp = em.find(Temp.class, 1L);
+        User storedUser = em.find(User.class, 1L);
         em.getTransaction().commit();
-        System.out.println(storedTemp);
+        System.out.println(storedUser);
         em.close();
         
         emf.close();
