@@ -17,7 +17,6 @@ import org.hibernate.validator.constraints.Email;
 
 /**
  * Represents a user entity.
- *
  * @author Stefan Malcek
  */
 @Entity

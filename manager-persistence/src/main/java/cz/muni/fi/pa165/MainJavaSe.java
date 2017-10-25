@@ -9,7 +9,7 @@ import javax.persistence.Persistence;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- *
+ * Represents a main class.
  * @author Stefan Malcek
  */
 public class MainJavaSe {
@@ -21,23 +21,25 @@ public class MainJavaSe {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-                
+
         User user = new User();
         user.setName("temp name");
         user.setEmail("example@gmail.com");
         user.setUserRole(UserRole.Administrator);
-        
+
         em.persist(user);
         em.getTransaction().commit();
         em.close();
-        
+
         em = emf.createEntityManager();
         em.getTransaction().begin();
+
         User storedUser = em.find(User.class, 1L);
+
         em.getTransaction().commit();
-        System.out.println(storedUser);
         em.close();
-        
         emf.close();
+
+        System.out.println(storedUser);
     }
 }

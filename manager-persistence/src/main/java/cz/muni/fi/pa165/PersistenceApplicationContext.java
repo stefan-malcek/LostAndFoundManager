@@ -1,10 +1,9 @@
 package cz.muni.fi.pa165;
 
-/**
- * Created by Stefan Malcek on 24.10.2017.
- */
 import org.hibernate.jpa.HibernatePersistenceProvider;
+
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
@@ -18,24 +17,28 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 
-
+/**
+ * Represents an application context class.
+ * Created by Stefan Malcek on 24.10.2017.
+ */
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-//@ComponentScan(basePackageClasses={UserDao.class}, basePackages = "cz.muni.fi.pa165")
+@ComponentScan(basePackages = "cz.muni.fi.pa165")
 public class PersistenceApplicationContext {
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor postProcessor() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 
     @Bean
     public JpaTransactionManager transactionManager() {
         return new JpaTransactionManager(entityManagerFactory().getObject());
     }
 
-    /**
-     * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
-     *
-     * @return
-     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();

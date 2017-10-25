@@ -8,34 +8,32 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Lost And Found Manager</name>
+    
     <modules>
         <module>manager-persistence</module>
     </modules>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>io.spring.platform</groupId>
-                <artifactId>platform-bom</artifactId>
-                <!-- <version>1.1.3.RELEASE</version> -->
-                <version>1.0.1.RELEASE</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    
+    <parent>
+        <groupId>io.spring.platform</groupId>
+        <artifactId>platform-bom</artifactId>
+        <version>2.0.8.RELEASE</version>
+        <relativePath/>
+    </parent>
+    
     <build> 
         <pluginManagement> 
             <plugins> 
                 <plugin> 
                     <groupId>org.apache.maven.plugins</groupId> 
                     <artifactId>maven-compiler-plugin</artifactId> 
-                    <configuration> 
+                    <configuration>
                         <source>1.8</source> 
                         <target>1.8</target> 
-                    </configuration> 
+                    </configuration>
                 </plugin> 
             </plugins> 
         </pluginManagement> 
