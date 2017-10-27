@@ -1,4 +1,5 @@
 package cz.muni.fi.pa165.entities;
+
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
