@@ -1,5 +1,4 @@
 package cz.muni.fi.pa165.dao;
-
 import cz.muni.fi.pa165.entities.Category;
 import java.util.List;
 import javax.persistence.EntityManager;
