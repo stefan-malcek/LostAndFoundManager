@@ -1,4 +1,7 @@
 target/
+.idea/
+manager-parent.iml
+manager-persistence/manager-persistence.iml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
