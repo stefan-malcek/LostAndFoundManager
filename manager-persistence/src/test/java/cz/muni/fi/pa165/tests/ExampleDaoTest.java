@@ -38,6 +38,7 @@ public class ExampleDaoTest extends AbstractTestNGSpringContextTests {
         user.setName(USER_NAME);
         user.setEmail("example@gmail.com");
         user.setUserRole(UserRole.Administrator);
+        user.setPassword("asdsa");
         
         userDao.create(user);
     }
