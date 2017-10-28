@@ -28,6 +28,12 @@ public interface EventDao {
     void delete(Event event);
     
     /**
+     * Update the event with given id.
+     * @param event Event to delete
+     */
+    void update(Event event);
+    
+    /**
      * Retrieves the event with given id.
      * @param id Id of the event
      * @return {@code Event} with given id

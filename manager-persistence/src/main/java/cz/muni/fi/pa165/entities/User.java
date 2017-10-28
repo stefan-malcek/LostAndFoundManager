@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -36,6 +37,11 @@ public class User {
     @NotNull
     @Column(nullable = false, unique = true)
     private String email;
+    
+    @NotNull    
+    @Size(min=4, max=255)
+    @Column(nullable = false, unique = false)
+    private String password;
 
     @Enumerated
     @NotNull
@@ -57,6 +63,14 @@ public class User {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public String getEmail() {
         return email;
     }

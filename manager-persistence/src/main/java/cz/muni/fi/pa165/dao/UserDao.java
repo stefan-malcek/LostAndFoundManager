@@ -22,6 +22,12 @@ public interface UserDao {
     void delete(User user);
     
     /**
+     * Updates the user with given id.
+     * @param user User to delete
+     */
+    void update(User user);
+    
+    /**
      * Retrieves the user with given id.
      * @param id Id of the user
      * @return {@code User} with given id

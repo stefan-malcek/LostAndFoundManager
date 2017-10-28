@@ -26,9 +26,8 @@ public class EventDaoImpl implements EventDao {
  
     @Override
     public void create(Event event)  {
-    if (event == null) {
+    if (event == null)
             throw new IllegalArgumentException("event cannot be null.");
-        }
         em.persist(event);        
     }
 
@@ -42,9 +41,8 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public Event findById(long id) {
-        if (id <= 0) {
+        if (id <= 0) 
             throw new IllegalArgumentException("Id cannot be lower than or equal to zero");
-        }
         return em.find(Event.class, id);
     }
 
@@ -102,5 +100,11 @@ public class EventDaoImpl implements EventDao {
          return em.createQuery("SELECT e FROM Event e WHERE e.dateOfLoss = :dateOfLoss",
 		Event.class).setParameter("dateOfLoss",date).getResultList();
     }
-    
+
+    @Override
+    public void update(Event event) {
+        if (event == null) 
+            throw new IllegalArgumentException("Event cannot be null.");
+         em.merge(event); 
+    }
 }
