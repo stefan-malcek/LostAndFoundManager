@@ -3,8 +3,12 @@ package cz.muni.fi.pa165.entities;
 import cz.muni.fi.pa165.enums.ItemColor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 /**
  * Represents a user entity.
@@ -20,12 +24,13 @@ public class Item {
 
     @NotNull
     @Column(nullable = false)
+    @Size(min = 1, max = 256)
     private String name;
 
-    //@ForeignKey
-    private long categoryId;
-
     @NotNull
+    @ManyToOne(optional = false)
+    private Category category;
+
     @Enumerated
     private ItemColor color;
 
@@ -33,27 +38,21 @@ public class Item {
     @Column(nullable = false)
     private String description;
 
-    @NotNull
-    @Min(0)
-    private double weight;
+    @DecimalMin("0.00")
+    private BigDecimal weight;
 
-    @NotNull
     @Min(0)
     private int height;
 
-    @NotNull
     @Min(0)
     private int width;
 
-    @NotNull
     @Min(0)
     private int depth;
 
-    @NotNull
     private String photoUri;
 
-    @NotNull
-    private boolean returned;
+    private LocalDate returned;
 
 
     public long getId() {
@@ -64,8 +63,8 @@ public class Item {
         this.id = id;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
     public String getName() {
@@ -76,8 +75,8 @@ public class Item {
         this.name = name;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public ItemColor getColor() {
@@ -96,11 +95,11 @@ public class Item {
         this.description = description;
     }
 
-    public double getWeight() {
+    public BigDecimal getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(BigDecimal weight) {
         this.weight = weight;
     }
 
@@ -136,12 +135,52 @@ public class Item {
         this.photoUri = photoUri;
     }
 
-    public boolean isReturned() {
+    public LocalDate getReturned() {
         return returned;
     }
 
-    public void setReturned(boolean returned) {
+    public void setReturned(LocalDate returned) {
         this.returned = returned;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Item)) {
+            return false;
+        }
+
+        Item item = (Item) obj;
+
+        if (!name.equals(item.getName()) ) return false;
+        if (!category.equals(item.getCategory()) ) return false;
+        if (color != null ? color != item.getColor() : item.getColor() != null) return false;
+        if (weight != null ? !weight.equals(item.getWeight()) : item.getWeight() != null) return false;
+        if (height != item.getHeight()) return false;
+        if (width != item.getWidth()) return false;
+        if (depth != item.getDepth()) return false;
+        return returned != null ? returned.equals(item.getReturned()) : item.getReturned() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 37;
+        int result = 1;
+
+        result = prime * result + name.hashCode();
+        result = prime * result + category.hashCode();
+        result = prime * result + (color != null ? color.hashCode() : 0);
+        result = prime * result + (weight != null ? weight.hashCode() : 0);
+        result = prime * result + height;
+        result = prime * result + width;
+        result = prime * result + depth;
+        result = prime * result + (returned != null ? returned.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -149,7 +188,7 @@ public class Item {
         return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", categoryId=" + categoryId +
+                ", category=" + category +
                 ", color=" + color +
                 ", description='" + description + '\'' +
                 ", weight=" + weight +

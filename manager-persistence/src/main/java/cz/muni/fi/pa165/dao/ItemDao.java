@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dao;
 
+import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 
 import java.util.List;
@@ -32,6 +33,14 @@ public interface ItemDao {
      * @return {@code Item} with given id
      */
     Item findById(long id);
+
+    /**
+     * Retrieves the items with given category.
+     *
+     * @param category category of the items
+     * @return {@code List} of items
+     */
+    List<Item> findByCategory(Category category);
 
     /**
      * Retrieves all items.

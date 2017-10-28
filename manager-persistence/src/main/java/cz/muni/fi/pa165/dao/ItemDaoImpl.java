@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dao;
 
+import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,16 @@ public class ItemDaoImpl implements ItemDao{
         }
 
         return em.find(Item.class, id);
+    }
+
+    @Override
+    public List<Item> findByCategory(Category category) {
+        if (category == null) {
+            throw new IllegalArgumentException("Category cannot be null.");
+        }
+        return em.createQuery("SELECT i FROM Item i WHERE i.category = :category", Item.class)
+                .setParameter("category", category)
+                .getResultList();
     }
 
     @Override
