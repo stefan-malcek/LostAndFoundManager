@@ -59,11 +59,4 @@ public class UserDaoImpl implements UserDao {
     public List<User> findAll() {
         return em.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
-    
-    @Override
-    public void update(User user) {
-        if (user == null) 
-            throw new IllegalArgumentException("User cannot be null.");
-         em.merge(user); 
-    }
 }

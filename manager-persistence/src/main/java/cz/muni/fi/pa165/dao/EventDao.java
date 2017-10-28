@@ -7,6 +7,8 @@ package cz.muni.fi.pa165.dao;
 import java.util.List;
 
 import cz.muni.fi.pa165.entities.Event;
+import cz.muni.fi.pa165.entities.Item;
+import cz.muni.fi.pa165.entities.User;
 import java.time.LocalDate;
 
 
@@ -26,13 +28,7 @@ public interface EventDao {
      * @param event Event to delete
      */
     void delete(Event event);
-    
-    /**
-     * Update the event with given id.
-     * @param event Event to delete
-     */
-    void update(Event event);
-    
+        
     /**
      * Retrieves the event with given id.
      * @param id Id of the event
@@ -41,25 +37,25 @@ public interface EventDao {
     Event findById(long id);
     
     /**
-     * Retrieves the event with given id.
-     * @param id Id of the lost item.
+     * Retrieves the event with given item.
+     * @param item The lost item.
      * @return {@code Event} with given id
      */
-    Event findByItemId(long id);
+    Event findByItem(Item item);
     
     /**
-     * Retrieves all events with given finder id.
-     * @param id Id of the finder.
+     * Retrieves all events with given finder.
+     * @param finder User who found item.
      * @return {@code Event} with given id
      */
-    List<Event> findEventByFinderId(long id);
+    List<Event> findEventByFinder(User finder);
     
     /**
-     * Retrieves all events with given owner id.
-     * @param id Id of the owner.
+     * Retrieves all events with given owner.
+     * @param owner User who lost item.
      * @return {@code Event} with given id
      */
-    List<Event> findEventByOwnerId(long id);
+    List<Event> findEventByOwner(User owner);
     
     /**
      * Retrieves all events with given place of loss.

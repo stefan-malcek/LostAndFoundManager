@@ -6,10 +6,11 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.Event;
+import cz.muni.fi.pa165.entities.Item;
+import cz.muni.fi.pa165.entities.User;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.OneToOne;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -46,13 +47,12 @@ public class EventDaoImpl implements EventDao {
         return em.find(Event.class, id);
     }
 
-    @OneToOne
     @Override
-    public Event findByItemId(long id) {
-        if (id <= 0) 
-            throw new IllegalArgumentException("Id cannot be lower than or equal to zero");
-        return em.createQuery("SELECT e FROM Event e WHERE e.itemId = :itemId ",
-				Event.class).setParameter("itemId",id).getSingleResult();
+    public Event findByItem(Item item) {
+          if (item == null)
+            throw new IllegalArgumentException("Item cannot be null.");
+        return em.createQuery("SELECT e FROM Event e WHERE item = :item ",
+				Event.class).setParameter("item",item).getSingleResult();
     }
 
     @Override
@@ -62,19 +62,19 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public List<Event> findEventByFinderId(long id) {
-          if (id <= 0) 
-            throw new IllegalArgumentException("Id cannot be lower than or equal to zero");
-          return em.createQuery("SELECT e FROM Event e WHERE e.finderId = :finderId ",
-		Event.class).setParameter("finderId",id).getResultList();
+    public List<Event> findEventByFinder(User user) {
+         if (user == null)
+            throw new IllegalArgumentException("User cannot be null.");
+          return em.createQuery("SELECT e FROM Event e WHERE e.finder = :finder ",
+		Event.class).setParameter("finder",user).getResultList();
     }
 
     @Override
-    public List<Event> findEventByOwnerId(long id) {
-          if (id <= 0) 
-            throw new IllegalArgumentException("Id cannot be lower than or equal to zero");
-          return em.createQuery("SELECT e FROM Event e WHERE e.ownerId = :ownerId ",
-		Event.class).setParameter("ownerId",id).getResultList();
+    public List<Event> findEventByOwner(User user) {
+          if (user == null)
+            throw new IllegalArgumentException("User cannot be null.");
+          return em.createQuery("SELECT e FROM Event e WHERE e.owner = :owner",
+		Event.class).setParameter("owner",user).getResultList();
     }
 
     @Override
@@ -99,12 +99,5 @@ public class EventDaoImpl implements EventDao {
     public List<Event> findEventByDateOfLoss(LocalDate date) {
          return em.createQuery("SELECT e FROM Event e WHERE e.dateOfLoss = :dateOfLoss",
 		Event.class).setParameter("dateOfLoss",date).getResultList();
-    }
-
-    @Override
-    public void update(Event event) {
-        if (event == null) 
-            throw new IllegalArgumentException("Event cannot be null.");
-         em.merge(event); 
     }
 }

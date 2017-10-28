@@ -140,21 +140,4 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         user2 = userDao.findById(user2Id);
         Assert.assertNotNull(user2);       
     }
-    
-    @Test
-    public void testUpdate() {
-                        
-    	userDao.create(user);         
-        userDao.create(user2);         
-        long id = user.getId();       
-        long id2 = user2.getId();       
-        User userFromDb = userDao.findById(id);       
-        userFromDb.setName("Tomáš Dobrý");
-        
-        userDao.update(userFromDb);        
-        User newestUser = userDao.findById(id);               
-        assertEquals(newestUser.getName(), "Tomáš Dobrý");         
-        User newestUser2 = userDao.findById(id2);               
-        assertEquals(newestUser2.getName(), "Monika Bledá");         
-    }
 }

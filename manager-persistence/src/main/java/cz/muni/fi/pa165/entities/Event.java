@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -27,12 +28,11 @@ public class Event {
     private long id;
 
     @NotNull
-    @Column(nullable = false, unique = true)
-    private long itemId;
+    @ManyToOne(optional = false)
+    private Item item;
     
-    
-    @Column(nullable = true, unique = false)
-    private long ownerId;
+    @ManyToOne(optional = true)
+    private User owner;
     
     @Column(nullable = true, unique = false)
     private LocalDate dateOfLoss;
@@ -41,10 +41,9 @@ public class Event {
     @NotNull
     @Column(nullable = false, unique = false)
     private String placeOfLoss;
-
     
-    @Column(nullable = true, unique = false)
-    private long finderId;
+    @ManyToOne(optional = true)
+    private User finder;
    
     @Column(nullable = true, unique = false)
     private LocalDate dateOfFind;
@@ -61,28 +60,28 @@ public class Event {
         this.id = id;
     }
     
-    public long getItemId() {
-        return itemId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemId(long id) {
-        this.itemId = id;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public long getOwnerId() {
-        return ownerId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setOwnerId(long id) {
-        this.ownerId = id;
+    public void setOwner(User user) {
+        this.owner = user;
     }
     
-    public long getFinderId() {
-        return finderId;
+    public User getFinder() {
+        return finder;
     }
 
-    public void setFinderId(long id) {
-        this.finderId = id;
+    public void setFinder(User user) {
+        this.finder = user;
     }
     
     public String getPlaceOfFind() {
@@ -121,7 +120,7 @@ public class Event {
     public int hashCode() {
         int prime = 37;
         int result = 1;
-        result = prime * result + Objects.hashCode(this.itemId);
+        result = prime * result + Objects.hashCode(this.item);
         return result;
     }
 
@@ -137,20 +136,20 @@ public class Event {
             return false;
         }
         Event other = (Event) obj;
-        return Objects.equals(this.itemId, other.getItemId());
+        return Objects.equals(this.item.getId(), other.getItem().getId());
     }
     
     @Override
     public String toString() {
         return "Event{" +
                 "id=" + id + 
-                ", itemId=" + itemId + 
+                ", itemId=" + item.getId() + 
                 ", dateOfLoss=" + dateOfLoss + 
                 ", placeOfLoss=" + placeOfLoss + 
                 ", dateOfFind=" + dateOfFind + 
                 ", placeOfFind=" + placeOfFind + 
-                ", ownerId=" + ownerId + 
-                ", finderId=" + finderId + 
+                ", owner=" + owner.getEmail() + 
+                ", finder=" + finder.getEmail() + 
                 '}';
     }
 }
