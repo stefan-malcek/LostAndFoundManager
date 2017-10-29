@@ -62,89 +62,63 @@ public class ItemDaoTest extends AbstractTestNGSpringContextTests {
         
     @Test
     public void testCreate() {
-        Assert.assertEquals(0, jacket.getId());
-        Assert.assertEquals(0, laptop.getId());
-        
-        itemDao.create(jacket);        
-        itemDao.create(laptop);
-        
-        Assert.assertNotNull(jacket.getId());
-        Assert.assertNotNull(laptop.getId());
-        Assert.assertTrue(jacket.getId() < laptop.getId());
+        Assert.assertEquals(0, jacket.getId());        
+        itemDao.create(jacket);       
+        Assert.assertTrue(0 != jacket.getId());
     }   
     
-    @Test
-    public void testCreateNullName() {
-        try {
-            jacket.setName(null);
-            itemDao.create(jacket);
-            Assert.fail("Expected exception to be thrown");
-        } catch (ValidationException ex) {
-            
-        }
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateNullName() {        
+        jacket.setName(null);
+        itemDao.create(jacket);
     }   
     
-    @Test
-    public void testCreateEmptyName() {
-        try {
-            jacket.setName("");
-            itemDao.create(jacket);
-            Assert.fail("Expected exception to be thrown");
-        } catch (ValidationException ex) {
-            
-        }
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateEmptyName() {        
+        jacket.setName("");
+        itemDao.create(jacket);
     } 
     
-    @Test
+    @Test(expectedExceptions = ValidationException.class)
     public void testCreateOverlongName() {
-        // Generated name will be 259 characters long
-        String name = "";
+        // Generated name will be more than 256 characters long
+        StringBuilder name = new StringBuilder() ;
         for(int i = 0; i <= 122; i++) {
-            name += i;            
+            name.append(i);
         }       
-        
-        try {            
-            jacket.setName(name);
-            itemDao.create(jacket);
-            Assert.fail("Expected exception to be thrown");
-        } catch (ValidationException ex) {
-            
-        }
+             
+        jacket.setName(name.toString());
+        itemDao.create(jacket);
     } 
     
-    @Test
+    @Test(expectedExceptions = ValidationException.class)
     public void testCreateNullDescription() {
-        try {
-            jacket.setDescription(null);
-            itemDao.create(jacket);
-            Assert.fail("Expected exception to be thrown");
-        } catch (ValidationException ex) {
-            
-        }
+        jacket.setDescription(null);
+        itemDao.create(jacket);
     }   
     
-    @Test
-    public void testCreateNegativeHeightWidthDepth() {
-        try {           
-            jacket.setHeight(-1);
-            jacket.setWidth(-1);
-            jacket.setDepth(-1);            
-            itemDao.create(jacket);
-            Assert.fail("Expected exception to be thrown");
-        } catch (ValidationException ex) {
-            
-        }
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateNegativeHeight() {                 
+        jacket.setHeight(-1);           
+        itemDao.create(jacket);
     } 
     
-    @Test
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateNegativeWidth() {
+        jacket.setWidth(-1);          
+        itemDao.create(jacket);
+    } 
+    
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateNegativeDepth() {
+        jacket.setDepth(-1);            
+        itemDao.create(jacket);
+    } 
+    
+    @Test(expectedExceptions = ValidationException.class)
     public void testCreateNegativeWeight() {
-        try {           
-            jacket.setWeight(new BigDecimal(-1.00));
-            itemDao.create(jacket);
-            Assert.fail("Expected exception to be thrown");
-        } catch (ValidationException ex) {
-            
-        }
+        jacket.setWeight(new BigDecimal(-1.00));
+        itemDao.create(jacket);
     } 
     
     @Test
@@ -160,7 +134,7 @@ public class ItemDaoTest extends AbstractTestNGSpringContextTests {
         try {
             itemDao.findById(-50L);
             Assert.fail("Expected exception to be thrown");
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
             Assert.assertTrue(ex.getCause() instanceof IllegalArgumentException);
         }
     }
@@ -216,11 +190,7 @@ public class ItemDaoTest extends AbstractTestNGSpringContextTests {
         
         storedItems = itemDao.findAll();
         Assert.assertEquals(storedItems.size(), 1);
-        Assert.assertEquals(storedItems.get(0), laptop);
-        itemDao.delete(storedItems.get(0));
-        
-        storedItems = itemDao.findAll();
-        Assert.assertEquals(storedItems.size(), 0);        
+        Assert.assertEquals(storedItems.get(0), laptop);               
     }
     
     @Test
