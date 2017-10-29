@@ -14,7 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import java.util.List;
 
 /**
@@ -40,18 +40,18 @@ public class CategoryDaoTest extends AbstractTestNGSpringContextTests {
         category.setDescription(CATEGORY_DESCRIPTION);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void create_null_throwsException() {
         categoryDao.create(null);
     }
 
-    @Test(expectedExceptions = ConstraintViolationException.class)
+    @Test(expectedExceptions = ValidationException.class)
     public void create_nullName_throwsException() {
         category.setName(null);
         categoryDao.create(category);
     }
 
-    @Test(expectedExceptions = ConstraintViolationException.class)
+    @Test(expectedExceptions = ValidationException.class)
     public void create_nullDescription_throwsException() {
         category.setDescription(null);
         categoryDao.create(category);
@@ -68,7 +68,7 @@ public class CategoryDaoTest extends AbstractTestNGSpringContextTests {
         categoryDao.create(nonUniqueCategory);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void delete_null_throwsException() {
         categoryDao.delete(null);
     }
@@ -85,7 +85,7 @@ public class CategoryDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertNull(storedCategory);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void findById_negativeId_throwsException() {
         categoryDao.findById(-5L);
     }
@@ -100,12 +100,12 @@ public class CategoryDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(storedCategory.getDescription(), CATEGORY_DESCRIPTION);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void findCategoryByName_null_throwsException() {
         categoryDao.findCategoryByName(null);
     }
 
-    @Test(expectedExceptions = Exception.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void findCategoryByName_emptyName_throwsException() {
         categoryDao.findCategoryByName("");
     }
