@@ -119,7 +119,7 @@ public class Event {
         int prime = 37;
         int result = 1;
         result = prime * result + Objects.hashCode(this.item);
-        result = prime * result + (finder != null ? owner.hashCode() : 0);
+        result = prime * result + (finder != null ? finder.hashCode() : 0);
         result = prime * result + (owner != null ? owner.hashCode() : 0);
         result = prime * result + (item != null ? item.hashCode() : 0);
         result = prime * result + (dateOfLoss != null ? dateOfLoss.hashCode() : 0);
@@ -146,10 +146,10 @@ public class Event {
         if(!placeOfLoss.equals(other.getPlaceOfLoss()) ) return false;
         if(!dateOfLoss.equals(other.getDateOfLoss()) ) return false;
         if(!dateOfFind.equals(other.getDateOfFind()) ) return false;
-        if(finder.getId() != other.getFinder().getId()) return false;
-        if(owner.getId() != other.getOwner().getId()) return false;
+        if(!finder.equals(other.getFinder())) return false;
+        if(!owner.equals(other.getOwner())) return false;
         if(item.getId() != other.getItem().getId()) return false;
-        return Objects.equals(this.item.getId(), other.getItem().getId());
+        return Objects.equals(this.item, other.getItem());
     }
     
     @Override
