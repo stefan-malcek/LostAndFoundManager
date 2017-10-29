@@ -24,7 +24,7 @@ public class Category {
     private String name;
     
     @NotNull
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private String description;
     
     public long getId() {
