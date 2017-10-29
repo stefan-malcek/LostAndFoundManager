@@ -50,13 +50,13 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         user.setName("Josef Novák");
         user.setEmail("admin@lost.com");
         user.setUserRole(UserRole.Administrator);
-        user.setPassword("1245");
+        user.setPasswordHash("1245");
         
         user2 = new User();
         user2.setName("Monika Bledá");
         user2.setEmail("user@lost.com");
         user2.setUserRole(UserRole.Member);
-        user2.setPassword("1245");
+        user2.setPasswordHash("1245");
     }
     
     @Test
@@ -74,30 +74,6 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     public void testCreateNullEmail() {    
            try {
                user.setEmail(null);
-               userDao.create(user);
-           fail( "Method didn't throw when I expected it to" );
-           } catch (ConstraintViolationException e) {
-            
-           }
-
-    }
-    
-    @Test
-    public void testCreateNullPassword() {                        
-           try {
-            user.setPassword(null);
-            userDao.create(user);
-        fail( "Method didn't throw when I expected it to" );
-        } catch (ConstraintViolationException e) {
-
-        }
-        
-    }
-        
-    @Test
-    public void testCreateShortPassword() {    
-           try {
-               user.setPassword("123");
                userDao.create(user);
            fail( "Method didn't throw when I expected it to" );
            } catch (ConstraintViolationException e) {
