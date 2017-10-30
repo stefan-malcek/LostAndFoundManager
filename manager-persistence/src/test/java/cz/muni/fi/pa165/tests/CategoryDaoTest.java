@@ -45,6 +45,15 @@ public class CategoryDaoTest extends AbstractTestNGSpringContextTests {
         categoryDao.create(null);
     }
 
+    @Test
+    public void create_category_stores() {
+        Assert.assertEquals(category.getId(), 0);
+
+        categoryDao.create(category);
+
+        Assert.assertTrue(category.getId() != 0);
+    }
+
     @Test(expectedExceptions = ValidationException.class)
     public void create_nullName_throwsException() {
         category.setName(null);
@@ -124,10 +133,10 @@ public class CategoryDaoTest extends AbstractTestNGSpringContextTests {
     public void findAll_electronics_retrievesList() {
         categoryDao.create(category);
 
-        Category cat = new Category();
-        cat.setName("Bag");
-        cat.setDescription(CATEGORY_DESCRIPTION);
-        categoryDao.create(cat);
+        Category bag = new Category();
+        bag.setName("Bag");
+        bag.setDescription(CATEGORY_DESCRIPTION);
+        categoryDao.create(bag);
 
         List<Category> storedCategories = categoryDao.findAll();
 
