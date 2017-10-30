@@ -105,7 +105,7 @@ public class Event {
         result = prime * result + Objects.hashCode(this.item);
         result = prime * result + (finder != null ? finder.hashCode() : 0);
         result = prime * result + (owner != null ? owner.hashCode() : 0);
-        result = prime * result + (item != null ? item.hashCode() : 0);
+        result = prime * result + item.hashCode();
         result = prime * result + (dateOfLoss != null ? dateOfLoss.hashCode() : 0);
         result = prime * result + (dateOfFind != null ? dateOfFind.hashCode() : 0);
         result = prime * result + (placeOfLoss != null ? placeOfLoss.hashCode() : 0);
@@ -126,13 +126,12 @@ public class Event {
             return false;
         }
         Event other = (Event) obj;
-        if (!placeOfFind.equals(other.getPlaceOfFind())) return false;
-        if (!placeOfLoss.equals(other.getPlaceOfLoss())) return false;
-        if (!dateOfLoss.equals(other.getDateOfLoss())) return false;
-        if (!dateOfFind.equals(other.getDateOfFind())) return false;
-        if (!finder.equals(other.getFinder())) return false;
-        if (!owner.equals(other.getOwner())) return false;
-        if (item.getId() != other.getItem().getId()) return false;
+        if (placeOfFind != null ? !placeOfFind.equals(other.getPlaceOfFind()) : other.getPlaceOfFind() != null) return false;
+        if (placeOfLoss != null ? !placeOfLoss.equals(other.getPlaceOfLoss()) : other.getPlaceOfLoss() != null) return false;
+        if (dateOfLoss != null ? !dateOfLoss.equals(other.getDateOfLoss()) : other.getDateOfLoss() != null) return false;
+        if (dateOfFind != null ? !dateOfFind.equals(other.getDateOfFind()) : other.getDateOfFind() != null) return false;
+        if (finder != null ? !finder.equals(other.getFinder()) : other.getFinder() != null) return false;
+        if (owner != null ? !owner.equals(other.getOwner()) : other.getFinder() != null) return false;
         return Objects.equals(this.item, other.getItem());
     }
 
@@ -140,13 +139,13 @@ public class Event {
     public String toString() {
         return "Event{" +
                 "id=" + id +
-                ", itemId=" + item.getId() +
+                ", item=" + item +
                 ", dateOfLoss=" + dateOfLoss +
                 ", placeOfLoss=" + placeOfLoss +
                 ", dateOfFind=" + dateOfFind +
                 ", placeOfFind=" + placeOfFind +
-                ", owner=" + owner.getEmail() +
-                ", finder=" + finder.getEmail() +
+                ", owner=" + owner +
+                ", finder=" + finder +
                 '}';
     }
 }
