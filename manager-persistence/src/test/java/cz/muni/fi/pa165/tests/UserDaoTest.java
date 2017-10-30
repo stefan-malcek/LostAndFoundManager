@@ -5,23 +5,25 @@
  */
 package cz.muni.fi.pa165.tests;
 
-import cz.muni.fi.pa165.PersistenceApplicationContext;
 import cz.muni.fi.pa165.dao.UserDao;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.enums.UserRole;
+
+import cz.muni.fi.pa165.PersistenceApplicationContext;
 import java.util.List;
-import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+
 
 /**
  *
@@ -41,11 +43,7 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
     private User user2;
 
     @BeforeMethod
-        public void setup() {
-        List<User> users = userDao.findAll();
-        for (User u : users)
-            userDao.delete(u);
-               
+        public void setup() {       
         user = new User();
         user.setName("Josef Novák");
         user.setEmail("admin@lost.com");
@@ -58,35 +56,41 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         user2.setUserRole(UserRole.Member);
         user2.setPasswordHash("1245");
     }
-    
-    @Test
-    public void testCreateNulltname() { 
-        try {
+        
+    @Test(expectedExceptions = ValidationException.class)   
+    public void testCreateNullName_throwsException() { 
            user.setName(null);
            userDao.create(user);
-           fail( "Method didn't throw when I expected it to" );
-           } catch (ConstraintViolationException e) {
-            
-           }
     }
    
-    @Test
-    public void testCreateNullEmail() {    
-           try {
-               user.setEmail(null);
-               userDao.create(user);
-           fail( "Method didn't throw when I expected it to" );
-           } catch (ConstraintViolationException e) {
-            
-           }
-
+    @Test(expectedExceptions =  DataAccessException.class)   
+    public void testCreateNull_throwsException() {          
+           userDao.create(null);
     }
     
+    @Test(expectedExceptions = DataAccessException.class) 
+    public void testCreateRoleNull_throwsException() { 
+               user.setUserRole(null);
+               userDao.create(null);
+    }
+    
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateNullEmail_throwsException() {           
+               user.setEmail(null);
+               userDao.create(user);
+    }
+    
+    @Test(expectedExceptions = ValidationException.class)
+    public void testCreateInvalidEmail_throwsException() {    
+               user.setEmail("error");
+               userDao.create(user);
+    }
+      
     @Test
     public void testCreate() {                        
         Assert.assertEquals(0,user.getId());
         userDao.create(user);
-        Assert.assertNotNull(user.getId());
+        Assert.assertTrue(user.getId()!=0);
     }
     
     @Test
@@ -94,26 +98,37 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
                                
         Assert.assertEquals(0,user.getId());
         userDao.create(user);
-        Assert.assertNotNull(user.getId());
+         Assert.assertTrue(user.getId()!=0);
                              
         User userFromDb = userDao.findById(user.getId());               
         Assert.assertEquals(userFromDb.getId(), user.getId());                
     }
     
-    @Test
-    public void testDelete() {                        
+        @Test
+    public void testFindAll() {
+                               
         userDao.create(user);
         userDao.create(user2);
-        Assert.assertNotNull(user.getId());
-        Assert.assertNotNull(user2.getId());
-        Long userId = user.getId();
-        Long user2Id = user2.getId();
-        user = userDao.findById(userId);
-        Assert.assertNotNull(user);  
-        userDao.delete(user);
-        user = userDao.findById(userId);
-        Assert.assertNull(user);       
-        user2 = userDao.findById(user2Id);
-        Assert.assertNotNull(user2);       
+        
+        List<User> usersFromDb = userDao.findAll();
+        Assert.assertEquals(usersFromDb.size(), 2);    
+        Assert.assertEquals(usersFromDb.get(0), user);    
+        Assert.assertEquals(usersFromDb.get(1), user2);    
+    }
+    
+    @Test
+    public void testDelete() {       
+        
+        userDao.create(user);
+        userDao.create(user2);
+        
+        List<User> usersFromDb = userDao.findAll();
+        Assert.assertEquals(usersFromDb.size(), 2);        
+        userDao.delete(user);    
+        
+        usersFromDb = userDao.findAll();
+        Assert.assertEquals(usersFromDb.size(), 1);
+        Assert.assertEquals(usersFromDb.get(0), user2);        
+
     }
 }
