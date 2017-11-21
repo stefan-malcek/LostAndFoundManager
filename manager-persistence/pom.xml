@@ -9,6 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>manager-persistence</artifactId>
+    <name>DAO layer</name>
     <packaging>jar</packaging>
 
     <dependencies>

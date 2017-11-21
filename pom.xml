@@ -11,6 +11,8 @@
     
     <modules>
         <module>manager-persistence</module>
+        <module>manager-services</module>
+        <module>manager-api</module>
     </modules>
     
     <properties>
