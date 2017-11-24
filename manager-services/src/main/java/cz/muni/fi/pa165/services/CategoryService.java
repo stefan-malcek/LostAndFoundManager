@@ -15,9 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface CategoryService {
-	Category findById(Long id);
-	List<Category> findAll();
 	void create(Category category);
 	void remove(Category c);
+	Category findById(long id);
 	Category findByName(String categoryName);
+	List<Category> findAll();
 }

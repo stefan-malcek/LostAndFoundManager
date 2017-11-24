@@ -5,10 +5,13 @@ import cz.muni.fi.pa165.dto.CategoryDTO;
 import java.util.List;
 
 /**
- * Created by stefa on 21.11.2017.
+ * Created by Stefan malcek on 21.11.2017.
  */
 public interface CategoryFacade {
-    long createCategory(CategoryCreateDTO categoryCreateDTO);  
-    List<CategoryDTO> getAllCategories();
+    long createCategory(CategoryCreateDTO categoryCreateDTO);
+    void updateCategory(CategoryDTO categoryDTO);
+    void remove(long categoryId);
     CategoryDTO getCategoryById(long id);
+    CategoryDTO findByName(String categoryName);
+    List<CategoryDTO> getAllCategories();
 }
