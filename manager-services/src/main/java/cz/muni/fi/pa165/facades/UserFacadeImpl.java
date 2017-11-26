@@ -5,10 +5,12 @@
  */
 package cz.muni.fi.pa165.facades;
 
+import cz.muni.fi.pa165.dto.UserAuthenticateDTO;
 import cz.muni.fi.pa165.dto.UserDTO;
+import cz.muni.fi.pa165.dto.UserUpdateDTO;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.facade.UserFacade;
-import cz.muni.fi.pa165.services.BeanMappingService;
+import cz.muni.fi.pa165.services.MappingService;
 import cz.muni.fi.pa165.services.UserService;
 import java.util.List;
 import javax.inject.Inject;
@@ -26,16 +28,16 @@ public class UserFacadeImpl implements UserFacade {
     private UserService userService;
      
     @Inject
-    private BeanMappingService beanMappingService;
+    private MappingService mappingService;
 
     @Override
-    public UserDTO findUserById(Long id) {
+    public UserDTO findUserById(long id) {
         User user = userService.findUserById(id);
         
         if(user == null) {
             return null;
         }        
-        return beanMappingService.mapTo(user, UserDTO.class); 
+        return mappingService.mapTo(user, UserDTO.class); 
     }
 
     @Override
@@ -45,19 +47,50 @@ public class UserFacadeImpl implements UserFacade {
         if(user == null) {
             return null;
         }         
-        return beanMappingService.mapTo(user, UserDTO.class);
+        return mappingService.mapTo(user, UserDTO.class);
     }
 
     @Override
     public List<UserDTO> findAllUsers() {
         List<User> users = userService.findAllUsers();
-        return beanMappingService.mapTo(users, UserDTO.class);
+        return mappingService.mapTo(users, UserDTO.class);
     }
     
     @Override
     public boolean isAdministrator(UserDTO user) {    
-        User mappedUser = beanMappingService.mapTo(user, User.class);
+        User mappedUser = mappingService.mapTo(user, User.class);
         return userService.isAdministrator(mappedUser);        
+    }
+
+    @Override
+    public void register(UserDTO user, String password) {
+        User mappedUser = mappingService.mapTo(user, User.class);
+        userService.register(mappedUser, password);
+    }
+
+    @Override
+    public boolean authenticate(UserAuthenticateDTO user) {
+        User retrievedUser = userService.findUserById(user.getId());
+        return userService.authenticate(retrievedUser, user.getPassword());
+    }  
+
+    @Override
+    public void update(UserUpdateDTO user) {
+        User retrievedUser = userService.findUserById(user.getId());
+        userService.update(retrievedUser, user.getName());
+    }
+
+    @Override
+    public void changePassword(UserAuthenticateDTO user, String newPassword) {
+        User retrievedUser = userService.findUserById(user.getId());
+        userService.changePassword(retrievedUser, user.getPassword(), newPassword);
+         
+    }
+
+    @Override
+    public void delete(long id) {
+        User user = userService.findUserById(id);
+        userService.delete(user);
     }
     
 }
