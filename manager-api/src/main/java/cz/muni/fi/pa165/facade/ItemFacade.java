@@ -3,33 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.services;
+package cz.muni.fi.pa165.facade;
 
-import cz.muni.fi.pa165.entities.Category;
-import cz.muni.fi.pa165.entities.Item;
+import cz.muni.fi.pa165.dto.CategoryDTO;
+import cz.muni.fi.pa165.dto.ItemDTO;
 import java.util.List;
-import org.springframework.stereotype.Service;
 
 /**
  *
  * @author robhavlicek
  */
-@Service
-public interface ItemService {
-  
+public interface ItemFacade {
     /**
      * Stores a new item in the application.
      *
      * @param item item to create
      */
-    void create(Item item);
+    Long create(ItemDTO item);
 
     /**
      * Deletes the item with given id.
      *
      * @param item item to delete
      */
-    void delete(Item item);
+    void remove(ItemDTO item);
 
     /**
      * Retrieves the item with given id.
@@ -37,7 +34,7 @@ public interface ItemService {
      * @param id Id of the item
      * @return {@code Item} with given id
      */
-    Item findById(long id);
+    ItemDTO findById(long id);
 
     /**
      * Retrieves the items with given category.
@@ -45,13 +42,12 @@ public interface ItemService {
      * @param category category of the items
      * @return {@code List} of items
      */
-    List<Item> findByCategory(Category category);
+    List<ItemDTO> findByCategory(CategoryDTO category);
 
     /**
      * Retrieves all items.
      *
      * @return {@code List} of items
      */
-    List<Item> findAll();
-    
+    List<ItemDTO> getAllItems();
 }
