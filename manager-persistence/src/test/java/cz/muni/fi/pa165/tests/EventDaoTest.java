@@ -53,7 +53,7 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         User user = new User();
         user.setName("Monika Bledá");
         user.setEmail("user@lost.com");
-        user.setUserRole(UserRole.Member);
+        user.setUserRole(UserRole.MEMBER);
         user.setPasswordHash("1245");
         userDao.create(user);
         Category electronics = new Category();
