@@ -44,7 +44,7 @@ public class ItemDaoTest extends AbstractTestNGSpringContextTests {
         clothes.setDescription("Any kind of clothing"); 
         categoryDao.create(clothes);
         jacket = new Item();
-        jacket.setColor(ItemColor.Blue);        
+        jacket.setColor(ItemColor.BLUE);
         jacket.setName("Jacket");
         jacket.setDescription("Jacket for men");               
         jacket.setCategory(clothes);
@@ -54,7 +54,7 @@ public class ItemDaoTest extends AbstractTestNGSpringContextTests {
         electronics.setDescription("Various types of electronics");
         categoryDao.create(electronics);
         laptop = new Item();
-        laptop.setColor(ItemColor.Black);
+        laptop.setColor(ItemColor.BLACK);
         laptop.setName("Laptop");
         laptop.setDescription("Lenovo laptop");        
         laptop.setCategory(electronics);

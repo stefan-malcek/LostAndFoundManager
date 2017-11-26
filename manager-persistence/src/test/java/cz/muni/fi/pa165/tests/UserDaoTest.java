@@ -47,13 +47,13 @@ public class UserDaoTest extends AbstractTestNGSpringContextTests {
         user = new User();
         user.setName("Josef Novák");
         user.setEmail("admin@lost.com");
-        user.setUserRole(UserRole.Administrator);
+        user.setUserRole(UserRole.ADMINISTRATOR);
         user.setPasswordHash("1245");
         
         user2 = new User();
         user2.setName("Monika Bledá");
         user2.setEmail("user@lost.com");
-        user2.setUserRole(UserRole.Member);
+        user2.setUserRole(UserRole.MEMBER);
         user2.setPasswordHash("1245");
     }
         
