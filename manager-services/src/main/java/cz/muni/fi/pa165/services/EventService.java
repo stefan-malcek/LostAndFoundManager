@@ -88,7 +88,7 @@ public interface EventService {
     /**
      *  Finds events with given owner.
      *
-     * @param owner    finder of desired events
+     * @param owner    owner of desired events
      * @return  list of desired events
      */
     List<Event> findEventsByOwner(User owner);

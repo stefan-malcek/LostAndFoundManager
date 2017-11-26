@@ -49,6 +49,9 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public boolean checkEventResolved(Event event) {
+        if (event == null) {
+            throw new IllegalArgumentException("event can't be null.");
+        }
         return  event.getFinder() != null && event.getOwner() != null;
     }
 
