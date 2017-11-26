@@ -27,6 +27,34 @@ public interface EventService {
     void deleteEvent(Event event);
 
     /**
+     * Adds loosing to an existing event.
+     *
+     * @param event existing event to update
+     * @param owner owner of event's item
+     * @param dateOfLoss    date of loosing
+     * @param placeOfLoss   place of loosing
+     */
+    void addLoosing(Event event, User owner, LocalDate dateOfLoss, String placeOfLoss);
+
+    /**
+     * Ads finding to an existing event.
+     *
+     * @param event existing event to update
+     * @param finder    finder of event's item
+     * @param dateOfFind    date of finding
+     * @param placeOfFind   place of finding
+     */
+    void addFinding(Event event, User finder, LocalDate dateOfFind, String placeOfFind);
+
+    /**
+     * Checks whether event have reported both loosing and finding.
+     *
+     * @param event event to check
+     * @return  true when event is resolved, false otherwise
+     */
+    boolean checkEventResolved(Event event);
+
+    /**
      * Finds event with given id.
      *
      * @param id    id of desired event

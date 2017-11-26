@@ -28,6 +28,31 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
+    public void addLoosing(Event event, User owner, LocalDate dateOfLoss, String placeOfLoss) {
+        if (event.getOwner() != null) {
+            throw new IllegalArgumentException("Loosing already added.");
+        }
+        event.setOwner(owner);
+        event.setDateOfLoss(dateOfLoss);
+        event.setPlaceOfLoss(placeOfLoss);
+    }
+
+    @Override
+    public void addFinding(Event event, User finder, LocalDate dateOfFind, String placeOfFind) {
+        if (event.getFinder() != null) {
+            throw new IllegalArgumentException("Finding already added.");
+        }
+        event.setFinder(finder);
+        event.setDateOfFind(dateOfFind);
+        event.setPlaceOfFind(placeOfFind);
+    }
+
+    @Override
+    public boolean checkEventResolved(Event event) {
+        return  event.getFinder() != null && event.getOwner() != null;
+    }
+
+    @Override
     public Event findEventById(long id) {
         return eventDao.findById(id);
     }
