@@ -31,7 +31,7 @@ public class CategoryDaoImpl implements CategoryDao {
             throw new IllegalArgumentException("Category cannot be null.");
         }
 
-        em.remove(category);
+        em.remove(em.contains(category) ? category : em.merge(category));
     }
 
     @Override
