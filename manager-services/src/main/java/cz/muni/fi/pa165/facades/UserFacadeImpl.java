@@ -12,6 +12,7 @@ import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.facade.UserFacade;
 import cz.muni.fi.pa165.services.MappingService;
 import cz.muni.fi.pa165.services.UserService;
+import exceptions.LostAndFoundManagerDataAccessException;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -32,65 +33,100 @@ public class UserFacadeImpl implements UserFacade {
 
     @Override
     public UserDTO findUserById(long id) {
-        User user = userService.findUserById(id);
-        
-        if(user == null) {
-            return null;
-        }        
-        return mappingService.mapTo(user, UserDTO.class); 
+        try {
+            User user = userService.findUserById(id);
+                    
+            if(user == null) {
+                return null;
+            }        
+            return mappingService.mapTo(user, UserDTO.class);
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot find user by id",e);
+        }
     }
 
     @Override
     public UserDTO findUserByEmail(String email) {
-        User user = userService.findUserByEmail(email);
+        try {
+            User user = userService.findUserByEmail(email);        
         
-        if(user == null) {
-            return null;
-        }         
-        return mappingService.mapTo(user, UserDTO.class);
+            if(user == null) {
+                return null;
+            }         
+            return mappingService.mapTo(user, UserDTO.class);
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot find user by email",e);
+        }
     }
 
     @Override
     public List<UserDTO> findAllUsers() {
-        List<User> users = userService.findAllUsers();
-        return mappingService.mapTo(users, UserDTO.class);
+        try {
+            List<User> users = userService.findAllUsers();
+            return mappingService.mapTo(users, UserDTO.class);
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot find all users",e);
+        }        
     }
     
     @Override
-    public boolean isAdministrator(UserDTO user) {    
-        User mappedUser = mappingService.mapTo(user, User.class);
-        return userService.isAdministrator(mappedUser);        
+    public boolean isAdministrator(UserDTO user) {
+        try {
+            User mappedUser = mappingService.mapTo(user, User.class);        
+            return userService.isAdministrator(mappedUser);        
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot check authorization",e);
+        } 
     }
 
     @Override
     public void register(UserDTO user, String password) {
-        User mappedUser = mappingService.mapTo(user, User.class);
-        userService.register(mappedUser, password);
+        try {
+            User mappedUser = mappingService.mapTo(user, User.class);      
+            userService.register(mappedUser, password);
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot register user",e);
+        } 
     }
 
     @Override
     public boolean authenticate(UserAuthenticateDTO user) {
-        User retrievedUser = userService.findUserById(user.getId());
-        return userService.authenticate(retrievedUser, user.getPassword());
+        try {
+            User retrievedUser = userService.findUserById(user.getId());
+            return userService.authenticate(retrievedUser, user.getPassword());
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot authenticate user",e);
+        } 
     }  
 
     @Override
     public void update(UserUpdateDTO user) {
-        User retrievedUser = userService.findUserById(user.getId());
-        userService.update(retrievedUser, user.getName());
+        try {
+            User retrievedUser = userService.findUserById(user.getId());
+            userService.update(retrievedUser, user.getName());
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot update user",e);
+        } 
     }
 
     @Override
     public void changePassword(UserAuthenticateDTO user, String newPassword) {
-        User retrievedUser = userService.findUserById(user.getId());
-        userService.changePassword(retrievedUser, user.getPassword(), newPassword);
-         
+        try {
+            User retrievedUser = userService.findUserById(user.getId());
+            userService.changePassword(retrievedUser, user.getPassword(), newPassword);
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot change password",e);
+        }          
     }
 
     @Override
     public void delete(long id) {
-        User user = userService.findUserById(id);
-        userService.delete(user);
+        try {
+            User user = userService.findUserById(id);
+            userService.delete(user);
+        } catch (Exception e) {
+            throw new LostAndFoundManagerDataAccessException("Cannot remove user",e);
+        } 
     }
     
 }
