@@ -32,6 +32,9 @@ public class EventServiceImpl implements EventService{
         if (event.getOwner() != null) {
             throw new IllegalArgumentException("Loosing already added.");
         }
+        if (owner == null || dateOfLoss == null || placeOfLoss.isEmpty()) {
+            throw new IllegalArgumentException("Wrong arguments.");
+        }
         event.setOwner(owner);
         event.setDateOfLoss(dateOfLoss);
         event.setPlaceOfLoss(placeOfLoss);
@@ -41,6 +44,9 @@ public class EventServiceImpl implements EventService{
     public void addFinding(Event event, User finder, LocalDate dateOfFind, String placeOfFind) {
         if (event.getFinder() != null) {
             throw new IllegalArgumentException("Finding already added.");
+        }
+        if (finder == null || dateOfFind == null || placeOfFind.isEmpty()) {
+            throw new IllegalArgumentException("Wrong arguments.");
         }
         event.setFinder(finder);
         event.setDateOfFind(dateOfFind);
