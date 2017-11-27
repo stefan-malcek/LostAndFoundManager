@@ -17,6 +17,10 @@ import org.testng.annotations.Test;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ *
+ * @author Stefan Malcek
+ */
 @ContextConfiguration(classes = ServiceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional

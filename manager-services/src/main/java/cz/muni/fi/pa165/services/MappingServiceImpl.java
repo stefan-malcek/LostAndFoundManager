@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ *
+ * @author Stefan Malcek
+ */
 @Service
 public class MappingServiceImpl implements MappingService {
 

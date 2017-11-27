@@ -22,6 +22,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ *
+ * @author Stefan Malcek
+ */
 @ContextConfiguration(classes = ServiceApplicationContext.class)
 public class CategoryServiceTest extends AbstractTestNGSpringContextTests {
 
