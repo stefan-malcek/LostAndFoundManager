@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.dao.EventDao;
 import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * @author Adam Bananka
  */
+@Service
 public class EventServiceImpl implements EventService{
 
     @Inject

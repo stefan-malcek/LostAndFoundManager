@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isAdministrator(User user) {
         User retrievedUser = findUserById(user.getId());
-        return retrievedUser.getUserRole().equals(UserRole.Administrator);
+        return retrievedUser.getUserRole().equals(UserRole.ADMINISTRATOR);
     }
 
     @Override

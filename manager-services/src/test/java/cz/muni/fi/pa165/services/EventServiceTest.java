@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.services;
 
 import cz.muni.fi.pa165.ServiceApplicationContext;
-import cz.muni.fi.pa165.dao.CategoryDao;
 import cz.muni.fi.pa165.dao.EventDao;
-import cz.muni.fi.pa165.dao.ItemDao;
-import cz.muni.fi.pa165.dao.UserDao;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
@@ -14,6 +11,9 @@ import cz.muni.fi.pa165.enums.UserRole;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -35,20 +35,21 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Mock
     private EventDao eventDao;
-    @Mock
-    private UserDao userDao;
-    @Mock
-    private ItemDao itemDao;
-    @Mock
-    private CategoryDao categoryDao;
-
-    private Event lossEvent;
-    private Event findEvent;
-    private User user;
 
     @Autowired
     @InjectMocks
     private EventService eventService;
+
+    @Mock
+    private UserService userService;
+    @Mock
+    private ItemService itemService;
+    @Mock
+    private CategoryService categoryService;
+
+    private Event lossEvent;
+    private Event findEvent;
+    private User user;
 
     @BeforeMethod
     public void createData() {
@@ -56,23 +57,23 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         user.setName("Tester");
         user.setEmail("mail@test.com");
         user.setUserRole(UserRole.MEMBER);
-        userDao.create(user);
+        userService.register(user, "psw12345");
         Category category = new Category();
         category.setName("Electronics");
         category.setDescription("electro stuff");
-        categoryDao.create(category);
+        categoryService.create(category);
         Item laptop = new Item();
         laptop.setColor(ItemColor.GRAY);
         laptop.setName("Laptop");
         laptop.setDescription("Lenovo laptop");
         laptop.setCategory(category);
-        itemDao.create(laptop);
+        itemService.create(laptop);
         Item mobile = new Item();
         mobile.setName("Mobile");
         mobile.setColor(ItemColor.WHITE);
         mobile.setDescription("Samsung");
         mobile.setCategory(category);
-        itemDao.create(mobile);
+        itemService.create(mobile);
 
         lossEvent = new Event();
         lossEvent.setItem(laptop);
@@ -94,42 +95,23 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testCreateEvent() {
-        Assert.assertEquals(0, lossEvent.getId());
         eventService.createEvent(lossEvent);
-        Assert.assertTrue(lossEvent.getId() != 0);
-    }
-
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testCreateEventNull() {
-        eventService.createEvent(null);
+        verify(eventDao, times(1)).create(lossEvent);
     }
 
     @Test
     public void testDeleteEvent() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
-
-        Assert.assertEquals(eventService.findAllEvents().size(), 2);
-        eventService.deleteEvent(findEvent);
-
-        Assert.assertEquals(eventService.findAllEvents().size(), 1);
-        Assert.assertEquals(eventService.findAllEvents().get(0), lossEvent);
-    }
-
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testDeleteEventNull() {
-        eventService.deleteEvent(null);
+        eventService.deleteEvent(lossEvent);
+        verify(eventDao, times(1)).delete(lossEvent);
     }
 
     @Test
     public void testAddLoosing() {
         eventService.createEvent(findEvent);
-        Event event = eventService.findEventById(findEvent.getId());
-        Assert.assertEquals(null, event.getOwner());
+        Assert.assertEquals(null, findEvent.getOwner());
 
         eventService.addLoosing(findEvent, user, LocalDate.now().minusDays(2), "Brno");
-        event = eventService.findEventById(findEvent.getId());
-        Assert.assertTrue(event.getOwner() != null);
+        Assert.assertTrue(findEvent.getOwner() != null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -146,12 +128,10 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testAddFinding() {
         eventService.createEvent(lossEvent);
-        Event event = eventService.findEventById(lossEvent.getId());
-        Assert.assertEquals(null, event.getFinder());
+        Assert.assertEquals(null, lossEvent.getFinder());
 
         eventService.addFinding(lossEvent, user, LocalDate.now().minusDays(1), "Brno");
-        event = eventService.findEventById(lossEvent.getId());
-        Assert.assertTrue(event.getFinder() != null);
+        Assert.assertTrue(lossEvent.getFinder() != null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -185,26 +165,11 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(lossEvent, eventService.findEventById(lossEvent.getId()));
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testFindEventByIdZero() {
-        eventService.findEventById(0);
-    }
-
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testFindEventByIdNegative() {
-        eventService.findEventById(-7);
-    }
-
     @Test
     public void testFindEventByItem() {
         eventService.createEvent(lossEvent);
         eventService.createEvent(findEvent);
         Assert.assertEquals(lossEvent, eventService.findEventByItem(lossEvent.getItem()));
-    }
-
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testFindEventByItemNull() {
-        eventService.findEventByItem(null);
     }
 
     @Test
@@ -223,11 +188,6 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(findEvent, res.get(0));
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testFindEventsByFinderNull() {
-        eventService.findEventsByFinder(null);
-    }
-
     @Test
     public void testFindEventsByOwner() {
         eventService.createEvent(lossEvent);
@@ -235,11 +195,6 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         List<Event> res = eventService.findEventsByOwner(lossEvent.getOwner());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
-    }
-
-    @Test(expectedExceptions = DataAccessException.class)
-    public void testFindEventsByOwnerNull() {
-        eventService.findEventsByOwner(null);
     }
 
     @Test

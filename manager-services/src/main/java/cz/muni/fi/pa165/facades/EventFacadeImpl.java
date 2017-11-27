@@ -3,12 +3,15 @@ package cz.muni.fi.pa165.facades;
 import cz.muni.fi.pa165.dto.EventDTO;
 import cz.muni.fi.pa165.dto.EventFindDTO;
 import cz.muni.fi.pa165.dto.EventLossDTO;
+import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.facade.EventFacade;
 import cz.muni.fi.pa165.services.EventService;
+import cz.muni.fi.pa165.services.ItemService;
 import cz.muni.fi.pa165.services.MappingService;
+import cz.muni.fi.pa165.services.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -92,11 +95,10 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public EventDTO findEventByItem(long itemId) {
-        ItemDTO itemDTO = itemService.findById(itemId);
-        if (itemDTO == null) {
+        Item item = itemService.findById(itemId);
+        if (item == null) {
             return null;
         }
-        Item item = mappingService.mapTo(itemDTO, Item.class);
         Event event = eventService.findEventByItem(item);
         return event == null
                 ? null
@@ -111,23 +113,21 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public List<EventDTO> findEventsByFinder(long finderId) {
-        UserDTO userDTO = userService.findUserById(finderId);
-        if (userDTO == null) {
+        User user = userService.findUserById(finderId);
+        if (user == null) {
             return null;
         }
-        User finder = mappingService.mapTo(userDTO, User.class);
-        List<Event> events = eventService.findEventsByFinder(finder);
+        List<Event> events = eventService.findEventsByFinder(user);
         return mappingService.mapTo(events, EventDTO.class);
     }
 
     @Override
     public List<EventDTO> findEventsByOwner(long ownerId) {
-        UserDTO userDTO = userService.findUserById(ownerId);
-        if (userDTO == null) {
+        User user = userService.findUserById(ownerId);
+        if (user == null) {
             return null;
         }
-        User owner = mappingService.mapTo(userDTO, User.class);
-        List<Event> events = eventService.findEventsByOwner(owner);
+        List<Event> events = eventService.findEventsByOwner(user);
         return mappingService.mapTo(events, EventDTO.class);
     }
 
