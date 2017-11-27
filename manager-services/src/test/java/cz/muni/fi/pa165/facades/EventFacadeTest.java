@@ -10,11 +10,14 @@ import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +25,8 @@ import java.util.List;
  * @author Adam Bananka
  */
 @ContextConfiguration(classes = ServiceApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Autowired
