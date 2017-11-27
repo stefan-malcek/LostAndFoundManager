@@ -6,16 +6,20 @@ import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.facade.CategoryFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ContextConfiguration(classes = ServiceApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class CategoryFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
@@ -35,11 +39,6 @@ public class CategoryFacadeTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void init() {
         electronicsId = categoryFacade.createCategory(electronicsCreateDTO);
-    }
-
-    @AfterMethod
-    public void clear() {
-        categoryFacade.remove(electronicsId);
     }
 
     @Test
@@ -67,14 +66,9 @@ public class CategoryFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void remove_bagId_deletes() {
-        CategoryCreateDTO bagCreateDTO = new CategoryCreateDTO();
-        bagCreateDTO.setName("Bag");
-        bagCreateDTO.setDescription("Items for stuff.");
-        long bagId = categoryFacade.createCategory(bagCreateDTO);
+        categoryFacade.remove(electronicsId);
 
-        categoryFacade.remove(bagId);
-
-        CategoryDTO retrieved = categoryFacade.getCategoryById(bagId);
+        CategoryDTO retrieved = categoryFacade.getCategoryById(electronicsId);
         Assert.assertNull(retrieved);
     }
 
@@ -95,9 +89,9 @@ public class CategoryFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getAllCategories_retrievesCategories() {
+    public void getAllCategories_list_retrievesCategories() {
         List<CategoryDTO> categories = categoryFacade.getAllCategories();
 
-        Assert.assertTrue(categories.size() == 1 || categories.size() == 2);
+        Assert.assertTrue(categories.size() == 1);
     }
 }
