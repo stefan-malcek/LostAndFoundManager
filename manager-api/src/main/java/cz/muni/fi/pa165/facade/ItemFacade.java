@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -50,4 +51,24 @@ public interface ItemFacade {
      * @return {@code List} of items
      */
     List<ItemDTO> getAllItems();
+    
+    
+    /**
+     * Set date when item was returned to owner.
+     *
+     *  @param item item which was returned
+     *  @param date date of return
+     * 
+     */
+    void itemReturnedToOwner(ItemDTO item, LocalDate date);
+    
+    /**
+     * Set date when item was returned to owner.
+     *
+     *  @param updatedItem item with new values
+     * 
+     *  @return updated item
+     */
+    ItemDTO update(ItemDTO updatedItem );
+
 }
