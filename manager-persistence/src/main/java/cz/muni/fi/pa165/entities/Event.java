@@ -131,7 +131,7 @@ public class Event {
         if (dateOfLoss != null ? !dateOfLoss.equals(other.getDateOfLoss()) : other.getDateOfLoss() != null) return false;
         if (dateOfFind != null ? !dateOfFind.equals(other.getDateOfFind()) : other.getDateOfFind() != null) return false;
         if (finder != null ? !finder.equals(other.getFinder()) : other.getFinder() != null) return false;
-        if (owner != null ? !owner.equals(other.getOwner()) : other.getFinder() != null) return false;
+        if (owner != null ? !owner.equals(other.getOwner()) : other.getOwner() != null) return false;
         return Objects.equals(this.item, other.getItem());
     }
 
