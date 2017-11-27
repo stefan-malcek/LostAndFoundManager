@@ -6,7 +6,7 @@
 package cz.muni.fi.pa165.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -26,12 +26,14 @@ public class Event {
 
     @ManyToOne()
     private User owner;
-    private LocalDate dateOfLoss;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfLoss;
     private String placeOfLoss;
 
     @ManyToOne()
     private User finder;
-    private LocalDate dateOfFind;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfFind;
     private String placeOfFind;
 
     public long getId() {
@@ -74,19 +76,19 @@ public class Event {
         this.placeOfFind = place;
     }
 
-    public LocalDate getDateOfFind() {
+    public Date getDateOfFind() {
         return dateOfFind;
     }
 
-    public void setDateOfFind(LocalDate date) {
+    public void setDateOfFind(Date date) {
         this.dateOfFind = date;
     }
 
-    public LocalDate getDateOfLoss() {
+    public Date getDateOfLoss() {
         return dateOfLoss;
     }
 
-    public void setDateOfLoss(LocalDate date) {
+    public void setDateOfLoss(Date date) {
         this.dateOfLoss = date;
     }
 

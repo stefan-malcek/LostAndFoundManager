@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void addLoosing(Event event, User owner, LocalDate dateOfLoss, String placeOfLoss) {
+    public void addLoosing(Event event, User owner, Date dateOfLoss, String placeOfLoss) {
         if (event.getOwner() != null) {
             throw new IllegalArgumentException("Loosing already added.");
         }
@@ -43,7 +44,7 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void addFinding(Event event, User finder, LocalDate dateOfFind, String placeOfFind) {
+    public void addFinding(Event event, User finder, Date dateOfFind, String placeOfFind) {
         if (event.getFinder() != null) {
             throw new IllegalArgumentException("Finding already added.");
         }
@@ -99,12 +100,12 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<Event> findEventsByDateOfFind(LocalDate date) {
+    public List<Event> findEventsByDateOfFind(Date date) {
         return eventDao.findEventByDateOfFind(date);
     }
 
     @Override
-    public List<Event> findEventsByDateOfLoss(LocalDate date) {
+    public List<Event> findEventsByDateOfLoss(Date date) {
         return eventDao.findEventByDateOfLoss(date);
     }
 }

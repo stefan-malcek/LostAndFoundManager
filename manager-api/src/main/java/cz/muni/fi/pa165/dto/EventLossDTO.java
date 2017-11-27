@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,7 +18,7 @@ public class EventLossDTO {
     @NotNull
     private UserDTO owner;
     @NotNull
-    private LocalDate dateOfLoss;
+    private Date dateOfLoss;
     @NotNull
     @Size(min = 2, max = 256)
     private String placeOfLoss;
@@ -46,11 +47,11 @@ public class EventLossDTO {
         this.owner = owner;
     }
 
-    public LocalDate getDateOfLoss() {
+    public Date getDateOfLoss() {
         return dateOfLoss;
     }
 
-    public void setDateOfLoss(LocalDate dateOfLoss) {
+    public void setDateOfLoss(Date dateOfLoss) {
         this.dateOfLoss = dateOfLoss;
     }
 

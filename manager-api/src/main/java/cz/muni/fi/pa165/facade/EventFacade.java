@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.dto.EventFindDTO;
 import cz.muni.fi.pa165.dto.EventLossDTO;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -112,7 +113,7 @@ public interface EventFacade {
      * @param date  date of find of desired events
      * @return  list of desired events
      */
-    List<EventDTO> findEventsByDateOfFind(LocalDate date);
+    List<EventDTO> findEventsByDateOfFind(Date date);
 
     /**
      * Finds events with given date of loss.
@@ -120,5 +121,5 @@ public interface EventFacade {
      * @param date  date of loss of desired events
      * @return  list of desired events
      */
-    List<EventDTO> findEventsByDateOfLoss(LocalDate date);
+    List<EventDTO> findEventsByDateOfLoss(Date date);
 }

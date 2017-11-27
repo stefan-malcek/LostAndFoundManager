@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public interface EventService {
      * @param dateOfLoss    date of loosing
      * @param placeOfLoss   place of loosing
      */
-    void addLoosing(Event event, User owner, LocalDate dateOfLoss, String placeOfLoss);
+    void addLoosing(Event event, User owner, Date dateOfLoss, String placeOfLoss);
 
     /**
      * Ads finding to an existing event.
@@ -44,7 +45,7 @@ public interface EventService {
      * @param dateOfFind    date of finding
      * @param placeOfFind   place of finding
      */
-    void addFinding(Event event, User finder, LocalDate dateOfFind, String placeOfFind);
+    void addFinding(Event event, User finder, Date dateOfFind, String placeOfFind);
 
     /**
      * Checks whether event have reported both loosing and finding.
@@ -115,7 +116,7 @@ public interface EventService {
      * @param date  date of find of desired events
      * @return  list of desired events
      */
-    List<Event> findEventsByDateOfFind(LocalDate date);
+    List<Event> findEventsByDateOfFind(Date date);
 
     /**
      * Finds events with given date of loss.
@@ -123,5 +124,5 @@ public interface EventService {
      * @param date  date of loss of desired events
      * @return  list of desired events
      */
-    List<Event> findEventsByDateOfLoss(LocalDate date);
+    List<Event> findEventsByDateOfLoss(Date date);
 }

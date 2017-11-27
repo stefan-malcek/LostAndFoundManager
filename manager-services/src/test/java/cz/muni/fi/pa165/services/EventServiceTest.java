@@ -19,8 +19,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -77,12 +80,12 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         lossEvent = new Event();
         lossEvent.setItem(laptop);
         lossEvent.setOwner(user);
-        lossEvent.setDateOfLoss(LocalDate.now().minusDays(2));
+        lossEvent.setDateOfLoss(Date.from(Instant.now()));
         lossEvent.setPlaceOfLoss("Brno");
         findEvent = new Event();
         findEvent.setItem(mobile);
         findEvent.setFinder(user);
-        findEvent.setDateOfFind(LocalDate.now().minusDays(1));
+        findEvent.setDateOfFind(Date.from(Instant.now()));
         findEvent.setPlaceOfFind("Brno");
 
         events = new ArrayList<>();
@@ -111,19 +114,19 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         eventService.createEvent(findEvent);
         Assert.assertEquals(null, findEvent.getOwner());
 
-        eventService.addLoosing(findEvent, user, LocalDate.now().minusDays(2), "Brno");
+        eventService.addLoosing(findEvent, user, Date.from(Instant.now()), "Brno");
         Assert.assertTrue(findEvent.getOwner() != null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAddLoosingAlreadyLost() {
         eventService.createEvent(lossEvent);
-        eventService.addLoosing(lossEvent, user, LocalDate.now().minusDays(2), "Brno");
+        eventService.addLoosing(lossEvent, user, Date.from(Instant.now()), "Brno");
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAddLoosingNullOwner() {
-        eventService.addLoosing(findEvent, null, LocalDate.now().minusDays(2), "Brno");
+        eventService.addLoosing(findEvent, null, Date.from(Instant.now()), "Brno");
     }
 
     @Test
@@ -131,18 +134,18 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         eventService.createEvent(lossEvent);
         Assert.assertEquals(null, lossEvent.getFinder());
 
-        eventService.addFinding(lossEvent, user, LocalDate.now().minusDays(1), "Brno");
+        eventService.addFinding(lossEvent, user, Date.from(Instant.now()), "Brno");
         Assert.assertTrue(lossEvent.getFinder() != null);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAddFindingAlreadyFound() {
-        eventService.addFinding(findEvent, user, LocalDate.now().minusDays(1), "Brno");
+        eventService.addFinding(findEvent, user, Date.from(Instant.now()), "Brno");
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAddFindingNullFinder() {
-        eventService.addFinding(findEvent, null, LocalDate.now().minusDays(1), "Brno");
+        eventService.addFinding(findEvent, null, Date.from(Instant.now()), "Brno");
     }
 
     @Test
@@ -150,7 +153,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertFalse(eventService.checkEventResolved(lossEvent));
         lossEvent.setFinder(user);
         lossEvent.setPlaceOfFind("Brno");
-        lossEvent.setDateOfFind(LocalDate.now());
+        lossEvent.setDateOfFind(Date.from(Instant.now()));
         Assert.assertTrue(eventService.checkEventResolved(lossEvent));
     }
 

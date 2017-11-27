@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.dto;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -14,11 +15,11 @@ public class EventDTO {
     private ItemDTO item;
 
     private UserDTO owner;
-    private LocalDate dateOfLoss;
+    private Date dateOfLoss;
     private String placeOfLoss;
 
     private UserDTO finder;
-    private LocalDate dateOfFind;
+    private Date dateOfFind;
     private String placeOfFind;
 
     public long getId() {
@@ -45,11 +46,11 @@ public class EventDTO {
         this.owner = owner;
     }
 
-    public LocalDate getDateOfLoss() {
+    public Date getDateOfLoss() {
         return dateOfLoss;
     }
 
-    public void setDateOfLoss(LocalDate dateOfLoss) {
+    public void setDateOfLoss(Date dateOfLoss) {
         this.dateOfLoss = dateOfLoss;
     }
 
@@ -69,11 +70,11 @@ public class EventDTO {
         this.finder = finder;
     }
 
-    public LocalDate getDateOfFind() {
+    public Date getDateOfFind() {
         return dateOfFind;
     }
 
-    public void setDateOfFind(LocalDate dateOfFind) {
+    public void setDateOfFind(Date dateOfFind) {
         this.dateOfFind = dateOfFind;
     }
 

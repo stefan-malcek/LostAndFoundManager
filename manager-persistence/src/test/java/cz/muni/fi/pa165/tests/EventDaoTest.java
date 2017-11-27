@@ -23,7 +23,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.validation.ValidationException;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,12 +77,12 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         lost = new Event();
         lost.setItem(laptop);
         lost.setOwner(user);
-        lost.setDateOfLoss(LocalDate.now().minusDays(2));
+        lost.setDateOfLoss(Date.from(Instant.now()));
         lost.setPlaceOfLoss("Botanická, Brno");
         found = new Event();
         found.setItem(mobile);
         found.setFinder(user);
-        found.setDateOfFind(LocalDate.now().minusDays(1));
+        found.setDateOfFind(Date.from(Instant.now()));
         found.setPlaceOfFind("Brno");
     }
 

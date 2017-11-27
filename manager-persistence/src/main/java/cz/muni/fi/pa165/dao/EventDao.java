@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package cz.muni.fi.pa165.dao;
+import java.util.Date;
 import java.util.List;
 
 import cz.muni.fi.pa165.entities.Event;
@@ -79,7 +80,7 @@ public interface EventDao {
      * @return {@code Event} with given id 
      * or {@code null} if was not found. 
      */
-    List<Event> findEventByDateOfFind(LocalDate date);
+    List<Event> findEventByDateOfFind(Date date);
     
     /**
      * Retrieves all events with given date of loss.
@@ -87,7 +88,7 @@ public interface EventDao {
      * @return {@code Event} with given id 
      * or {@code null} if was not found. 
      */
-    List<Event> findEventByDateOfLoss(LocalDate date);
+    List<Event> findEventByDateOfLoss(Date date);
     
     /**
      * Retrieves all events.
