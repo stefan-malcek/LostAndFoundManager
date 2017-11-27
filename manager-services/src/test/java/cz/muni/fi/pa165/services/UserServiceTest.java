@@ -53,7 +53,7 @@ public class UserServiceTest extends AbstractTestNGSpringContextTests {
         testUser = new User();
         testUser.setName("Tester");
         testUser.setEmail("mail@test.com");
-        testUser.setUserRole(UserRole.Member);        
+        testUser.setUserRole(UserRole.MEMBER);
     }    
     
     @Test

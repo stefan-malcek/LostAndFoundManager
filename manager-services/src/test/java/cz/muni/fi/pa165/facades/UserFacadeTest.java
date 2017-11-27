@@ -41,7 +41,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests  {
         testUser = new UserDTO();
         testUser.setName("Tester");
         testUser.setEmail("mail@test.com");
-        testUser.setUserRole(UserRole.Member); 
+        testUser.setUserRole(UserRole.MEMBER);
         
         userFacade.register(testUser, "password");
         testUser = userFacade.findUserByEmail("mail@test.com");
