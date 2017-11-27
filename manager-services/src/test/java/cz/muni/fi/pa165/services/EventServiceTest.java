@@ -11,21 +11,19 @@ import cz.muni.fi.pa165.enums.UserRole;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.Mockito.*;
 
 /**
  * @author Adam Bananka
@@ -49,6 +47,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     private Event lossEvent;
     private Event findEvent;
+    private List<Event> events;
     private User user;
 
     @BeforeMethod
@@ -85,6 +84,8 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         findEvent.setFinder(user);
         findEvent.setDateOfFind(LocalDate.now().minusDays(1));
         findEvent.setPlaceOfFind("Brno");
+
+        events = new ArrayList<>();
     }
 
     @BeforeClass
@@ -96,7 +97,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testCreateEvent() {
         eventService.createEvent(lossEvent);
-        verify(eventDao, times(1)).create(lossEvent);
+        verify(eventDao, atLeastOnce()).create(lossEvent);
     }
 
     @Test
@@ -160,29 +161,38 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindEventById() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
-        Assert.assertEquals(lossEvent, eventService.findEventById(lossEvent.getId()));
+        when(eventDao.findById(0)).thenReturn(lossEvent);
+
+        Event returned = eventService.findEventById(lossEvent.getId());
+        Assert.assertEquals(lossEvent, returned);
+
+        verify(eventDao, times(1)).findById(0);
     }
 
     @Test
     public void testFindEventByItem() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
-        Assert.assertEquals(lossEvent, eventService.findEventByItem(lossEvent.getItem()));
+        when(eventDao.findByItem(lossEvent.getItem())).thenReturn(lossEvent);
+
+        Event returned = eventService.findEventByItem(lossEvent.getItem());
+        Assert.assertEquals(lossEvent, returned);
+
+        verify(eventDao, times(1)).findByItem(lossEvent.getItem());
     }
 
     @Test
     public void testFindAllEvents() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(lossEvent);
+        events.add(findEvent);
+        when(eventDao.findAll()).thenReturn(events);
+
         Assert.assertEquals(eventService.findAllEvents().size(), 2);
     }
 
     @Test
     public void testFindEventsByFinder() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(findEvent);
+        when(eventDao.findEventByFinder(findEvent.getFinder())).thenReturn(events);
+
         List<Event> res = eventService.findEventsByFinder(findEvent.getFinder());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
@@ -190,8 +200,9 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindEventsByOwner() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(lossEvent);
+        when(eventDao.findEventByOwner(lossEvent.getOwner())).thenReturn(events);
+
         List<Event> res = eventService.findEventsByOwner(lossEvent.getOwner());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
@@ -199,8 +210,9 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindEventsByPlaceOfLoss() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(lossEvent);
+        when(eventDao.findEventByPlaceOfLoss(lossEvent.getPlaceOfLoss())).thenReturn(events);
+
         List<Event> res = eventService.findEventsByPlaceOfLoss(lossEvent.getPlaceOfLoss());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
@@ -208,8 +220,9 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindEventsByPlaceOfFind() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(findEvent);
+        when(eventDao.findEventByPlaceOfFind(findEvent.getPlaceOfFind())).thenReturn(events);
+
         List<Event> res = eventService.findEventsByPlaceOfFind(findEvent.getPlaceOfFind());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
@@ -217,8 +230,9 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindEventsByDateOfFind() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(findEvent);
+        when(eventDao.findEventByDateOfFind(findEvent.getDateOfFind())).thenReturn(events);
+
         List<Event> res = eventService.findEventsByDateOfFind(findEvent.getDateOfFind());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
@@ -226,8 +240,9 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void testFindEventsByDateOfLoss() {
-        eventService.createEvent(lossEvent);
-        eventService.createEvent(findEvent);
+        events.add(lossEvent);
+        when(eventDao.findEventByDateOfLoss(lossEvent.getDateOfLoss())).thenReturn(events);
+
         List<Event> res = eventService.findEventsByDateOfLoss(lossEvent.getDateOfLoss());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
