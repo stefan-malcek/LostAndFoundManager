@@ -15,8 +15,6 @@ import java.math.BigDecimal;
 public class QuestionsDTO {
 
     private ItemColor color;
-     
-    private String description;
 
     private BigDecimal weight;
 
@@ -26,14 +24,14 @@ public class QuestionsDTO {
 
     private int depth;
 
-    private ItemDTO selected;
+    private long selectedItemId;
     
-    public ItemDTO getItem() {
-        return selected;
+    public long getItemId() {
+        return selectedItemId;
     }
 
-    public void setItem(ItemDTO item) {
-        this.selected = item;
+    public void setItemId(long itemId) {
+        this.selectedItemId = itemId;
     }
         
     public ItemColor getColor() {
@@ -42,14 +40,6 @@ public class QuestionsDTO {
 
     public void setColor(ItemColor color) {
         this.color = color;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public BigDecimal getWeight() {

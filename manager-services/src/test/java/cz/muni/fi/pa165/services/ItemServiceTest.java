@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.services;
 
 import cz.muni.fi.pa165.ServiceApplicationContext;
 import cz.muni.fi.pa165.dao.ItemDao;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.enums.ItemColor;
@@ -62,6 +63,10 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         jacket.setName("Jacket");
         jacket.setDescription("Jacket for men");               
         jacket.setCategory(clothes);
+        jacket.setDepth(5);
+        jacket.setWidth(5);
+        jacket.setHeight(5);
+        jacket.setWeight(BigDecimal.ONE);
         
         electronics = new Category();
         electronics.setName("Electronics");
@@ -116,6 +121,23 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(returnedItem, jacket); 
 
         verify(itemDao, times(1)).findById(0);
+    } 
+    
+    @Test
+    public void testItemReturnedToOwner() {   
+        Item returnedItem = itemService.findById(0);
+        QuestionsDTO question = new QuestionsDTO();
+        question.setColor(cz.muni.fi.pa165.dto.enums.ItemColor.BLUE);
+        question.setDepth(5);
+        question.setWidth(5);
+        question.setHeight(5);
+        question.setWeight(BigDecimal.ONE);
+        question.setItemId(0);
+        
+        Assert.assertTrue(itemService.canBeReturned(question)); 
+        
+        question.setHeight(20);
+        Assert.assertFalse(itemService.canBeReturned(question)); 
     } 
     
     @Test

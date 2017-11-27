@@ -126,7 +126,7 @@ public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
         questions.setWidth(1);
         questions.setColor(ItemColor.GREEN);
         questions.setWeight(BigDecimal.ONE);
-        questions.setItem(testItem);
+        questions.setItemId(testItem.getId());
         boolean result = itemFacade.canBeReturned(questions);
         Assert.assertTrue(result);
         questions.setColor(ItemColor.BLACK);

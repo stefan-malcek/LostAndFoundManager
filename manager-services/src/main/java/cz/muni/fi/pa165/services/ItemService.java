@@ -73,5 +73,12 @@ public interface ItemService {
      */
     Item update(Item updatedItem );
     
+    
+    /**
+     * When administrator returns item, he has to check if returned item is actually users. User cant see field like width, height, ... 
+     *
+     *  @param  questions users answers and id of returned object
+     * 
+     */
     public boolean canBeReturned(QuestionsDTO questions);
 }
