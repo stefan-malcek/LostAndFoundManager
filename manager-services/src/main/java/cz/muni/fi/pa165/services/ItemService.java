@@ -5,9 +5,10 @@
  */
 package cz.muni.fi.pa165.services;
 
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +63,7 @@ public interface ItemService {
      *  @param date date of return
      * 
      */
-    void itemReturnedToOwner(Item item, LocalDate date);
+    void itemReturnedToOwner(Item item, Date date);
     
     /**
      * Set date when item was returned to owner.
@@ -71,4 +72,13 @@ public interface ItemService {
      * 
      */
     Item update(Item updatedItem );
+    
+    
+    /**
+     * When administrator returns item, he has to check if returned item is actually users. User cant see field like width, height, ... 
+     *
+     *  @param  questions users answers and id of returned object
+     * 
+     */
+    public boolean canBeReturned(QuestionsDTO questions);
 }

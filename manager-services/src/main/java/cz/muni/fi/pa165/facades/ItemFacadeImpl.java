@@ -7,13 +7,14 @@ package cz.muni.fi.pa165.facades;
 
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.services.ItemService;
 import cz.muni.fi.pa165.services.MappingService;
 import exceptions.LostAndFoundManagerDataAccessException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -89,6 +90,18 @@ public class ItemFacadeImpl implements ItemFacade {
         }
     }
 
+    
+    @Override
+    public boolean canBeReturned(QuestionsDTO questions) {
+        
+        try {
+            return itemService.canBeReturned(questions);
+        } catch (Exception e) 
+        {
+            throw new LostAndFoundManagerDataAccessException("can not evalute if item can be returned",e);
+        }
+    }
+    
     @Override
     public List<ItemDTO> getAllItems() {
         
@@ -104,7 +117,7 @@ public class ItemFacadeImpl implements ItemFacade {
     }
 
     @Override
-    public void itemReturnedToOwner(ItemDTO item, LocalDate date) {
+    public void itemReturnedToOwner(ItemDTO item, Date date) {
         try {
             Item itemDAO  = itemService.findById(item.getId());
             itemService.itemReturnedToOwner(itemDAO,date);

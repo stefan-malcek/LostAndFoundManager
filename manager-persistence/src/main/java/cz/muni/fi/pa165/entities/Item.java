@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Represents a user entity.
@@ -52,7 +53,7 @@ public class Item {
 
     private String photoUri;
 
-    private LocalDate returned;
+    private Date returned;
 
 
     public long getId() {
@@ -135,11 +136,11 @@ public class Item {
         this.photoUri = photoUri;
     }
 
-    public LocalDate getReturned() {
+    public Date getReturned() {
         return returned;
     }
 
-    public void setReturned(LocalDate returned) {
+    public void setReturned(Date returned) {
         this.returned = returned;
     }
 

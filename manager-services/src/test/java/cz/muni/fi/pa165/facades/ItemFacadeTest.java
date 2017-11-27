@@ -9,11 +9,13 @@ import cz.muni.fi.pa165.ServiceApplicationContext;
 import cz.muni.fi.pa165.dto.CategoryCreateDTO;
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.dto.enums.ItemColor;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.CategoryFacade;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +100,7 @@ public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
     
     @Test
     public void testReturnItem() {
-        itemFacade.itemReturnedToOwner(testItem, LocalDate.now());
+        itemFacade.itemReturnedToOwner(testItem, Date.from(Instant.now()));
         ItemDTO returnedItem = itemFacade.findById(testItem.getId());
         
         Assert.assertNotNull(returnedItem.getReturned());
@@ -115,6 +117,23 @@ public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
         Assert.assertEquals(returnedItem.getDepth(),55);
         Assert.assertEquals(returnedItem.getHeight(),22);
         Assert.assertEquals(returnedItem.getDescription(),"zmena popisu");
+    }
+    
+    @Test
+    public void testQuestionsItem() {
+        QuestionsDTO questions = new QuestionsDTO();
+        questions.setDepth(1);
+        questions.setHeight(1);
+        questions.setWidth(1);
+        questions.setColor(ItemColor.GREEN);
+        questions.setWeight(BigDecimal.ONE);
+        questions.setItemId(testItem.getId());
+        boolean result = itemFacade.canBeReturned(questions);
+        Assert.assertTrue(result);
+        questions.setColor(ItemColor.BLACK);
+        result = itemFacade.canBeReturned(questions);
+        Assert.assertFalse(result);
+ 
     }
     
 }
