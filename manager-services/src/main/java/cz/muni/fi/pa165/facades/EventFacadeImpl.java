@@ -72,7 +72,7 @@ public class EventFacadeImpl implements EventFacade {
             return event.getId();
         }
         User finder = mappingService.mapTo(eventDTO.getFinder(), User.class);
-        eventService.addLoosing(event, finder, eventDTO.getDateOfFind(), eventDTO.getPlaceOfFind());
+        eventService.addFinding(event, finder, eventDTO.getDateOfFind(), eventDTO.getPlaceOfFind());
         return event.getId();
     }
 
