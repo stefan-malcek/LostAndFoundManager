@@ -13,6 +13,7 @@ import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.services.ItemService;
 import cz.muni.fi.pa165.services.MappingService;
 import exceptions.LostAndFoundManagerDataAccessException;
+import java.time.LocalDate;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -101,5 +102,28 @@ public class ItemFacadeImpl implements ItemFacade {
             throw new LostAndFoundManagerDataAccessException("can not retrive all items",e);
         }
     }
+
+    @Override
+    public void itemReturnedToOwner(ItemDTO item, LocalDate date) {
+        try {
+            Item itemDAO  = itemService.findById(item.getId());
+            itemService.itemReturnedToOwner(itemDAO,date);
+            
+        } catch (Exception e) 
+        {
+            throw new LostAndFoundManagerDataAccessException("can not set return date",e);
+        }
+    }
     
+    @Override
+    public ItemDTO update(ItemDTO updatedItem) {
+        try {
+            Item updated = mappingService.mapTo(updatedItem, Item.class);
+             return mappingService.mapTo(itemService.update(updated), ItemDTO.class);
+            
+        } catch (Exception e) 
+        {
+            throw new LostAndFoundManagerDataAccessException("can not update item",e);
+        }
+    }
 }

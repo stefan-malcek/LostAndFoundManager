@@ -61,7 +61,7 @@ public class EventDaoTest extends AbstractTestNGSpringContextTests {
         electronics.setDescription("Various types of electronics");
         categoryDao.create(electronics);
         Item laptop = new Item();
-        laptop.setColor(ItemColor.Black);
+        laptop.setColor(ItemColor.BLACK);
         laptop.setName("Laptop");
         laptop.setDescription("Lenovo laptop");
         laptop.setCategory(electronics);

@@ -34,7 +34,7 @@ public class ItemDaoImpl implements ItemDao{
             throw new IllegalArgumentException("Item cannot be null.");
         }
 
-        em.remove(item);
+        em.remove(em.merge(item));
     }
 
     @Override
