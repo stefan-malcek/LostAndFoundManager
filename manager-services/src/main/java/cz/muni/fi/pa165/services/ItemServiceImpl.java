@@ -8,8 +8,10 @@ package cz.muni.fi.pa165.services;
 import cz.muni.fi.pa165.dao.ItemDao;
 import cz.muni.fi.pa165.dao.CategoryDao;
 import cz.muni.fi.pa165.entities.Category;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
+import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.entities.Item;
-import cz.muni.fi.pa165.enums.ItemColor;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import javax.inject.Inject;
@@ -75,6 +77,28 @@ public class ItemServiceImpl implements ItemService {
        updated.setDescription(updatedItem.getDescription());
        updated.setHeight(updatedItem.getHeight());
        return updated;
+    }
+    
+    private boolean isNotAroundValue(int x, int y) {
+        return !(y-5<=x && x<=y+5);
+    }
+
+    @Override
+    public boolean canBeReturned(QuestionsDTO questions) {
+       ItemDTO item = questions.getItem();
+
+       if(item.getColor() != questions.getColor())
+           return false;
+       if(isNotAroundValue(item.getDepth(), questions.getDepth()))
+           return false;
+       if(isNotAroundValue(item.getWidth(), questions.getWidth()))
+           return false;
+       if(isNotAroundValue(item.getHeight(), questions.getHeight()))
+           return false; 
+        if(item.getWeight().add(BigDecimal.TEN).compareTo(questions.getWeight()) > 0 && item.getWeight().add(BigDecimal.TEN.negate()).compareTo(questions.getWeight()) > 0 )
+           return false; 
+       
+       return true;
     }
     
 }

@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.facades;
 
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.facade.ItemFacade;
@@ -89,6 +90,18 @@ public class ItemFacadeImpl implements ItemFacade {
         }
     }
 
+    
+    @Override
+    public boolean canBeReturned(QuestionsDTO questions) {
+        
+        try {
+            return itemService.canBeReturned(questions);
+        } catch (Exception e) 
+        {
+            throw new LostAndFoundManagerDataAccessException("can not evalute if item can be returned",e);
+        }
+    }
+    
     @Override
     public List<ItemDTO> getAllItems() {
         

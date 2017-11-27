@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.ServiceApplicationContext;
 import cz.muni.fi.pa165.dto.CategoryCreateDTO;
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.dto.enums.ItemColor;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.CategoryFacade;
@@ -115,6 +116,23 @@ public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
         Assert.assertEquals(returnedItem.getDepth(),55);
         Assert.assertEquals(returnedItem.getHeight(),22);
         Assert.assertEquals(returnedItem.getDescription(),"zmena popisu");
+    }
+    
+    @Test
+    public void testQuestionsItem() {
+        QuestionsDTO questions = new QuestionsDTO();
+        questions.setDepth(1);
+        questions.setHeight(1);
+        questions.setWidth(1);
+        questions.setColor(ItemColor.GREEN);
+        questions.setWeight(BigDecimal.ONE);
+        questions.setItem(testItem);
+        boolean result = itemFacade.canBeReturned(questions);
+        Assert.assertTrue(result);
+        questions.setColor(ItemColor.BLACK);
+        result = itemFacade.canBeReturned(questions);
+        Assert.assertFalse(result);
+ 
     }
     
 }

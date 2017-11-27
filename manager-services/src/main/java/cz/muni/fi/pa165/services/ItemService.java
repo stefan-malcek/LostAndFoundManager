@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.services;
 
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 import java.time.LocalDate;
@@ -71,4 +72,6 @@ public interface ItemService {
      * 
      */
     Item update(Item updatedItem );
+    
+    public boolean canBeReturned(QuestionsDTO questions);
 }

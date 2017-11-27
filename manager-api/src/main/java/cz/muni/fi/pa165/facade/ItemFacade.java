@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import cz.muni.fi.pa165.dto.QuestionsDTO;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -70,5 +71,7 @@ public interface ItemFacade {
      *  @return updated item
      */
     ItemDTO update(ItemDTO updatedItem );
+    
+    public boolean canBeReturned(QuestionsDTO questions);
 
 }
