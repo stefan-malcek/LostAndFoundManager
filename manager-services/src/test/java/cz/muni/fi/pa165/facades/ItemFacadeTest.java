@@ -14,7 +14,8 @@ import cz.muni.fi.pa165.dto.enums.ItemColor;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.CategoryFacade;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +100,7 @@ public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
     
     @Test
     public void testReturnItem() {
-        itemFacade.itemReturnedToOwner(testItem, LocalDate.now());
+        itemFacade.itemReturnedToOwner(testItem, Date.from(Instant.now()));
         ItemDTO returnedItem = itemFacade.findById(testItem.getId());
         
         Assert.assertNotNull(returnedItem.getReturned());

@@ -8,7 +8,7 @@ package cz.muni.fi.pa165.facade;
 import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,7 +61,7 @@ public interface ItemFacade {
      *  @param date date of return
      * 
      */
-    void itemReturnedToOwner(ItemDTO item, LocalDate date);
+    void itemReturnedToOwner(ItemDTO item, Date date);
     
     /**
      * Set date when item was returned to owner.

@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.dto;
 import cz.muni.fi.pa165.dto.enums.ItemColor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,7 +46,7 @@ public class ItemDTO {
 
     private String photoUri;
 
-    private LocalDate returned;
+    private Date returned;
 
 
     public long getId() {
@@ -128,11 +129,11 @@ public class ItemDTO {
         this.photoUri = photoUri;
     }
 
-    public LocalDate getReturned() {
+    public Date getReturned() {
         return returned;
     }
 
-    public void setReturned(LocalDate returned) {
+    public void setReturned(Date returned) {
         this.returned = returned;
     }
 

@@ -12,7 +12,8 @@ import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.enums.ItemColor;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Instant;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.service.spi.ServiceException;
@@ -93,7 +94,7 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void testItemReturned() {
-        LocalDate date =  LocalDate.now();
+        Date date =  Date.from(Instant.now());
         itemService.itemReturnedToOwner(jacket, date); 
         Assert.assertEquals(jacket.getReturned(), date);
     } 
@@ -110,6 +111,7 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         items.add(jacket);
         when(itemDao.findByCategory(clothes)).thenReturn(items);
         List<Item> returnedItems = itemService.findByCategory(clothes);
+        Assert.assertEquals(returnedItems.size(), 1);
         
         verify(itemDao, times(1)).findByCategory(clothes);
     } 

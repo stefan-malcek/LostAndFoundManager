@@ -9,10 +9,9 @@ import cz.muni.fi.pa165.dao.ItemDao;
 import cz.muni.fi.pa165.dao.CategoryDao;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
-import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.entities.Item;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -48,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void itemReturnedToOwner(Item item, LocalDate date) {
+    public void itemReturnedToOwner(Item item, Date date) {
        if(date != null)
         {
             item.setReturned(date);
