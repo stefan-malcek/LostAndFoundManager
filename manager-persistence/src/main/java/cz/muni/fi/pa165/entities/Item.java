@@ -53,6 +53,7 @@ public class Item {
 
     private String photoUri;
 
+    @Temporal(TemporalType.DATE)
     private Date returned;
 
 

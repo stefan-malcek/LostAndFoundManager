@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -90,13 +91,13 @@ public class EventDaoImpl implements EventDao {
     }
 
     @Override
-    public List<Event> findEventByDateOfFind(LocalDate date) {
+    public List<Event> findEventByDateOfFind(Date date) {
             return em.createQuery("SELECT e FROM Event e WHERE e.dateOfFind = :dateOfFind ",
 		Event.class).setParameter("dateOfFind",date).getResultList();
     }
 
     @Override
-    public List<Event> findEventByDateOfLoss(LocalDate date) {
+    public List<Event> findEventByDateOfLoss(Date date) {
          return em.createQuery("SELECT e FROM Event e WHERE e.dateOfLoss = :dateOfLoss",
 		Event.class).setParameter("dateOfLoss",date).getResultList();
     }

@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -17,7 +18,7 @@ public class EventFindDTO {
     @NotNull
     private UserDTO finder;
     @NotNull
-    private LocalDate dateOfFind;
+    private Date dateOfFind;
     @NotNull
     @Size(min = 2, max = 256)
     private String placeOfFind;
@@ -46,11 +47,11 @@ public class EventFindDTO {
         this.finder = finder;
     }
 
-    public LocalDate getDateOfFind() {
+    public Date getDateOfFind() {
         return dateOfFind;
     }
 
-    public void setDateOfFind(LocalDate dateOfFind) {
+    public void setDateOfFind(Date dateOfFind) {
         this.dateOfFind = dateOfFind;
     }
 

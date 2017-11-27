@@ -10,18 +10,24 @@ import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.LocalDate;
+import javax.transaction.Transactional;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author Adam Bananka
  */
 @ContextConfiguration(classes = ServiceApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Autowired
@@ -43,11 +49,12 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
         user.setEmail("mail@test.com");
         user.setUserRole(UserRole.MEMBER);
         userFacade.register(user, "psw12345");
+        user = userFacade.findAllUsers().get(0);
         CategoryCreateDTO categoryDTO = new CategoryCreateDTO();
         categoryDTO.setName("Electronics");
         categoryDTO.setDescription("electro stuff");
-        long id = categoryFacade.createCategory(categoryDTO);
-        CategoryDTO category = categoryFacade.getCategoryById(id);
+        categoryFacade.createCategory(categoryDTO);
+        CategoryDTO category = categoryFacade.getAllCategories().get(0);
         ItemDTO laptop = new ItemDTO();
         laptop.setColor(ItemColor.GRAY);
         laptop.setName("Laptop");
@@ -60,31 +67,28 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
         mobile.setDescription("Samsung");
         mobile.setCategory(category);
         itemFacade.create(mobile);
+        laptop = itemFacade.getAllItems().get(0);
+        mobile = itemFacade.getAllItems().get(1);
 
         lossEvent = new EventDTO();
         lossEvent.setItem(laptop);
         lossEvent.setOwner(user);
-        lossEvent.setDateOfLoss(LocalDate.now().minusDays(2));
+        lossEvent.setDateOfLoss(Date.from(Instant.now()));
         lossEvent.setPlaceOfLoss("Brno");
         findEvent = new EventDTO();
         findEvent.setItem(mobile);
         findEvent.setFinder(user);
-        findEvent.setDateOfFind(LocalDate.now().minusDays(1));
+        findEvent.setDateOfFind(Date.from(Instant.now()));
         findEvent.setPlaceOfFind("Brno");
-    }
 
-    @Test
-    public void testCreateEvent() {
-        Assert.assertEquals(0, lossEvent.getId());
         eventFacade.createEvent(lossEvent);
-        Assert.assertTrue(lossEvent.getId() != 0);
+        lossEvent = eventFacade.findAllEvents().get(0);
+        eventFacade.createEvent(findEvent);
+        findEvent = eventFacade.findAllEvents().get(1);
     }
 
     @Test
     public void testDeleteEvent() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
-
         Assert.assertEquals(eventFacade.findAllEvents().size(), 2);
         eventFacade.deleteEvent(findEvent.getId());
 
@@ -94,12 +98,11 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testAddLoosing() {
-        eventFacade.createEvent(findEvent);
         EventLossDTO loss = new EventLossDTO();
         loss.setId(findEvent.getId());
         loss.setItem(findEvent.getItem());
         loss.setPlaceOfLoss("brno");
-        loss.setDateOfLoss(LocalDate.now().minusDays(3));
+        loss.setDateOfLoss(Date.from(Instant.now()));
         loss.setOwner(findEvent.getFinder());
         Assert.assertEquals(findEvent.getId(), eventFacade.addLoosing(loss));
         EventDTO updated = eventFacade.findEventById(findEvent.getId());
@@ -107,23 +110,11 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void testAddLoosingNotCreated() {
-        EventLossDTO loss = new EventLossDTO();
-        loss.setItem(lossEvent.getItem());
-        loss.setOwner(lossEvent.getOwner());
-        loss.setDateOfLoss(lossEvent.getDateOfLoss());
-        loss.setPlaceOfLoss(lossEvent.getPlaceOfLoss());
-        long id = eventFacade.addLoosing(loss);
-        Assert.assertEquals(lossEvent, eventFacade.findEventById(id));
-    }
-
-    @Test
     public void testAddFinding() {
-        eventFacade.createEvent(lossEvent);
         EventFindDTO find = new EventFindDTO();
         find.setId(lossEvent.getId());
         find.setItem(lossEvent.getItem());
-        find.setDateOfFind(LocalDate.now());
+        find.setDateOfFind(Date.from(Instant.now()));
         find.setPlaceOfFind("Brno");
         find.setFinder(lossEvent.getOwner());
         Assert.assertEquals(lossEvent.getId(), eventFacade.addFinding(find));
@@ -132,24 +123,12 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
-    public void testAddFindingNotCreated() {
-        EventFindDTO find = new EventFindDTO();
-        find.setItem(findEvent.getItem());
-        find.setDateOfFind(findEvent.getDateOfFind());
-        find.setPlaceOfFind(findEvent.getPlaceOfFind());
-        find.setFinder(findEvent.getFinder());
-        long id = eventFacade.addFinding(find);
-        Assert.assertEquals(findEvent, eventFacade.findEventById(id));
-    }
-
-    @Test
     public void testCheckEventResolved() {
-        eventFacade.createEvent(lossEvent);
         Assert.assertFalse(eventFacade.checkEventResolved(lossEvent.getId()));
         EventFindDTO find = new EventFindDTO();
         find.setId(lossEvent.getId());
         find.setItem(lossEvent.getItem());
-        find.setDateOfFind(LocalDate.now());
+        find.setDateOfFind(Date.from(Instant.now()));
         find.setPlaceOfFind("Brno");
         find.setFinder(lossEvent.getOwner());
         eventFacade.addFinding(find);
@@ -158,29 +137,21 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testFindEventById() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         Assert.assertEquals(lossEvent, eventFacade.findEventById(lossEvent.getId()));
     }
 
     @Test
     public void testFindEventByItem() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         Assert.assertEquals(lossEvent, eventFacade.findEventByItem(lossEvent.getItem().getId()));
     }
 
     @Test
     public void testFindAllEvents() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         Assert.assertEquals(eventFacade.findAllEvents().size(), 2);
     }
 
     @Test
     public void testFindEventsByFinder() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         List<EventDTO> res = eventFacade.findEventsByFinder(findEvent.getFinder().getId());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
@@ -188,8 +159,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testFindEventsByOwner() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         List<EventDTO> res = eventFacade.findEventsByOwner(lossEvent.getOwner().getId());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
@@ -197,8 +166,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testFindEventsByPlaceOfLoss() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         List<EventDTO> res = eventFacade.findEventsByPlaceOfLoss(lossEvent.getPlaceOfLoss());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
@@ -206,8 +173,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testFindEventsByPlaceOfFind() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         List<EventDTO> res = eventFacade.findEventsByPlaceOfFind(findEvent.getPlaceOfFind());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
@@ -215,8 +180,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testFindEventsByDateOfFind() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         List<EventDTO> res = eventFacade.findEventsByDateOfFind(findEvent.getDateOfFind());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
@@ -224,8 +187,6 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testFindEventsByDateOfLoss() {
-        eventFacade.createEvent(lossEvent);
-        eventFacade.createEvent(findEvent);
         List<EventDTO> res = eventFacade.findEventsByDateOfLoss(lossEvent.getDateOfLoss());
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));

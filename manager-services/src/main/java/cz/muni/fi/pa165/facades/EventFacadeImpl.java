@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,8 +49,7 @@ public class EventFacadeImpl implements EventFacade {
 
     @Override
     public void deleteEvent(long eventId) {
-        Event event = new Event();
-        event.setId(eventId);
+        Event event = eventService.findEventById(eventId);
         eventService.deleteEvent(event);
     }
 
@@ -144,13 +144,13 @@ public class EventFacadeImpl implements EventFacade {
     }
 
     @Override
-    public List<EventDTO> findEventsByDateOfFind(LocalDate date) {
+    public List<EventDTO> findEventsByDateOfFind(Date date) {
         List<Event> events = eventService.findEventsByDateOfFind(date);
         return mappingService.mapTo(events, EventDTO.class);
     }
 
     @Override
-    public List<EventDTO> findEventsByDateOfLoss(LocalDate date) {
+    public List<EventDTO> findEventsByDateOfLoss(Date date) {
         List<Event> events = eventService.findEventsByDateOfLoss(date);
         return mappingService.mapTo(events, EventDTO.class);
     }
