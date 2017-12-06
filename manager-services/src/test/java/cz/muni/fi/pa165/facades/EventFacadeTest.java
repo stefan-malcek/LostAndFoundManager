@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.facade.CategoryFacade;
 import cz.muni.fi.pa165.facade.EventFacade;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.UserFacade;
+import cz.muni.fi.pa165.services.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -38,6 +39,8 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
     private CategoryFacade categoryFacade;
     @Autowired
     private UserFacade userFacade;
+    @Autowired
+    private MappingService mappingService;
 
     private EventDTO lossEvent;
     private EventDTO findEvent;
@@ -110,6 +113,27 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
     }
 
     @Test
+    public void testAddLoosingNotCreated() {
+        ItemDTO tab = new ItemDTO();
+        tab.setColor(ItemColor.GRAY);
+        tab.setName("Tablet");
+        tab.setDescription("iPad");
+        tab.setCategory(lossEvent.getItem().getCategory());
+        long tabId = itemFacade.create(tab);
+        tab = itemFacade.findById(tabId);
+
+        EventLossDTO loss = new EventLossDTO();
+        loss.setItem(tab);
+        loss.setOwner(lossEvent.getOwner());
+        loss.setDateOfLoss(lossEvent.getDateOfLoss());
+        loss.setPlaceOfLoss(lossEvent.getPlaceOfLoss());
+        long id = eventFacade.addLoosing(loss);
+
+        EventDTO event = mappingService.mapTo(loss, EventDTO.class);
+        Assert.assertEquals(event, eventFacade.findEventById(id));
+    }
+
+    @Test
     public void testAddFinding() {
         EventFindDTO find = new EventFindDTO();
         find.setId(lossEvent.getId());
@@ -120,6 +144,27 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
         Assert.assertEquals(lossEvent.getId(), eventFacade.addFinding(find));
         EventDTO updated = eventFacade.findEventById(lossEvent.getId());
         Assert.assertEquals(updated.getOwner(), lossEvent.getOwner());
+    }
+
+    @Test
+    public void testAddFindingNotCreated() {
+        ItemDTO tab = new ItemDTO();
+        tab.setColor(ItemColor.GRAY);
+        tab.setName("Tablet");
+        tab.setDescription("iPad");
+        tab.setCategory(lossEvent.getItem().getCategory());
+        long tabId = itemFacade.create(tab);
+        tab = itemFacade.findById(tabId);
+
+        EventFindDTO find = new EventFindDTO();
+        find.setItem(tab);
+        find.setDateOfFind(findEvent.getDateOfFind());
+        find.setPlaceOfFind(findEvent.getPlaceOfFind());
+        find.setFinder(findEvent.getFinder());
+        long id = eventFacade.addFinding(find);
+
+        EventDTO event = mappingService.mapTo(find, EventDTO.class);
+        Assert.assertEquals(event, eventFacade.findEventById(id));
     }
 
     @Test
