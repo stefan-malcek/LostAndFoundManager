@@ -12,6 +12,7 @@
         <module>manager-services</module>
         <module>manager-api</module>
         <module>manager-web</module>
+        <module>manager-sample-data</module>
     </modules>
     
     <properties>

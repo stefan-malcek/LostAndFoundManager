@@ -4,6 +4,8 @@ manager-parent.iml
 manager-persistence/manager-persistence.iml
 manager-api/manager-api.iml
 manager-services/manager-services.iml
+manager-web/manager-web.iml
+manager-sample-data/manager-sample-data.iml
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
