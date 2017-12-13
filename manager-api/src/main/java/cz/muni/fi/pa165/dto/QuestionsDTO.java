@@ -24,16 +24,6 @@ public class QuestionsDTO {
 
     private int depth;
 
-    private long selectedItemId;
-    
-    public long getItemId() {
-        return selectedItemId;
-    }
-
-    public void setItemId(long itemId) {
-        this.selectedItemId = itemId;
-    }
-        
     public ItemColor getColor() {
         return color;
     }
@@ -73,5 +63,5 @@ public class QuestionsDTO {
     public void setDepth(int depth) {
         this.depth = depth;
     }
-    
+
 }

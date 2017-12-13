@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.facades;
 import cz.muni.fi.pa165.ServiceApplicationContext;
 import cz.muni.fi.pa165.dto.CategoryCreateDTO;
 import cz.muni.fi.pa165.dto.CategoryDTO;
+import cz.muni.fi.pa165.dto.ItemCreateDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.dto.enums.ItemColor;
@@ -31,94 +32,91 @@ import org.testng.annotations.Test;
  *
  * @author robhavlicek
  */
-
-
 @ContextConfiguration(classes = ServiceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
-    
+public class ItemFacadeTest extends AbstractTestNGSpringContextTests {
+
     @Autowired
     private ItemFacade itemFacade;
-    
+
     @Autowired
     private CategoryFacade categoryFacade;
-    
-    private ItemDTO testItem;  
-    private CategoryDTO testCategory;  
-    
-    
+
+    private ItemDTO testItem;
+    private CategoryDTO testCategory;
+
     @BeforeMethod
-    public void setup() {      
-        
+    public void setup() {
+
         CategoryCreateDTO category = new CategoryCreateDTO();
         category.setName("Electronics");
         category.setDescription("Various types of electronics");
         categoryFacade.createCategory(category);
         testCategory = categoryFacade.getAllCategories().get(0);
-        testItem = new ItemDTO();
-        testItem.setCategory(testCategory);
-        testItem.setColor(ItemColor.GREEN);
-        testItem.setName("Notebook");
-        testItem.setDescription("DELL laptop");
-        testItem.setDepth(1);
-        testItem.setWeight(BigDecimal.ONE);
-        testItem.setHeight(1);
-        testItem.setWidth(1);
-        testItem.setPhotoUri("test");
-        
-        itemFacade.create(testItem);
+        ItemCreateDTO item = new ItemCreateDTO();
+        item.setCategory(testCategory);
+        item.setColor(ItemColor.GREEN);
+        item.setName("Notebook");
+        item.setDescription("DELL laptop");
+        item.setDepth(1);
+        item.setWeight(BigDecimal.ONE);
+        item.setHeight(1);
+        item.setWidth(1);
+        item.setPhotoUri("test");
+
+        itemFacade.create(item);
         testItem = itemFacade.getAllItems().get(0);
     }
-    
+
     @Test
     public void testGetAllItems() {
-        
+
         List<ItemDTO> retrievedItems = itemFacade.getAllItems();
         Assert.assertEquals(retrievedItems.size(), 1);
-    } 
-    
+    }
+
     @Test
     public void testGetItemByCategory() {
-        List<ItemDTO> retrievedItems = itemFacade.findByCategory(testCategory);
+        List<ItemDTO> retrievedItems = itemFacade.findByCategory(testCategory.getId());
         Assert.assertEquals(retrievedItems.size(), 1);
-    } 
-    
+    }
+
     @Test
     public void testGetItemById() {
         ItemDTO returnedItem = itemFacade.findById(testItem.getId());
         Assert.assertEquals(returnedItem.getName(), testItem.getName());
-    } 
-    
+    }
+
     @Test
     public void testRemoveItem() {
         ItemDTO returnedItem = itemFacade.findById(testItem.getId());
-        itemFacade.remove(returnedItem);
-        List<ItemDTO> retrievedItems = itemFacade.findByCategory(testCategory);
+        itemFacade.remove(returnedItem.getId());
+        List<ItemDTO> retrievedItems = itemFacade.findByCategory(testCategory.getId());
         Assert.assertEquals(retrievedItems.size(), 0);
-    } 
-    
+    }
+
     @Test
     public void testReturnItem() {
-        itemFacade.itemReturnedToOwner(testItem, Date.from(Instant.now()));
+        itemFacade.itemReturnedToOwner(testItem.getId());
         ItemDTO returnedItem = itemFacade.findById(testItem.getId());
-        
+
         Assert.assertNotNull(returnedItem.getReturned());
     }
-    
+
     @Test
     public void testUpdateItem() {
-        
+
         testItem.setDepth(55);
         testItem.setHeight(22);
         testItem.setDescription("zmena popisu");
         itemFacade.update(testItem);
         ItemDTO returnedItem = itemFacade.findById(testItem.getId());
-        Assert.assertEquals(returnedItem.getDepth(),55);
-        Assert.assertEquals(returnedItem.getHeight(),22);
-        Assert.assertEquals(returnedItem.getDescription(),"zmena popisu");
+        Assert.assertEquals(returnedItem.getDepth(), 55);
+        Assert.assertEquals(returnedItem.getHeight(), 22);
+        Assert.assertEquals(returnedItem.getDescription(), "zmena popisu");
     }
-    
+
     @Test
     public void testQuestionsItem() {
         QuestionsDTO questions = new QuestionsDTO();
@@ -127,13 +125,12 @@ public class ItemFacadeTest extends AbstractTestNGSpringContextTests  {
         questions.setWidth(1);
         questions.setColor(ItemColor.GREEN);
         questions.setWeight(BigDecimal.ONE);
-        questions.setItemId(testItem.getId());
-        boolean result = itemFacade.canBeReturned(questions);
+        boolean result = itemFacade.canBeReturned(testItem.getId(), questions);
         Assert.assertTrue(result);
         questions.setColor(ItemColor.BLACK);
-        result = itemFacade.canBeReturned(questions);
+        result = itemFacade.canBeReturned(testItem.getId(), questions);
         Assert.assertFalse(result);
- 
+
     }
-    
+
 }

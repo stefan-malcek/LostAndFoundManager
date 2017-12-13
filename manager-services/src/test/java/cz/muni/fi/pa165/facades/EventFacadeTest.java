@@ -29,7 +29,7 @@ import java.util.List;
 @ContextConfiguration(classes = ServiceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class EventFacadeTest extends AbstractTestNGSpringContextTests{
+public class EventFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private EventFacade eventFacade;
@@ -58,20 +58,20 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
         categoryDTO.setDescription("electro stuff");
         categoryFacade.createCategory(categoryDTO);
         CategoryDTO category = categoryFacade.getAllCategories().get(0);
-        ItemDTO laptop = new ItemDTO();
-        laptop.setColor(ItemColor.GRAY);
-        laptop.setName("Laptop");
-        laptop.setDescription("Lenovo laptop");
-        laptop.setCategory(category);
-        itemFacade.create(laptop);
-        ItemDTO mobile = new ItemDTO();
-        mobile.setName("Mobile");
-        mobile.setColor(ItemColor.WHITE);
-        mobile.setDescription("Samsung");
-        mobile.setCategory(category);
-        itemFacade.create(mobile);
-        laptop = itemFacade.getAllItems().get(0);
-        mobile = itemFacade.getAllItems().get(1);
+        ItemCreateDTO laptopCreateDto = new ItemCreateDTO();
+        laptopCreateDto.setColor(ItemColor.GRAY);
+        laptopCreateDto.setName("Laptop");
+        laptopCreateDto.setDescription("Lenovo laptop");
+        laptopCreateDto.setCategory(category);
+        itemFacade.create(laptopCreateDto);
+        ItemCreateDTO mobileCreateDto = new ItemCreateDTO();
+        mobileCreateDto.setName("Mobile");
+        mobileCreateDto.setColor(ItemColor.WHITE);
+        mobileCreateDto.setDescription("Samsung");
+        mobileCreateDto.setCategory(category);
+        itemFacade.create(mobileCreateDto);
+        ItemDTO laptop = itemFacade.getAllItems().get(0);
+        ItemDTO mobile = itemFacade.getAllItems().get(1);
 
         lossEvent = new EventDTO();
         lossEvent.setItem(laptop);
@@ -114,13 +114,13 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testAddLoosingNotCreated() {
-        ItemDTO tab = new ItemDTO();
-        tab.setColor(ItemColor.GRAY);
-        tab.setName("Tablet");
-        tab.setDescription("iPad");
-        tab.setCategory(lossEvent.getItem().getCategory());
-        long tabId = itemFacade.create(tab);
-        tab = itemFacade.findById(tabId);
+        ItemCreateDTO tabCreateDto = new ItemCreateDTO();
+        tabCreateDto.setColor(ItemColor.GRAY);
+        tabCreateDto.setName("Tablet");
+        tabCreateDto.setDescription("iPad");
+        tabCreateDto.setCategory(lossEvent.getItem().getCategory());
+        long tabId = itemFacade.create(tabCreateDto);
+        ItemDTO tab = itemFacade.findById(tabId);
 
         EventLossDTO loss = new EventLossDTO();
         loss.setItem(tab);
@@ -148,13 +148,13 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests{
 
     @Test
     public void testAddFindingNotCreated() {
-        ItemDTO tab = new ItemDTO();
-        tab.setColor(ItemColor.GRAY);
-        tab.setName("Tablet");
-        tab.setDescription("iPad");
-        tab.setCategory(lossEvent.getItem().getCategory());
-        long tabId = itemFacade.create(tab);
-        tab = itemFacade.findById(tabId);
+        ItemCreateDTO tabCreateDto = new ItemCreateDTO();
+        tabCreateDto.setColor(ItemColor.GRAY);
+        tabCreateDto.setName("Tablet");
+        tabCreateDto.setDescription("iPad");
+        tabCreateDto.setCategory(lossEvent.getItem().getCategory());
+        long tabId = itemFacade.create(tabCreateDto);
+        ItemDTO tab = itemFacade.findById(tabId);
 
         EventFindDTO find = new EventFindDTO();
         find.setItem(tab);
