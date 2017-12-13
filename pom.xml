@@ -12,10 +12,7 @@
         <module>manager-services</module>
         <module>manager-api</module>
         <module>manager-web</module>
-<<<<<<< HEAD
         <module>manager-sample-data</module>
-=======
->>>>>>> 96a5d092575a4314b8aabfd254a7ee8fd4d9f0b3
     </modules>
     
     <properties>
