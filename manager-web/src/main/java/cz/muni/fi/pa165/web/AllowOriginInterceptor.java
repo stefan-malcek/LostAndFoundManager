@@ -11,8 +11,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * PUT or POST Here we are allowing all origins "Access-Control-Allow-Origin",
  * "*" and all operations "Access-Control-Allow-Methods", "GET, POST, PUT,
  * DELETE, OPTIONS"
- *
- * @author Stefan Malcek
  */
 public class AllowOriginInterceptor extends HandlerInterceptorAdapter {
 

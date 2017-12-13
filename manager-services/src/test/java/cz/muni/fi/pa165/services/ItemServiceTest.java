@@ -37,38 +37,39 @@ import org.testng.annotations.Test;
  */
 @ContextConfiguration(classes = ServiceApplicationContext.class)
 public class ItemServiceTest extends AbstractTestNGSpringContextTests {
+
     @Mock
     private ItemDao itemDao;
-    
+
     @Autowired
     @InjectMocks
     private ItemService itemService;
-    
+
     @Mock
     private CategoryService categoryService;
-    
+
     private Item jacket;
     private Item laptop;
     private Category clothes;
     private Category electronics;
-    
+
     @BeforeMethod
     public void createCategories() {
-        
+
         clothes = new Category();
         clothes.setName("Clothes");
-        clothes.setDescription("Any kind of clothing"); 
+        clothes.setDescription("Any kind of clothing");
         categoryService.create(clothes);
         jacket = new Item();
-        jacket.setColor(ItemColor.BLUE);        
+        jacket.setColor(ItemColor.BLUE);
         jacket.setName("Jacket");
-        jacket.setDescription("Jacket for men");               
+        jacket.setDescription("Jacket for men");
         jacket.setCategory(clothes);
         jacket.setDepth(5);
         jacket.setWidth(5);
         jacket.setHeight(5);
         jacket.setWeight(BigDecimal.ONE);
-        
+
         electronics = new Category();
         electronics.setName("Electronics");
         electronics.setDescription("Various types of electronics");
@@ -76,7 +77,7 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         laptop = new Item();
         laptop.setColor(ItemColor.BLACK);
         laptop.setName("Laptop");
-        laptop.setDescription("Lenovo laptop");        
+        laptop.setDescription("Lenovo laptop");
         laptop.setCategory(electronics);
 
     }
@@ -85,26 +86,26 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
-    
+
     @Test
     public void testCreate() {
-        itemService.create(jacket);       
+        itemService.create(jacket);
         verify(itemDao, times(1)).create(jacket);
-    } 
-    
+    }
+
     @Test
     public void testItemReturned() {
-        Date date =  Date.from(Instant.now());
-        itemService.itemReturnedToOwner(jacket, date); 
+        Date date = Date.from(Instant.now());
+        itemService.itemReturnedToOwner(jacket, date);
         Assert.assertEquals(jacket.getReturned(), date);
-    } 
-    
-    
+    }
+
     @Test
     public void testDelete() {
-        itemService.delete(jacket);       
+        itemService.delete(jacket);
         verify(itemDao, times(1)).delete(jacket);
-    } 
+    }
+
     @Test
     public void testFindByCategory() {
         List<Item> items = new ArrayList();
@@ -112,21 +113,22 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         when(itemDao.findByCategory(clothes)).thenReturn(items);
         List<Item> returnedItems = itemService.findByCategory(clothes);
         Assert.assertEquals(returnedItems.size(), 1);
-        
+
         verify(itemDao, times(1)).findByCategory(clothes);
-    } 
+    }
+
     @Test
-    public void testFindById() {   
+    public void testFindById() {
         when(itemDao.findById(0)).thenReturn(jacket);
-        
+
         Item returnedItem = itemService.findById(0);
-        Assert.assertEquals(returnedItem, jacket); 
+        Assert.assertEquals(returnedItem, jacket);
 
         verify(itemDao, times(1)).findById(0);
-    } 
-    
+    }
+
     @Test
-    public void testItemReturnedToOwner() {   
+    public void testItemReturnedToOwner() {
         Item returnedItem = itemService.findById(0);
         QuestionsDTO question = new QuestionsDTO();
         question.setColor(cz.muni.fi.pa165.dto.enums.ItemColor.BLUE);
@@ -134,17 +136,17 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         question.setWidth(5);
         question.setHeight(5);
         question.setWeight(BigDecimal.ONE);
-        
-        Assert.assertTrue(itemService.canBeReturned(0, question)); 
-        
+
+        Assert.assertTrue(itemService.canBeReturned(0, question));
+
         question.setHeight(20);
-        Assert.assertFalse(itemService.canBeReturned(0, question)); 
-    } 
-    
+        Assert.assertFalse(itemService.canBeReturned(0, question));
+    }
+
     @Test
-    public void testUpdate() {   
+    public void testUpdate() {
         when(itemDao.findById(0)).thenReturn(laptop);
-        
+
         Item laptop2 = itemDao.findById(0);
         laptop2.setColor(ItemColor.GREEN);
         laptop2.setName("Notebook");
@@ -154,25 +156,24 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
         laptop2.setHeight(1);
         laptop2.setWidth(1);
         laptop2.setPhotoUri("test");
-        
+
         Item returnedItem = itemService.update(laptop2);
-        Assert.assertEquals(returnedItem, laptop2); 
-    } 
-    
+        Assert.assertEquals(returnedItem, laptop2);
+    }
+
     @Test
     public void testFindAll() {
         List<Item> items = new ArrayList();
         items.add(jacket);
-        items.add(laptop);  
-        
+        items.add(laptop);
+
         when(itemDao.findAll()).thenReturn(items);
-        
+
         List<Item> retrievedItems = itemService.findAll();
         Assert.assertEquals(2, retrievedItems.size());
         Assert.assertEquals(retrievedItems.get(0), jacket);
         Assert.assertEquals(retrievedItems.get(1), laptop);
-        
-        
+
         verify(itemDao, times(1)).findAll();
-    } 
+    }
 }

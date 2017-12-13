@@ -21,15 +21,14 @@ import org.springframework.stereotype.Service;
  * @author robhavlicek
  */
 @Service
-public class ItemServiceImpl implements ItemService { 
+public class ItemServiceImpl implements ItemService {
 
-    @Inject 
+    @Inject
     private ItemDao itemDao;
-    
-    @Inject 
+
+    @Inject
     private CategoryDao categoryDao;
-    
-    
+
     @Override
     public void create(Item item) {
         itemDao.create(item);
@@ -37,23 +36,22 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void delete(Item item) {
-        
+
         itemDao.delete(item);
     }
 
     @Override
     public Item findById(long id) {
-       return itemDao.findById(id);
+        return itemDao.findById(id);
     }
 
     @Override
     public void itemReturnedToOwner(Item item, Date date) {
-       if(date != null)
-        {
+        if (date != null) {
             item.setReturned(date);
         }
     }
-    
+
     @Override
     public List<Item> findByCategory(Category category) {
         return itemDao.findByCategory(category);
@@ -63,42 +61,47 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> findAll() {
         return itemDao.findAll();
     }
-    
+
     @Override
-    public Item update(Item updatedItem ) {
-       Item updated = itemDao.findById(updatedItem.getId());
-       updated.setColor(updatedItem.getColor());
-       updated.setDepth(updatedItem.getDepth());
-       updated.setWidth(updatedItem.getWidth());
-       updated.setWeight(updatedItem.getWeight());
-       updated.setName(updatedItem.getName());
-       updated.setPhotoUri(updatedItem.getPhotoUri());
-       updated.setDescription(updatedItem.getDescription());
-       updated.setHeight(updatedItem.getHeight());
-       return updated;
+    public Item update(Item updatedItem) {
+        Item updated = itemDao.findById(updatedItem.getId());
+        updated.setColor(updatedItem.getColor());
+        updated.setDepth(updatedItem.getDepth());
+        updated.setWidth(updatedItem.getWidth());
+        updated.setWeight(updatedItem.getWeight());
+        updated.setName(updatedItem.getName());
+        updated.setPhotoUri(updatedItem.getPhotoUri());
+        updated.setDescription(updatedItem.getDescription());
+        updated.setHeight(updatedItem.getHeight());
+        return updated;
     }
-    
+
     private boolean isNotAroundValue(int x, int y) {
-        return !(y-5<=x && x<=y+5);
+        return !(y - 5 <= x && x <= y + 5);
     }
 
     @Override
     public boolean canBeReturned(long id, QuestionsDTO questions) {
-       
-        Item item =  itemDao.findById(id);
 
-       if(!item.getColor().name().equals(questions.getColor().name()))
-           return false;
-       if(isNotAroundValue(item.getDepth(), questions.getDepth()))
-           return false;
-       if(isNotAroundValue(item.getWidth(), questions.getWidth()))
-           return false;
-       if(isNotAroundValue(item.getHeight(), questions.getHeight()))
-           return false; 
-        if(item.getWeight().add(BigDecimal.TEN).compareTo(questions.getWeight()) > 0 && item.getWeight().add(BigDecimal.TEN.negate()).compareTo(questions.getWeight()) > 0 )
-           return false; 
-       
-       return true;
+        Item item = itemDao.findById(id);
+
+        if (!item.getColor().name().equals(questions.getColor().name())) {
+            return false;
+        }
+        if (isNotAroundValue(item.getDepth(), questions.getDepth())) {
+            return false;
+        }
+        if (isNotAroundValue(item.getWidth(), questions.getWidth())) {
+            return false;
+        }
+        if (isNotAroundValue(item.getHeight(), questions.getHeight())) {
+            return false;
+        }
+        if (item.getWeight().add(BigDecimal.TEN).compareTo(questions.getWeight()) > 0 && item.getWeight().add(BigDecimal.TEN.negate()).compareTo(questions.getWeight()) > 0) {
+            return false;
+        }
+
+        return true;
     }
-    
+
 }

@@ -5,11 +5,9 @@
  */
 package cz.muni.fi.pa165.facade;
 
-import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemCreateDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
-import java.util.Date;
 import java.util.List;
 
 /**

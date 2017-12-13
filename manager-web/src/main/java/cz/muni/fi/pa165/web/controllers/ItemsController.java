@@ -100,7 +100,6 @@ public class ItemsController {
         return productDTO;
     }
 
-    //TODO: change path to {id}/can_return
     @RequestMapping(value = "/{id}/can_return", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final boolean canBeReturned(@PathVariable("id") long id,

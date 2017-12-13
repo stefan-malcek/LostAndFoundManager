@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
  * @author Stefan Malcek
  */
 public class ItemCreateDTO {
-    
+
     @NotNull
     @Size(min = 1, max = 256)
     private String name;
@@ -26,7 +26,7 @@ public class ItemCreateDTO {
     private CategoryDTO category;
 
     private ItemColor color;
-    
+
     @NotNull
     private String description;
 
@@ -139,13 +139,27 @@ public class ItemCreateDTO {
 
         ItemDTO item = (ItemDTO) obj;
 
-        if (!name.equals(item.getName()) ) return false;
-        if (!category.equals(item.getCategory()) ) return false;
-        if (color != null ? color != item.getColor() : item.getColor() != null) return false;
-        if (weight != null ? !weight.equals(item.getWeight()) : item.getWeight() != null) return false;
-        if (height != item.getHeight()) return false;
-        if (width != item.getWidth()) return false;
-        if (depth != item.getDepth()) return false;
+        if (!name.equals(item.getName())) {
+            return false;
+        }
+        if (!category.equals(item.getCategory())) {
+            return false;
+        }
+        if (color != null ? color != item.getColor() : item.getColor() != null) {
+            return false;
+        }
+        if (weight != null ? !weight.equals(item.getWeight()) : item.getWeight() != null) {
+            return false;
+        }
+        if (height != item.getHeight()) {
+            return false;
+        }
+        if (width != item.getWidth()) {
+            return false;
+        }
+        if (depth != item.getDepth()) {
+            return false;
+        }
         return returned != null ? returned.equals(item.getReturned()) : item.getReturned() == null;
     }
 
@@ -167,17 +181,17 @@ public class ItemCreateDTO {
 
     @Override
     public String toString() {
-        return "Item{" +
-                ", name='" + name + '\'' +
-                ", category=" + category +
-                ", color=" + color +
-                ", description='" + description + '\'' +
-                ", weight=" + weight +
-                ", height=" + height +
-                ", width=" + width +
-                ", depth=" + depth +
-                ", photoUri='" + photoUri + '\'' +
-                ", returned=" + returned +
-                '}';
+        return "Item{"
+                + ", name='" + name + '\''
+                + ", category=" + category
+                + ", color=" + color
+                + ", description='" + description + '\''
+                + ", weight=" + weight
+                + ", height=" + height
+                + ", width=" + width
+                + ", depth=" + depth
+                + ", photoUri='" + photoUri + '\''
+                + ", returned=" + returned
+                + '}';
     }
 }

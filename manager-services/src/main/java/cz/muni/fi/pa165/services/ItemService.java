@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface ItemService {
-  
+
     /**
      * Stores a new item in the application.
      *
@@ -55,30 +55,31 @@ public interface ItemService {
      * @return {@code List} of items
      */
     List<Item> findAll();
-    
+
     /**
      * Set date when item was returned to owner.
      *
-     *  @param item item which was returned
-     *  @param date date of return
-     * 
+     * @param item item which was returned
+     * @param date date of return
+     *
      */
     void itemReturnedToOwner(Item item, Date date);
-    
+
     /**
      * Set date when item was returned to owner.
      *
-     *  @param updatedItem updated item
-     * 
-     */
-    Item update(Item updatedItem );
-    
-    
-    /**
-     * When administrator returns item, he has to check if returned item is actually users. User cant see field like width, height, ... 
+     * @param updatedItem updated item
      *
-     *  @param  questions users answers and id of returned object
-     * 
+     */
+    Item update(Item updatedItem);
+
+    /**
+     * When administrator returns item, he has to check if returned item is
+     * actually users. User cant see field like width, height, ...
+     *
+     * @param id item Id
+     * @param questions users answers and id of returned object
+     *
      */
     public boolean canBeReturned(long id, QuestionsDTO questions);
 }

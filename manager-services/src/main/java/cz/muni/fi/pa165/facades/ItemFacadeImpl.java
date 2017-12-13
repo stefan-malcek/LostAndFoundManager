@@ -5,7 +5,6 @@
  */
 package cz.muni.fi.pa165.facades;
 
-import cz.muni.fi.pa165.dto.CategoryDTO;
 import cz.muni.fi.pa165.dto.ItemCreateDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
@@ -33,13 +32,13 @@ public class ItemFacadeImpl implements ItemFacade {
 
     @Inject
     private ItemService itemService;
-    
+
     @Inject
     private CategoryService categoryService;
 
     @Inject
     private TimeService timeService;
-    
+
     @Inject
     private MappingService mappingService;
 
@@ -119,11 +118,11 @@ public class ItemFacadeImpl implements ItemFacade {
     public void itemReturnedToOwner(long id) {
         try {
             Item item = itemService.findById(id);
-            
-            if(item.getReturned() != null){
+
+            if (item.getReturned() != null) {
                 throw new IllegalArgumentException("Item was already returned.");
             }
-            
+
             Date actualDate = timeService.getCurrentTime();
             itemService.itemReturnedToOwner(item, actualDate);
 

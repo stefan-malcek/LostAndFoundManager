@@ -29,7 +29,7 @@ import java.util.List;
 @ContextConfiguration(classes = ServiceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
-public class EventFacadeTest extends AbstractTestNGSpringContextTests{
+public class EventFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Autowired
     private EventFacade eventFacade;

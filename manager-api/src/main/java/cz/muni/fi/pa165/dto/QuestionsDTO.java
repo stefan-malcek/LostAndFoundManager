@@ -23,7 +23,7 @@ public class QuestionsDTO {
     private int width;
 
     private int depth;
-        
+
     public ItemColor getColor() {
         return color;
     }
@@ -63,5 +63,5 @@ public class QuestionsDTO {
     public void setDepth(int depth) {
         this.depth = depth;
     }
-    
+
 }
