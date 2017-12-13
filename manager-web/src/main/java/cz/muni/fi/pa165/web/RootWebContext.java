@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import cz.muni.fi.pa165.ServiceApplicationContext;
+import cz.muni.fi.pa165.sampledata.ManagerWithSampleDataConfiguration;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -22,8 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @EnableWebMvc
 @Configuration
-//TODO: import sample data
-@Import({ServiceApplicationContext.class})
+@Import({ServiceApplicationContext.class, ManagerWithSampleDataConfiguration.class})
 @ComponentScan(basePackages = {"cz.fi.muni.pa165.web.controllers"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 

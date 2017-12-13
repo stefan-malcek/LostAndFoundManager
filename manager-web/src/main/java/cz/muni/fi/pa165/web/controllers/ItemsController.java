@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pa165.web.controllers;
 
-import cz.muni.fi.pa165.dto.CategoryDTO;
+import cz.muni.fi.pa165.dto.ItemCreateDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
 import cz.muni.fi.pa165.facade.ItemFacade;
@@ -13,7 +13,6 @@ import cz.muni.fi.pa165.web.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.web.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.web.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.web.rest.ApiUris;
-import java.util.Calendar;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -27,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author stefa
+ * @author Stefan Malcek
  */
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_ITEMS)
@@ -38,15 +37,15 @@ public class ItemsController {
     @Inject
     private ItemFacade itemFacade;
 
-    //TODO: changeDTO to CreateItemDTO
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final ItemDTO createItem(@RequestBody ItemDTO product) throws Exception {
+    public final ItemDTO createItem(@RequestBody ItemCreateDTO product) throws Exception {
         logger.debug("rest createItem()");
         try {
             Long id = itemFacade.create(product);
             return itemFacade.findById(id);
         } catch (Exception ex) {
+            logger.debug(ex.getMessage());
             throw new ResourceAlreadyExistingException();
         }
     }
@@ -59,19 +58,18 @@ public class ItemsController {
             itemFacade.update(newItem);
             return itemFacade.findById(id);
         } catch (Exception ex) {
+            logger.debug(ex.getMessage());
             throw new InvalidParameterException();
         }
     }
 
-    //TODO: update facade to consume Id
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteItem(@PathVariable("id") long id) throws Exception {
         logger.debug("rest deleteItem({})", id);
         try {
-            ItemDTO item = new ItemDTO();
-            item.setId(id);
-            itemFacade.remove(item);
+            itemFacade.remove(id);
         } catch (Exception ex) {
+            logger.debug(ex.getMessage());
             throw new ResourceNotFoundException();
         }
     }
@@ -92,13 +90,10 @@ public class ItemsController {
         return itemFacade.getAllItems();
     }
 
-    //TODO: update facade to consume category Id
-    @RequestMapping(value = "by_category_id/{category_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/by_category_id/{category_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<ItemDTO> getItemsByCategoryId(@PathVariable("category_id") long categoryId) throws Exception {
         logger.debug("rest getItemsByCategoryId({})", categoryId);
-        CategoryDTO category = new CategoryDTO();
-        category.setId(categoryId);
-        List<ItemDTO> productDTO = itemFacade.findByCategory(category);
+        List<ItemDTO> productDTO = itemFacade.findByCategory(categoryId);
         if (productDTO == null) {
             throw new ResourceNotFoundException();
         }
@@ -106,26 +101,26 @@ public class ItemsController {
     }
 
     //TODO: change path to {id}/can_return
-    @RequestMapping(value = "/can_return", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/{id}/can_return", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final boolean canBeReturned(@RequestBody QuestionsDTO questions) throws Exception {
+    public final boolean canBeReturned(@PathVariable("id") long id,
+            @RequestBody QuestionsDTO questions) throws Exception {
         logger.debug("rest canBeReturned()");
         try {
-            return itemFacade.canBeReturned(questions);
+            return itemFacade.canBeReturned(id, questions);
         } catch (Exception ex) {
+            logger.debug(ex.getMessage());
             throw new InvalidParameterException();
         }
     }
 
-    //TODO: change path to {id}/return
-    @RequestMapping(value = "/return", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void returnItem(@RequestBody ItemDTO item) throws Exception {
+    @RequestMapping(value = "/{id}/return", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public final void returnItem(@PathVariable("id") long id) throws Exception {
         logger.debug("rest returnItem()");
         try {
-            //TODO: implement service for time.
-            itemFacade.itemReturnedToOwner(item, Calendar.getInstance().getTime());
+            itemFacade.itemReturnedToOwner(id);
         } catch (Exception ex) {
+            logger.debug(ex.getMessage());
             throw new InvalidParameterException();
         }
     }

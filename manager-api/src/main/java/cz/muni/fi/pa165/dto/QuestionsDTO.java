@@ -23,16 +23,6 @@ public class QuestionsDTO {
     private int width;
 
     private int depth;
-
-    private long selectedItemId;
-    
-    public long getItemId() {
-        return selectedItemId;
-    }
-
-    public void setItemId(long itemId) {
-        this.selectedItemId = itemId;
-    }
         
     public ItemColor getColor() {
         return color;

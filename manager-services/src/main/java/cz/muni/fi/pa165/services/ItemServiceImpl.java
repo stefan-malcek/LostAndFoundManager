@@ -83,11 +83,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public boolean canBeReturned(QuestionsDTO questions) {
+    public boolean canBeReturned(long id, QuestionsDTO questions) {
        
-        Item item =  itemDao.findById(questions.getItemId());
+        Item item =  itemDao.findById(id);
 
-       if(item.getColor().name() != questions.getColor().name())
+       if(!item.getColor().name().equals(questions.getColor().name()))
            return false;
        if(isNotAroundValue(item.getDepth(), questions.getDepth()))
            return false;

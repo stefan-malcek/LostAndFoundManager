@@ -80,5 +80,5 @@ public interface ItemService {
      *  @param  questions users answers and id of returned object
      * 
      */
-    public boolean canBeReturned(QuestionsDTO questions);
+    public boolean canBeReturned(long id, QuestionsDTO questions);
 }

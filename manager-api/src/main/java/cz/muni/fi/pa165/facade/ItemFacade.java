@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.CategoryDTO;
+import cz.muni.fi.pa165.dto.ItemCreateDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
 import java.util.Date;
@@ -21,14 +22,14 @@ public interface ItemFacade {
      *
      * @param item item to create
      */
-    Long create(ItemDTO item);
+    Long create(ItemCreateDTO item);
 
     /**
      * Deletes the item with given id.
      *
-     * @param item item to delete
+     * @param id item to delete
      */
-    void remove(ItemDTO item);
+    void remove(long id);
 
     /**
      * Retrieves the item with given id.
@@ -41,10 +42,10 @@ public interface ItemFacade {
     /**
      * Retrieves the items with given category.
      *
-     * @param category category of the items
+     * @param categoryId category of the items
      * @return {@code List} of items
      */
-    List<ItemDTO> findByCategory(CategoryDTO category);
+    List<ItemDTO> findByCategory(long categoryId);
 
     /**
      * Retrieves all items.
@@ -57,11 +58,10 @@ public interface ItemFacade {
     /**
      * Set date when item was returned to owner.
      *
-     *  @param item item which was returned
-     *  @param date date of return
+     *  @param id item which was returned
      * 
      */
-    void itemReturnedToOwner(ItemDTO item, Date date);
+    void itemReturnedToOwner(long id);
     
     /**
      * Set date when item was returned to owner.
@@ -72,6 +72,6 @@ public interface ItemFacade {
      */
     ItemDTO update(ItemDTO updatedItem );
     
-    public boolean canBeReturned(QuestionsDTO questions);
+    public boolean canBeReturned(long id, QuestionsDTO questions);
 
 }
