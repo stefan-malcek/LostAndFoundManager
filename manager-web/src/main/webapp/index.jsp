@@ -9,14 +9,12 @@
         <link rel="shortcut icon" href="assets/ico/favicon.ico">
         <title>LostFoundmanager</title>
         <link href="assets/css/bootstrap.css" rel="stylesheet">
-        <!-- Custom styles for this template -->
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-        
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/angular.min.js"></script>
         <script src="assets/js/angular-route.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"
+        <script src="assets/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/angular_app.js"></script>
         </head>
         <body style>
@@ -34,11 +32,11 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse navbar-right">
                         <ul class="nav navbar-nav" role="navigation">
-                            <li><a href="#!/intro">Go shopping</a></li>
+                            <li><a href="#!/">Go shopping</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">BLOG</a></li>
+                                    <li><a href="#!/temp">BLOG</a></li>
                                     <li><a href="#">SINGLE POST</a></li>
                                     <li><a href="#">PORTFOLIO</a></li>
                                     <li><a href="#">SINGLE PROJECT</a></li>

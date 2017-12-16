@@ -1,17 +1,17 @@
 'use strict';
 
 /* Defines application and its dependencies */
-
-var app = angular.module('lostAndFoundApp', ['ngRoute', 'controllers']);
+var app = angular.module('lostAndFoundApp', ['ngRoute', 'appControllers']);
 var appControllers = angular.module('appControllers', []);
 
 /* Configures URL fragment routing, e.g. #/product/1  */
-app.config(['$routeProvider',
+app.config(
     function ($routeProvider) {
         $routeProvider.
-                when('/intro', {templateUrl: 'partials/intro.html', controller: 'IntroCtrl'}).
-                otherwise({redirectTo: '/intro'});
-    }]);
+                when('/', {templateUrl: 'partials/intro.html'}).
+                when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
+                otherwise({redirectTo: '/'});
+    });
 
 /*
  * alert closing functions defined in root scope to be available in every template
@@ -27,14 +27,14 @@ app.run(function ($rootScope) {
         $rootScope.errorAlert = undefined;
     };
 
-    $rootScope.$on('$routeChangeStart', function (event, next, current) {
-        // next is an object that is the route that we are starting to go to
-        // current is an object that is the route where we are currently
-        var currentPath = current.originalPath;
-        var nextPath = next.originalPath;
-
-        console.log('Starting to leave %s to go to %s', currentPath, nextPath);
-    });
+//    $rootScope.$on('$routeChangeStart', function (event, next, current) {
+//        // next is an object that is the route that we are starting to go to
+//        // current is an object that is the route where we are currently
+//        var currentPath = current.originalPath;
+//        var nextPath = next.originalPath;
+//
+//        console.log('Starting to leave %s to go to %s', currentPath, nextPath);
+//    });
     
     $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
       // both newUrl and oldUrl are strings
@@ -70,8 +70,8 @@ app.run(function ($rootScope) {
 /*
  * Shopping page with all categories and products
  */
-appControllers.controller('IntroCtrl', function ($scope, $http) {
-    console.log('calling  /eshop/api/v1/categories/');
+//appControllers.controller('IntroCtrl', function ($scope, $http) {
+//    console.log('calling  /eshop/api/v1/categories/');
 //    $http.get('/eshop/api/v1/categories/').then(function (response) {
 //        var categories = response.data['_embedded']['categories'];
 //        console.log('AJAX loaded all categories');
@@ -82,7 +82,7 @@ appControllers.controller('IntroCtrl', function ($scope, $http) {
 //            loadCategoryProducts($http, category, categoryProductsLink);
 //        }
 //    });
-});
+//});
 
 
 /*
