@@ -80,10 +80,11 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void register(UserDTO user, String password) {
+    public Long register(UserDTO user, String password) {
         try {
             User mappedUser = mappingService.mapTo(user, User.class);      
             userService.register(mappedUser, password);
+            return user.getId();
         } catch (Exception e) {
             throw new LostAndFoundManagerDataAccessException("Cannot register user",e);
         } 
