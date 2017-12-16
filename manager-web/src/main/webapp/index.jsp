@@ -12,41 +12,66 @@
         <!-- Custom styles for this template -->
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+        
+        <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/angular.min.js"></script>
-    </head>
-    <body style>
-        <!-- navigation bar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.jsp">Lost&AMP;Found Manager</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse navbar-right">
-                    <ul class="nav navbar-nav" role="navigation">
-                        <li><a href="#!/shopping">Go shopping</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">BLOG</a></li>
-                                <li><a href="#">SINGLE POST</a></li>
-                                <li><a href="#">PORTFOLIO</a></li>
-                                <li><a href="#">SINGLE PROJECT</a></li>
-                            </ul>
-                        </li>
+        <script src="assets/js/angular-route.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"
+        <script src="${pageContext.request.contextPath}/angular_app.js"></script>
+        </head>
+        <body style>
+            <!-- navigation bar -->
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.jsp">Lost&AMP;Found Manager</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse navbar-right">
+                        <ul class="nav navbar-nav" role="navigation">
+                            <li><a href="#!/intro">Go shopping</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">BLOG</a></li>
+                                    <li><a href="#">SINGLE POST</a></li>
+                                    <li><a href="#">PORTFOLIO</a></li>
+                                    <li><a href="#">SINGLE PROJECT</a></li>
+                                </ul>
+                            </li>
 
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
-        <div id="headerwrap">
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <div class="container">
-                TODO write content</div>
-        </div>
-    </body>
-</html>
+                <div ng-app="lostAndFoundApp"><!-- AngularJS takes care of this element -->
+                    <!-- Bootstrap-styled alerts, visible when $rootScope.xxxAlert is defined -->
+                    <div ng-show="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" aria-label="Close" ng-click="hideWarningAlert()"> <span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> <span>{{warningAlert}}</span>
+                    </div>
+                    <div ng-show="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" aria-label="Close" ng-click="hideErrorAlert()"> <span aria-hidden="true">&times;</span></button>
+                        <strong>Error!</strong> <span>{{errorAlert}}</span>
+                    </div>
+                    <div ng-show="successAlert" class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
+                        <strong>Success !</strong> <span>{{successAlert}}</span>
+                    </div>
+
+                    <!-- the place where HTML templates are replaced by AngularJS routing -->
+                    <div ng-view></div>
+                </div>
+
+                <footer class="footer">
+                    <p>&copy;&nbsp;Masaryk University</p>
+                </footer>
+            </div>
+        </body>
+    </html>
