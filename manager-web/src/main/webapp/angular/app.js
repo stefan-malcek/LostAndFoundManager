@@ -1,22 +1,23 @@
 'use strict';
 
 /* Defines application and its dependencies */
-var app = angular.module('lostAndFoundApp', ['ngRoute', 'appControllers']);
-var appControllers = angular.module('appControllers', []);
+var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute']);
 
 /* Configures URL fragment routing, e.g. #/product/1  */
-app.config(
-    function ($routeProvider) {
-        $routeProvider.
-                when('/', {templateUrl: 'partials/intro.html'}).
-                when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
-                otherwise({redirectTo: '/'});
-    });
+lostAndFoundApp.config(function ($routeProvider) {
+    $routeProvider.
+            when('/', {templateUrl: 'partials/intro.html'}).
+            when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
+            when('/lostItemList', {templateUrl: 'partials/lostItemList.html', controller: 'lostItemListCtrl'}).
+            when('/createLostItem', {templateUrl: 'partials/createLostItem.html', controller: 'createLostItemCtrl'}).
+             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
+            otherwise({redirectTo: '/'});
+});
 
 /*
  * alert closing functions defined in root scope to be available in every template
  */
-app.run(function ($rootScope) {
+lostAndFoundApp.run(function ($rootScope) {
     $rootScope.hideSuccessAlert = function () {
         $rootScope.successAlert = undefined;
     };
@@ -35,10 +36,10 @@ app.run(function ($rootScope) {
 //
 //        console.log('Starting to leave %s to go to %s', currentPath, nextPath);
 //    });
-    
-    $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
-      // both newUrl and oldUrl are strings
-      console.log('Starting to leave %s to go to %s', oldUrl, newUrl);
+
+    $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+        // both newUrl and oldUrl are strings
+        console.log('Starting to leave %s to go to %s', oldUrl, newUrl);
     });
 });
 
