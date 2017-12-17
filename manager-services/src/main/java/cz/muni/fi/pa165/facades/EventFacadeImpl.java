@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.facades;
 
+import cz.muni.fi.pa165.dto.EventCreateDTO;
 import cz.muni.fi.pa165.dto.EventDTO;
 import cz.muni.fi.pa165.dto.EventFindDTO;
 import cz.muni.fi.pa165.dto.EventLossDTO;
@@ -42,7 +43,7 @@ public class EventFacadeImpl implements EventFacade {
 
 
     @Override
-    public long createEvent(EventDTO eventDTO) {
+    public long createEvent(EventCreateDTO eventDTO) {
         try {
             Event event = mappingService.mapTo(eventDTO, Event.class);
             eventService.createEvent(event);

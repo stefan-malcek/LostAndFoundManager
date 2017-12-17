@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.facade;
 
+import cz.muni.fi.pa165.dto.EventCreateDTO;
 import cz.muni.fi.pa165.dto.EventDTO;
 import cz.muni.fi.pa165.dto.EventFindDTO;
 import cz.muni.fi.pa165.dto.EventLossDTO;
@@ -19,7 +20,7 @@ public interface EventFacade {
      * @param eventDTO event to create
      * @return id of new event
      */
-    long createEvent(EventDTO eventDTO);
+    long createEvent(EventCreateDTO eventDTO);
 
     /**
      * Deletes event with given id.
