@@ -10,6 +10,7 @@
         <link href="assets/css/bootstrap.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+        <link href="assets/css/custom.css" rel="stylesheet">
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/angular.min.js"></script>
         <script src="assets/js/angular-route.min.js"></script>
@@ -18,6 +19,7 @@
         <script src="angular/lostItemList.js"></script>
         <script src="angular/createLostItem.js"></script>
         <script src="angular/foundItemList.js"></script>
+        <script src="angular/itemList.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
@@ -38,9 +40,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#!/categories">Categories</a></li> <!--link to list of categories-->
-                                <li><a href="#">SINGLE POST</a></li>
-                                <li><a href="#">PORTFOLIO</a></li>
-                                <li><a href="#">SINGLE PROJECT</a></li>
+                                <li><a href="#!/items">Items</a></li>
                             </ul>
                         </li>
                         <li><a href="#!">Profile</a></li><!--link to change user details-->
@@ -48,29 +48,28 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <div ng-app="lostAndFoundApp"><!-- AngularJS takes care of this element -->
-                <!-- Bootstrap-styled alerts, visible when $rootScope.xxxAlert is defined -->
-                <div ng-show="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" aria-label="Close" ng-click="hideWarningAlert()"> <span aria-hidden="true">&times;</span></button>
-                    <strong>Warning!</strong> <span>{{warningAlert}}</span>
-                </div>
-                <div ng-show="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" aria-label="Close" ng-click="hideErrorAlert()"> <span aria-hidden="true">&times;</span></button>
-                    <strong>Error!</strong> <span>{{errorAlert}}</span>
-                </div>
-                <div ng-show="successAlert" class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
-                    <strong>Success !</strong> <span>{{successAlert}}</span>
-                </div>
-
-                <!-- the place where HTML templates are replaced by AngularJS routing -->
-                <div ng-view></div>
+        <div ng-app="lostAndFoundApp"><!-- AngularJS takes care of this element -->
+            <!-- Bootstrap-styled alerts, visible when $rootScope.xxxAlert is defined -->
+            <div ng-show="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" aria-label="Close" ng-click="hideWarningAlert()"> <span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong> <span>{{warningAlert}}</span>
+            </div>
+            <div ng-show="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" aria-label="Close" ng-click="hideErrorAlert()"> <span aria-hidden="true">&times;</span></button>
+                <strong>Error!</strong> <span>{{errorAlert}}</span>
+            </div>
+            <div ng-show="successAlert" class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
+                <strong>Success !</strong> <span>{{successAlert}}</span>
             </div>
 
-            <footer class="footer">
-                <p>&copy;&nbsp;Masaryk University</p>
-            </footer>
+            <!-- the place where HTML templates are replaced by AngularJS routing -->
+            <div ng-view></div>
         </div>
     </body>
+    <div id="footerwrap">
+        <div class="container">
+            <p>&copy;&nbsp;Masaryk University</p>
+        </div> 
+    </div>
 </html>
