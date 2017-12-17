@@ -73,20 +73,20 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
         ItemDTO laptop = itemFacade.getAllItems().get(0);
         ItemDTO mobile = itemFacade.getAllItems().get(1);
 
-        lossEvent = new EventDTO();
-        lossEvent.setItem(laptop);
-        lossEvent.setOwner(user);
-        lossEvent.setDateOfLoss(Date.from(Instant.now()));
-        lossEvent.setPlaceOfLoss("Brno");
-        findEvent = new EventDTO();
-        findEvent.setItem(mobile);
-        findEvent.setFinder(user);
-        findEvent.setDateOfFind(Date.from(Instant.now()));
-        findEvent.setPlaceOfFind("Brno");
+        EventCreateDTO lossEventCreate = new EventCreateDTO();
+        lossEventCreate.setItem(laptop);
+        lossEventCreate.setOwner(user);
+        lossEventCreate.setDateOfLoss(Date.from(Instant.now()));
+        lossEventCreate.setPlaceOfLoss("Brno");
+        EventCreateDTO findEventCreate = new EventCreateDTO();
+        findEventCreate.setItem(mobile);
+        findEventCreate.setFinder(user);
+        findEventCreate.setDateOfFind(Date.from(Instant.now()));
+        findEventCreate.setPlaceOfFind("Brno");
 
-        eventFacade.createEvent(lossEvent);
+        eventFacade.createEvent(lossEventCreate);
         lossEvent = eventFacade.findAllEvents().get(0);
-        eventFacade.createEvent(findEvent);
+        eventFacade.createEvent(findEventCreate);
         findEvent = eventFacade.findAllEvents().get(1);
     }
 

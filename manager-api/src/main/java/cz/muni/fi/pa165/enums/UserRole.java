@@ -5,6 +5,6 @@ package cz.muni.fi.pa165.enums;
  * @author Stefan Malcek
  */
 public enum UserRole {
-    Member,
-    Administrator
+    MEMBER,
+    ADMINISTRATOR
 }
