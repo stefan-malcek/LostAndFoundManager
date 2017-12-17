@@ -88,11 +88,16 @@ public class EventsController {
         }
     }
     
-    @RequestMapping(value = "/{check_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "check_id/{check_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final boolean checkEventResolved(@PathVariable("check_id") long check_id) throws Exception {
-        logger.debug("rest checkEventResolved({})", check_id);        
-        boolean resolved = eventFacade.checkEventResolved(check_id);
+        logger.debug("rest checkEventResolved({})", check_id);
+        try {
+            boolean resolved = eventFacade.checkEventResolved(check_id);
         return resolved;
+        } catch (Exception ex) {
+            logger.debug(ex.getMessage());
+            throw new ResourceNotFoundException();
+        }
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
