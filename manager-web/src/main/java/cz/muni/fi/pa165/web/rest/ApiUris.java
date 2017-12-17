@@ -13,4 +13,5 @@ package cz.muni.fi.pa165.web.rest;
 public abstract class ApiUris {
     public static final String ROOT_URI_ITEMS = "/rest/items";  
     public static final String ROOT_URI_EVENTS = "/rest/events";
+    public static final String ROOT_URI_CATEGORIES = "/rest/categories";
 }

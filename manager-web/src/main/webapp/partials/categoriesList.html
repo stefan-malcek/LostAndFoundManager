@@ -1,0 +1,28 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>{{categories.name}}</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mtb">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Caterory name</th>
+                    <th>Caterory description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="category in categories track by $index">
+                    <td>{{category.name}}</td>
+                    <td>{{category.description}}</td>
+                    <td><a href="#!/category/{{category.id}}" class="btn btn-info" >Detail</a></td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 /* Defines application and its dependencies */
-var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute']);
+var lostAndFoundApp = angular.module('lostAndFoundApp',  ['ngRoute']);
 
 /* Configures URL fragment routing, e.g. #/product/1  */
 lostAndFoundApp.config(function ($routeProvider) {
@@ -13,9 +13,11 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
             when('/admin/items', {templateUrl: 'partials/admin_items.html', controller: 'itemListCtrl'}).
             when('/admin/items/:itemId', {templateUrl: 'partials/admin_item_detail.html', controller: 'itemDetailCtrl'}).
+            when('/items', {templateUrl: 'partials/itemList.html', controller: 'itemListCtrl'}).
+            when('/categories', {templateUrl: 'partials/categoriesList.html', controller: 'categoriesListCtrl'}).
+            when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
             otherwise({redirectTo: '/'});
 });
-
 /*
  * alert closing functions defined in root scope to be available in every template
  */

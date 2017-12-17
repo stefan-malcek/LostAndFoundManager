@@ -21,6 +21,7 @@
         <script src="angular/foundItemList.js"></script>
         <script src="angular/itemList.js"></script>
         <script src="angular/itemDetail.js"></script>
+        <script src="angular/categories.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->

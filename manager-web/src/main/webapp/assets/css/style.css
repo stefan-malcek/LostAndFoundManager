@@ -334,8 +334,6 @@ a:focus {
 
 /* Footer */
 #footerwrap {
-	padding-top: 60px;
-	padding-bottom: 60px;
 	background: #384452;
 }
 
@@ -372,7 +370,6 @@ a:focus {
 
 #blue h3 {
 	color: white;
-	margin-left: 15px;
 }
 
 .ctitle {
