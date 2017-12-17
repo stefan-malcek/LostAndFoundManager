@@ -13,6 +13,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
             when('/admin/items', {templateUrl: 'partials/admin_items.html', controller: 'itemListCtrl'}).
             when('/admin/items/:itemId', {templateUrl: 'partials/admin_item_detail.html', controller: 'itemDetailCtrl'}).
+            when('/admin/items/:itemId/return', {templateUrl: 'partials/admin_item_return.html', controller: 'itemReturnCtrl'}).
             otherwise({redirectTo: '/'});
 });
 
