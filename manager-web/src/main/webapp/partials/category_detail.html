@@ -10,7 +10,7 @@
 <div>
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" ng-repeat="item in category.items">
-            <a href="#!/item/{{item.id}}">
+            <a href="#!/admin/items/{{item.id}}">
                 <div class="thumbnail">
                     <img ng-src="{{item.photoUri == null ? 'assets/img/default.png' : 'assets/img/'+item.photoUri}}"><br>
                     <div class="caption">

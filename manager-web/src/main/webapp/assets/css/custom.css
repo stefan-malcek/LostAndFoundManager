@@ -27,10 +27,6 @@ table tr td:last-child {
     text-align: right;
 }
 
-.thumbnail img {
-    height:350px;
-    width:100%;
-}
 
 .thumbnail {
     margin-left: 40px;

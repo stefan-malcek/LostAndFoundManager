@@ -11,7 +11,7 @@
         <div class="col-lg-10 col-lg-offset-1 centered">
             <div class="col-lg-5 col-lg-offset-1">
                 <div class="thumbnail">
-                    <img ng-src="{{item.photoUri}}" alt="image">
+                    <img ng-src="{{item.photoUri == null ? 'assets/img/default.png' : 'assets/img/'+item.photoUri}}" alt="image">
                     <div class="caption">
                         <p>{{item.description}}</p>
                     </div>
