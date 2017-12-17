@@ -1,0 +1,37 @@
+<div id="blue">
+    <div class="container">
+        <div class="row centered">
+            <h1>{{item.name}}</h1>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+<div class="container mt">
+    <div class="row">
+
+        <div class="col-lg-10 col-lg-offset-1 centered">
+            <div class="col-lg-5 col-lg-offset-1">
+                <div class="thumbnail">
+                    <img ng-src="{{item.photoUri}}" alt="image">
+                    <div class="caption">
+                        <p>{{item.description}}</p>
+                    </div>
+                </div>    
+            </div>
+            <div class="col-lg-4 col-lg-offset-1">
+                <div class="spacing"></div>
+                <h4>Item Details</h4>
+                <div class="hline"></div>
+                <p><b>Category:</b> {{item.category.name}}</p>
+                <p><b>Color:</b> {{item.color}}</p>
+                <p><b>Weight:</b> {{item.weight}}kg</p>
+                <p><b>Height:</b> {{item.weight}}cm</p>
+                <p><b>Width:</b> {{item.width}}cm</p>
+                <p><b>Depth:</b> {{item.depth}}cm</p>
+                <p ng-if="item.returned !== null"><b>Returned:</b> {{date | date:'mediumDate'}}</p>
+                <p ng-if="item.returned === null">
+                    <br/>
+                    <a href="#!/admin/items/{{item.id}}/can_return" class="btn btn-info" >Return</a>
+                </p>
+            </div>
+        </div>
+    </div> 

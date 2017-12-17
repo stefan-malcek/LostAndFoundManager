@@ -11,7 +11,8 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/lostItemList', {templateUrl: 'partials/lostItemList.html', controller: 'lostItemListCtrl'}).
             when('/createLostItem', {templateUrl: 'partials/createLostItem.html', controller: 'createLostItemCtrl'}).
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
-            when('/items', {templateUrl: 'partials/itemList.html', controller: 'itemListCtrl'}).
+            when('/admin/items', {templateUrl: 'partials/admin_items.html', controller: 'itemListCtrl'}).
+            when('/admin/items/:itemId', {templateUrl: 'partials/admin_item_detail.html', controller: 'itemDetailCtrl'}).
             otherwise({redirectTo: '/'});
 });
 

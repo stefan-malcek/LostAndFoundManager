@@ -6,20 +6,25 @@
     </div> <!-- /container -->
 </div><!-- /blue -->
 
-<div class="container mtb">
+<div class="container">
     <div class="row">
         <table class="table">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>item name</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Category Name</th>
+                    <th>Description</th>                   
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="item in items track by $index">
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td><a href="#!/item/{{item.id}}" class="btn btn-info" >View</a></td>
+                    <td>{{item.category.name}}</td>
+                    <td>{{item.description}}</td>
+                    <td><a href="#!/admin/items/{{item.id}}" class="btn btn-info" >View</a></td>
                 </tr>
             </tbody>
         </table>
