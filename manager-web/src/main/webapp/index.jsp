@@ -20,6 +20,7 @@
         <script src="angular/createLostItem.js"></script>
         <script src="angular/foundItemList.js"></script>
         <script src="angular/itemList.js"></script>
+        <script src="angular/user.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
