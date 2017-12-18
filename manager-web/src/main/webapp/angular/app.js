@@ -16,6 +16,9 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/items', {templateUrl: 'partials/itemList.html', controller: 'itemListCtrl'}).
             when('/categories', {templateUrl: 'partials/categoriesList.html', controller: 'categoriesListCtrl'}).
             when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
+            when('/admin/items/:itemId/return', {templateUrl: 'partials/admin_item_return.html', controller: 'itemReturnCtrl'}).
+            when('/categories/create', {templateUrl: 'partials/category_new.html', controller: 'newCategoryCtrl'}).
+            when('/category/edit/:categoryId', {templateUrl: 'partials/category_edit.html', controller: 'editCategoryCtrl'}).
             otherwise({redirectTo: '/'});
 });
 /*

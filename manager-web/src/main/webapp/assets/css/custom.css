@@ -27,11 +27,19 @@ table tr td:last-child {
     text-align: right;
 }
 
-
-.thumbnail {
-    margin-left: 40px;
-}
 .row {
     margin-right: 0px;
     margin-left: 0px;
+}
+.alert {
+    position: absolute;
+    top: 190px;
+    left: 10%;
+    width: 80%; 
+}
+.smallTopPadding {
+    margin-top: 20px;
+}
+.smallRightMargin {
+    margin-right: 20px;
 }
