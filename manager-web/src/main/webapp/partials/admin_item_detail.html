@@ -30,7 +30,7 @@
                 <p ng-if="item.returned !== null"><b>Returned:</b> {{date | date:'mediumDate'}}</p>
                 <p ng-if="item.returned === null">
                     <br/>
-                    <a href="#!/admin/items/{{item.id}}/return" class="btn btn-info" >Return</a>
+                    <a href="#!/admin/items/{{item.id}}/return" class="btn btn-info" ng-click="resetAlers()">Return</a>
                 </p>
             </div>
         </div>
