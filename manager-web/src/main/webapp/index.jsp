@@ -20,6 +20,10 @@
         <script src="angular/createLostItem.js"></script>
         <script src="angular/foundItemList.js"></script>
         <script src="angular/itemList.js"></script>
+        <script src="angular/eventList.js"></script>
+        <script src="angular/eventDetail.js"></script>
+        <script src="angular/eventFind.js"></script>
+        <script src="angular/eventLoss.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
@@ -41,6 +45,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#!/categories">Categories</a></li> <!--link to list of categories-->
                                 <li><a href="#!/items">Items</a></li>
+                                <li><a href="#!/events">Events</a></li>
                             </ul>
                         </li>
                         <li><a href="#!">Profile</a></li><!--link to change user details-->
