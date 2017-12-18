@@ -1,0 +1,36 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Categories</h3> 
+        </div>
+
+    </div>
+</div>
+<div class="container mtb">
+    <div class="row">
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Caterory name</th>
+                    <th>Caterory description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="category in categories track by $index">
+                    <td>{{category.name}}</td>
+                    <td>{{category.description}}</td>
+                    <td>
+                        <a href="#!/category/{{category.id}}" class="btn btn-info smallRightMargin" >Detail</a>
+                        <a href="#!/category/edit/{{category.id}}" class="btn btn-warning" >Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+        <a href="#!/categories/create" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            New category
+        </a>
+</div>

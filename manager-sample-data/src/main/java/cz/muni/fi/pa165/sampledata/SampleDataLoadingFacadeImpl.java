@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.security.spec.ECField;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -55,8 +54,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         log.info("Loaded L&F users.");
 
         Item laptop = item("MacBook", electro, ItemColor.GRAY, "MacBook Pro 2017 13\"", BigDecimal.valueOf(1.4), 2, 30, 21, null, null);
-        Item phone = item("Huawei P10", electro, ItemColor.BLUE, "Huawei P10 64GB", BigDecimal.valueOf(0.15), 15, 7, 1, null, null);
-        Item hat = item("Hat", clothes, ItemColor.BLACK, "Ordinary round black hat.", BigDecimal.valueOf(0.3), 15, 25, 30, null, null);
+        Item phone = item("Huawei P10", electro, ItemColor.BLUE, "Huawei P10 64GB", BigDecimal.valueOf(0.15), 15, 7, 1, "p10.jpg", null);
+        Item hat = item("Hat", clothes, ItemColor.BLACK, "Ordinary round black hat.", BigDecimal.valueOf(0.3), 15, 25, 30, "hat.jpg", null);
         Item sword = item("Longclaw", jewelry, ItemColor.GRAY, "Valyrian steel sword...please, return fast, White Walkers are coming!", BigDecimal.valueOf(3.5), 125, 15, 4, null, daysBeforeNow(0));
         log.info("Loaded L&F items.");
 
