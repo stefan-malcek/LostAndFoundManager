@@ -24,7 +24,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/events/add_loss/:itemId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
             when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'}).
             when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
-            when('/users', {templateUrl: 'partials/userList.html', controller: 'userListCtrl'}).
+            when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).
             when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
             otherwise({redirectTo: '/'});
 });

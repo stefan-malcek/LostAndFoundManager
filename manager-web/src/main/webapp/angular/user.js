@@ -9,7 +9,6 @@ lostAndFoundApp.controller('usersListCtrl', function ($scope, $http) {
     });
 });
 
-
 lostAndFoundApp.controller('userDetailCtrl', function ($scope, $routeParams, $http) {
         var userId = $routeParams.userId;
         $http.get('/pa165/rest/users/' + userId).then(function (response) {

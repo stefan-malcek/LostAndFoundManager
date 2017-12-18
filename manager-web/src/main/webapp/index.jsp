@@ -26,6 +26,7 @@
         <script src="angular/eventDetail.js"></script>
         <script src="angular/eventFind.js"></script>
         <script src="angular/eventLoss.js"></script>
+        <script src="angular/user.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
