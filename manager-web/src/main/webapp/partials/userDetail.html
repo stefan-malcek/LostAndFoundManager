@@ -1,0 +1,66 @@
+<div id="blue">
+    <div class="container">
+        <div class="row centered">
+            <h1>Detail about user</h1>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+<div class="container mt">
+    <div class="row">
+
+        <div class="col-lg-10 col-lg-offset-1 centered">
+            <div class="col-lg-5 col-lg-offset-1">
+                <div class="thumbnail">
+                    <p><b>Name:</b> {{user.name}}</p>
+                    <p><b>E-mail:</b> {{user.email}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-lg-offset-1">
+            <div class="spacing"></div>
+            <h4>Lost items</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Place</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="loss in lost track by $index">
+                    <td>{{loss.item.name}}</td>
+                    <td>{{loss.dateOfLoss}}</td>
+                    <td>{{loss.placeOfLoss}}</td>
+                    <td><a href="#!/admin/items/{{loss.item.id}}" class="btn btn-info" >View</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-lg-4 col-lg-offset-1">
+            <div class="spacing"></div>
+            <h4>Found items</h4>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Place</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="find in found track by $index">
+                    <td>{{find.item.name}}</td>
+                    <td>{{find.dateOfFind}}</td>
+                    <td>{{find.placeOfFind}}</td>
+                    <td><a href="#!/admin/items/{{find.item.id}}" class="btn btn-info" >View</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

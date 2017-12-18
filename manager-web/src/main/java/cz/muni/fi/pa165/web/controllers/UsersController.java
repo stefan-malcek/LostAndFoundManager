@@ -107,9 +107,9 @@ public class UsersController {
         return user;
     }
 
-    @RequestMapping(value = "/{id}/auth", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+    @RequestMapping(value = "/auth", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final boolean authenticateUser(@PathVariable("id") long id, @RequestBody UserAuthenticateDTO user) throws Exception{
+    public final boolean authenticateUser(@RequestBody UserAuthenticateDTO user) throws Exception{
         logger.debug("rest authenticateUser()");
         try {
             return userFacade.authenticate(user);

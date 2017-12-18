@@ -93,7 +93,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public boolean authenticate(UserAuthenticateDTO user) {
         try {
-            User retrievedUser = userService.findUserById(user.getId());
+            User retrievedUser = userService.findUserByEmail(user.getEmail());
             return userService.authenticate(retrievedUser, user.getPassword());
         } catch (Exception e) {
             throw new LostAndFoundManagerDataAccessException("Cannot authenticate user",e);
@@ -113,7 +113,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void changePassword(UserAuthenticateDTO user, String newPassword) {
         try {
-            User retrievedUser = userService.findUserById(user.getId());
+            User retrievedUser = userService.findUserByEmail(user.getEmail());
             userService.changePassword(retrievedUser, user.getPassword(), newPassword);
         } catch (Exception e) {
             throw new LostAndFoundManagerDataAccessException("Cannot change password",e);

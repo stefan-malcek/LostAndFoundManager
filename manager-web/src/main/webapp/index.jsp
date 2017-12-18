@@ -41,9 +41,11 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#!/categories">Categories</a></li> <!--link to list of categories-->
                                 <li><a href="#!/items">Items</a></li>
+                                <li><a href="#!/users">Users</a></li>
                             </ul>
                         </li>
-                        <li><a href="#!">Profile</a></li><!--link to change user details-->
+                        <li><a href="#!/register">Register</a></li><!--link to change user details-->
+                        <li><a href="#!/login">Login</a></li>
                     </ul>
                 </div>
             </div>

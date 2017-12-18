@@ -1,0 +1,31 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Users</h3>
+        </div>
+
+    </div>
+</div>
+<div class="container mtb">
+    <div class="row">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users track by $index">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <a href="#!/user/{{user.id}}" class="btn btn-info smallRightMargin" >Detail</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
