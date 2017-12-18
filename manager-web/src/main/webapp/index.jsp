@@ -40,12 +40,12 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#!/categories">Categories</a></li> <!--link to list of categories-->
+                                <li><a href="#!/categories">Categories</a></li>
                                 <li><a href="#!/items">Items</a></li>
                                 <li><a href="#!/users">Users</a></li>
                             </ul>
                         </li>
-                        <li><a href="#!/register">Register</a></li><!--link to change user details-->
+                        <li><a href="#!/register">Register</a></li>
                         <li><a href="#!/login">Login</a></li>
                     </ul>
                 </div>

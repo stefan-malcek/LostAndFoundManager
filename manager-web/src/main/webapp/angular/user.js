@@ -38,30 +38,19 @@ lostAndFoundApp.controller('loginCtrl',
                 url: '/pa165/rest/users/auth',
                 data: user
             }).then(function success(response) {
-                // switch (response.data) {
-                //
-                // }
-                //display confirmation alert
-
-                $rootScope.successAlert = 'Successfully logged in';
-                //change view to list of products
-                $location.path("/items");
+                if (response.data) {
+                    $rootScope.currentUser = user;
+                    $rootScope.successAlert = 'Successfully logged in';
+                    $location.path("/");
+                } else {
+                    $rootScope.Alert = 'Wrong email or password';
+                    $location.path("/login");
+                }
             }, function error(response) {
                 //display error
                 console.log("error during login");
                 console.log(response);
-                $location.path("/lostItem");
-                // switch (response.data.code) {
-                //     case 'PersistenceException':
-                //         $rootScope.errorAlert = 'Category with the same name already exists ! ';
-                //         break;
-                //     case 'InvalidRequestException':
-                //         $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
-                //         break;
-                //     default:
-                //         $rootScope.errorAlert = 'Cannot create category ! Reason given by the server: '+response.data.message;
-                //         break;
-                // }
+                $location.path("/login");
             });
         };
     });
@@ -70,20 +59,18 @@ lostAndFoundApp.controller('loginCtrl',
 lostAndFoundApp.controller('registerCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
         //set object bound to form fields
-        $scope.reg = {
-            'user': {
+        $scope.user = {
                 'name': '',
                 'email': '',
                 'userRole': 'MEMBER'
-            },
-            'password': ''
         };
-        // function called when submit button is clicked, creates product on server
-        $scope.register = function (reg) {
+        $scope.password = '';
+        $scope.register = function (user, password) {
+            var params = {'user': user, 'password': password};
             $http({
                 method: 'POST',
                 url: '/pa165/rest/users/register',
-                data: reg
+                params: params
             }).then(function success(response) {
                 console.log('registered');
                 var createdProduct = response.data;
