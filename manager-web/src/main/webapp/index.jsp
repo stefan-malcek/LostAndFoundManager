@@ -22,6 +22,10 @@
         <script src="angular/items.js"></script>
         <script src="angular/categories.js"></script>
         <script src="assets/js/custom.js"></script>
+        <script src="angular/eventList.js"></script>
+        <script src="angular/eventDetail.js"></script>
+        <script src="angular/eventFind.js"></script>
+        <script src="angular/eventLoss.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
@@ -43,6 +47,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#!/categories">Categories</a></li> link to list of categories
                                 <li><a href="#!/admin/items">Items</a></li>
+                                <li><a href="#!/events">Events</a></li>
                             </ul>
                         </li>
                         <li><a href="#!">Profile</a></li>link to change user details

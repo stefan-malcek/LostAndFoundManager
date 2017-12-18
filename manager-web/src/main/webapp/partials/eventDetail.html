@@ -1,0 +1,29 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+<div class="container mtb">
+    <div class="row">
+        <div class="spacing"></div>
+        <h4>Event Details</h4>         
+        <div class="hline"></div>
+        <p><b>Item:</b> &nbsp {{event.item.name}}</p>
+        <p><b>Category:</b>  &nbsp {{event.item.category.name}}</p>
+        <p><b>Description:</b> &nbsp {{event.item.description}}</p> 
+        <p><a href="#!/items/{{event.item.id}}">Item Details</a></p>        
+        <hr>
+        <p><b>Owner name:</b> &nbsp {{event.owner.name}}</p>
+        <p><b>Owner email:</b> &nbsp {{event.owner.email}}</p>
+        <hr>
+        <p><b>Finder name:</b> &nbsp {{event.finder.name}}</p>
+        <p><b>Finder email:</b> &nbsp {{event.finder.email}}</p>
+        <hr>
+        <p><b>Date of loss:</b> &nbsp {{event.dateOfLoss}}</p>
+        <p><b>Date of find:</b> &nbsp {{event.dateOfFind}}</p>
+        <hr>
+        <p><b>Place of loss:</b> &nbsp {{event.placeOfLoss}}</p>
+        <p><b>Place of find:</b> &nbsp {{event.placeOfFind}}</p>
+    </div></div>
