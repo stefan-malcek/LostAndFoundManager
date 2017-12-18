@@ -39,10 +39,10 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">Lost&AMP;Found Manager</a>
-                    <a class="navbar-brand" href="#!/events">Events</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse navbar-right">
                     <ul class="nav navbar-nav" role="navigation">
+                        <li><a href="#!/events">Events</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
