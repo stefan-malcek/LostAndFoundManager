@@ -82,26 +82,27 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public boolean canBeReturned(long id, QuestionsDTO questions) {
-
+        
+        int count = 0;
         Item item = itemDao.findById(id);
 
         if (!item.getColor().name().equals(questions.getColor().name())) {
-            return false;
+            count++;
         }
         if (isNotAroundValue(item.getDepth(), questions.getDepth())) {
-            return false;
+            count++;
         }
         if (isNotAroundValue(item.getWidth(), questions.getWidth())) {
-            return false;
+            count++;
         }
         if (isNotAroundValue(item.getHeight(), questions.getHeight())) {
-            return false;
+            count++;
         }
         if (item.getWeight().add(BigDecimal.TEN).compareTo(questions.getWeight()) > 0 && item.getWeight().add(BigDecimal.TEN.negate()).compareTo(questions.getWeight()) > 0) {
-            return false;
+            count++;
         }
-
-        return true;
+        
+        return count < 3;
     }
 
 }
