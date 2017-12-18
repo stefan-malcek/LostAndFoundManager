@@ -47,7 +47,7 @@ public interface UserFacade {
      * @param user User to register
      * @param password Password of the new user
      */
-    void register(UserDTO user, String password);
+    Long register(UserDTO user, String password);
     
     /**
      * Checks if the user is authenticated.
