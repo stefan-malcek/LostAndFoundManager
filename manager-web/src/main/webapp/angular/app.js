@@ -7,11 +7,16 @@ var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute']);
 lostAndFoundApp.config(function ($routeProvider) {
     $routeProvider.
             when('/', {templateUrl: 'partials/intro.html'}).
-            when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
+            when('/lostItem', {templateUrl: 'partials/lostItem.html'}).            
             when('/lostItemList', {templateUrl: 'partials/lostItemList.html', controller: 'lostItemListCtrl'}).
             when('/createLostItem', {templateUrl: 'partials/createLostItem.html', controller: 'createLostItemCtrl'}).
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
             when('/items', {templateUrl: 'partials/itemList.html', controller: 'itemListCtrl'}).
+            when('/events', {templateUrl: 'partials/eventList.html', controller: 'eventListCtrl'}).
+            when('/events/:eventId', {templateUrl: 'partials/eventDetail.html', controller: 'eventDetailCtrl'}).
+            when('/events/add_find/:itemId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).         
+            when('/events/add_loss/:itemId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).         
+            
             otherwise({redirectTo: '/'});
 });
 
@@ -28,7 +33,8 @@ lostAndFoundApp.run(function ($rootScope) {
     $rootScope.hideErrorAlert = function () {
         $rootScope.errorAlert = undefined;
     };
-
+    
+    
 //    $rootScope.$on('$routeChangeStart', function (event, next, current) {
 //        // next is an object that is the route that we are starting to go to
 //        // current is an object that is the route where we are currently
