@@ -19,10 +19,8 @@
         <script src="angular/lostItemList.js"></script>
         <script src="angular/createLostItem.js"></script>
         <script src="angular/foundItemList.js"></script>
-        <script src="angular/itemList.js"></script>
-        <script src="angular/itemDetail.js"></script>
+        <script src="angular/items.js"></script>
         <script src="angular/categories.js"></script>
-        <script src="angular/itemReturn.js"></script>
         <script src="assets/js/custom.js"></script>
     </head>
     <body style>
@@ -57,15 +55,15 @@
             <div class="container centered">
                 <div ng-show="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" aria-label="Close" ng-click="hideWarningAlert()"> <span aria-hidden="true">&times;</span></button>
-                    <strong>Warning!</strong> <span>{{warningAlert}}</span>
+                    <span>{{warningAlert}}</span>
                 </div>
                 <div ng-show="errorAlert" class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" aria-label="Close" ng-click="hideErrorAlert()"> <span aria-hidden="true">&times;</span></button>
-                    <strong>Error!</strong> <span>{{errorAlert}}</span>
+                    <span>{{errorAlert}}</span>
                 </div>
                 <div ng-show="successAlert" class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" aria-label="Close" ng-click="hideSuccessAlert()"> <span aria-hidden="true">&times;</span></button>
-                    <strong>Success !</strong> <span>{{successAlert}}</span>
+                    <span>{{successAlert}}</span>
                 </div>
             </div>
             <!-- the place where HTML templates are replaced by AngularJS routing -->
