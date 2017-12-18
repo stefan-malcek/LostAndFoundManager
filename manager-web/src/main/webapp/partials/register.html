@@ -6,7 +6,7 @@
             <label for="name" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-10">
                 <input placeholder="name" id="name" type="text" ng-minlength="2" name="name" class="form-control"
-                       ng-model="reg.user.name" required/>
+                       ng-model="user.name" required/>
                 <p class="help-block" ng-show="form.name.$error.required">name is required</p>
                 <p class="help-block" ng-show="form.name.$error.minlength">name must be at least 2 characters</p>
             </div>
@@ -16,7 +16,7 @@
             <label for="email" class="col-sm-2 control-label">E-mail</label>
             <div class="col-sm-10">
                 <input placeholder="e-mail" id="email" type="email" name="email" class="form-control"
-                       ng-model="reg.user.email" required/>
+                       ng-model="user.email" required/>
                 <p class="help-block" ng-show="form.email.$error.required">email is required</p>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <label for="password" class="col-sm-2 control-label">Password</label>
             <div class="col-sm-10">
                 <input placeholder="password" id="password" type="password" name="password" class="form-control"
-                       ng-model="reg.password" required/>
+                       ng-model="password" required/>
                 <p class="help-block" ng-show="form.password.$error.required">password is required</p>
             </div>
         </div>
@@ -40,7 +40,7 @@
         </div>
 
         <!-- show disabled button if form is not valid -->
-        <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="register(reg)">Register
+        <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="register(user, password)">Register
         </button>
     </div>
 </form>
