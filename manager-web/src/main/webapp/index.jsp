@@ -47,10 +47,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#!/categories">Categories</a></li>
-                                <li><a href="#!/admin/items">Items</a></li>                                
+                                <li><a href="#!/items">Items</a></li>
+                                <li><a href="#!/users">Users</a></li>
                             </ul>
                         </li>
-                        <li><a href="#!">Profile</a></li>
+                        <li><a href="#!/register">Register</a></li>
+                        <li><a href="#!/login">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,6 +73,7 @@
                     <span>{{successAlert}}</span>
                 </div>
             </div>
+
             <!-- the place where HTML templates are replaced by AngularJS routing -->
             <div ng-view></div>
         </div>

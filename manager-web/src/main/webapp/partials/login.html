@@ -1,0 +1,27 @@
+<form name="form" novalidate class="form-horizontal">
+
+    <div class="spacing"></div>
+    <div class="col-lg-3 col-lg-offset-2 centered">
+        <div class="container mt" ng-class="{'has-error': !(form.email.$valid)}">
+            <div class="row">
+                <label for="email" class="col-sm-2 control-label">E-mail</label>
+                <div class="col-sm-3">
+                    <input placeholder="e-mail" id="email" type="email" name="email" class="form-control"
+                           ng-model="user.email" required/>
+                    <p class="help-block" ng-show="form.email.$error.required">e-mail is required</p>
+                </div>
+            </div>
+            <div class="row">
+                <label for="password" class="col-sm-2 control-label">Password</label>
+                <div class="col-sm-3">
+                    <input placeholder="password" id="password" type="password" name="password" class="form-control"
+                           ng-model="user.password" required/>
+                    <p class="help-block" ng-show="form.password.$error.required">password is required</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- show disabled button if form is not valid -->
+        <button ng-disabled="!form.$valid" ng-click="login(user)" class="btn btn-primary" type="submit">Login</button>
+    </div>
+</form>
