@@ -139,6 +139,8 @@ public class ItemServiceTest extends AbstractTestNGSpringContextTests {
 
         Assert.assertTrue(itemService.canBeReturned(0, question));
 
+        question.setDepth(20);
+        question.setWidth(20);
         question.setHeight(20);
         Assert.assertFalse(itemService.canBeReturned(0, question));
     }

@@ -45,17 +45,22 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Category electro = category("Electronics", "Smartphones, laptops and other electronic devices.");
         Category jewelry = category("Jewelry", "Rings, necklaces...all shiny stuff.");
         Category clothes = category("Clothes", "Hats, jackets...anything you wear.");
+        Category cars = category("Cars", "Yep, cars.");
+        Category others = category("Others", "Everything else ...");
         log.info("Loaded L&F categories.");
 
         User admin = user("admin", "admin@lostandfound.com", "javajesuper", UserRole.ADMINISTRATOR);
         User jon = user("jonSnow", "youknow@nothing.ws", "lordCommander", UserRole.MEMBER);
         User walt = user("waltWhite", "heisenberg@bluestuff.com", "methBoss737", UserRole.MEMBER);
         User barry = user("barryAllen", "flash@starlabs.com", "runBarryRun", UserRole.MEMBER);
+        User deadpool = user("deadpool", "deadpool@unicorns.com", "deadpool", UserRole.MEMBER);
         log.info("Loaded L&F users.");
 
         Item laptop = item("MacBook", electro, ItemColor.GRAY, "MacBook Pro 2017 13\"", BigDecimal.valueOf(1.4), 2, 30, 21, null, null);
         Item phone = item("Huawei P10", electro, ItemColor.BLUE, "Huawei P10 64GB", BigDecimal.valueOf(0.15), 15, 7, 1, "p10.jpg", null);
         Item hat = item("Hat", clothes, ItemColor.BLACK, "Ordinary round black hat.", BigDecimal.valueOf(0.3), 15, 25, 30, "hat.jpg", null);
+        Item batmobile = item("Bat mobile", cars, ItemColor.BLACK, "ehm ... ordinary black car cough", BigDecimal.valueOf(2500), 150, 250, 300, "batmobile.jpg", null);
+        Item hand = item("Hand", others, ItemColor.WHITE, "missing hand", BigDecimal.valueOf(1), 200, 50, 30, "hand.jpg", null);
         Item sword = item("Longclaw", jewelry, ItemColor.GRAY, "Valyrian steel sword...please, return fast, White Walkers are coming!", BigDecimal.valueOf(3.5), 125, 15, 4, null, daysBeforeNow(0));
         log.info("Loaded L&F items.");
 
@@ -63,6 +68,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Event ev1 = event(phone, walt, daysBeforeNow(3), "Klusackova", null, null, null);
         Event ev2 = event(hat, walt, daysBeforeNow(3), "Kounicova", null, null, null);
         Event ev3 = event(sword, jon, daysBeforeNow(6), "Klacelova", barry, daysBeforeNow(0), "Cejl");
+        Event ev4 = event(hand, deadpool, daysBeforeNow(0), "Botanicka", null, null, null);
+        Event ev5 = event(batmobile, deadpool, daysBeforeNow(2), "Cejl", walt, daysBeforeNow(1), "Cejl");
         log.info("Loaded L&F events.");
     }
 
