@@ -214,4 +214,24 @@ public class EventFacadeImpl implements EventFacade {
             throw new LostAndFoundManagerDataAccessException("Cannot find events by date of loss.", ex);
         }
     }
+
+    @Override
+    public List<EventDTO> findEventsWithoutLoss() {
+        try {
+            List<Event> events = eventService.findEventsWithoutLoss();
+            return mappingService.mapTo(events, EventDTO.class);
+        } catch (Exception ex) {
+            throw new LostAndFoundManagerDataAccessException("Cannot find events without loss.", ex);
+        }
+    }
+
+    @Override
+    public List<EventDTO> findEventsWithoutFind() {
+        try {
+            List<Event> events = eventService.findEventsWithoutFind();
+            return mappingService.mapTo(events, EventDTO.class);
+        } catch (Exception ex) {
+            throw new LostAndFoundManagerDataAccessException("Cannot find events without find.", ex);
+        }
+    }
 }

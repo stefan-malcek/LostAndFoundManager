@@ -125,4 +125,18 @@ public interface EventService {
      * @return  list of desired events
      */
     List<Event> findEventsByDateOfLoss(Date date);
+    
+    /**
+     * Finds events without report about loss.
+     *
+     * @return  list of desired events
+     */
+    List<Event> findEventsWithoutLoss();
+    
+     /**
+     * Finds events without report about find.
+     *
+     * @return  list of desired events
+     */
+    List<Event> findEventsWithoutFind();
 }
