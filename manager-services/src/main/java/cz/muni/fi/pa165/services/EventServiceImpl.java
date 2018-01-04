@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -107,5 +108,31 @@ public class EventServiceImpl implements EventService{
     @Override
     public List<Event> findEventsByDateOfLoss(Date date) {
         return eventDao.findEventByDateOfLoss(date);
+    }
+
+    @Override
+    public List<Event> findEventsWithoutLoss() {
+        List<Event> events = eventDao.findAll();
+        List<Event> returnedEvents = new ArrayList<>();
+        for(Event event : events) {
+            if(event.getPlaceOfLoss() == null) {
+                returnedEvents.add(event);
+            }
+        }
+        
+        return returnedEvents;
+    }
+
+    @Override
+    public List<Event> findEventsWithoutFind() {
+        List<Event> events = eventDao.findAll();
+        List<Event> returnedEvents = new ArrayList<>();
+        for(Event event : events) {
+            if(event.getPlaceOfFind() == null) {
+                returnedEvents.add(event);
+            }
+        }
+        
+        return returnedEvents;
     }
 }

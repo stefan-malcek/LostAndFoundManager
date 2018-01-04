@@ -186,5 +186,15 @@ public class EventsController {
         return events;
     }      
 
+    @RequestMapping(value = "/without_loss" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<EventDTO> getEventsWithoutLoss() {
+        logger.debug("rest getEventsWithoutLoss()");
+        return eventFacade.findEventsWithoutLoss();
+    }
     
+    @RequestMapping(value = "/without_find" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<EventDTO> getEventsWithoutFind() {
+        logger.debug("rest getEventsWithoutFind()");
+        return eventFacade.findEventsWithoutFind();
+    }
 }

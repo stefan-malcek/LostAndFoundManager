@@ -123,4 +123,20 @@ public interface EventFacade {
      * @return  list of desired events
      */
     List<EventDTO> findEventsByDateOfLoss(Date date);
+    
+    /**
+     * Finds events without dreport about loss
+     *
+     * @return  list of desired events
+     */
+    List<EventDTO> findEventsWithoutLoss();
+    
+    /**
+     * Finds events without report about loss
+     *
+     * @return  list of desired events
+     */
+    List<EventDTO> findEventsWithoutFind();
+    
+    
 }

@@ -250,4 +250,24 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
     }
+    
+    @Test
+    public void testFindEventsWithoutLoss() {
+        events.add(findEvent);
+        when(eventDao.findAll()).thenReturn(events);
+
+        List<Event> res = eventService.findEventsWithoutLoss();
+        Assert.assertEquals(1, res.size());
+        Assert.assertEquals(findEvent, res.get(0));
+    }
+    
+    @Test
+    public void testFindEventsWithoutFind() {
+        events.add(lossEvent);
+        when(eventDao.findAll()).thenReturn(events);
+
+        List<Event> res = eventService.findEventsWithoutFind();
+        Assert.assertEquals(1, res.size());
+        Assert.assertEquals(lossEvent, res.get(0));
+    }
 }

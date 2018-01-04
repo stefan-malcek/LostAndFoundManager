@@ -236,4 +236,18 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
     }
+    
+    @Test
+    public void testFindEventsWithoutLoss() {
+        List<EventDTO> res = eventFacade.findEventsWithoutLoss();
+        Assert.assertEquals(1, res.size());
+        Assert.assertEquals(findEvent, res.get(0));
+    }
+    
+    @Test
+    public void testFindEventsWithoutFind() {
+        List<EventDTO> res = eventFacade.findEventsWithoutFind();
+        Assert.assertEquals(1, res.size());
+        Assert.assertEquals(lossEvent, res.get(0));
+    }
 }

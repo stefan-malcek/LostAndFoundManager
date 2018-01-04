@@ -1,0 +1,29 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>List of events without reported find</h3>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+
+
+<div class="container mtb">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>category</th>
+                    <th>owner</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="event in events track by $index">
+                    <td>{{event.item.name}}</td>
+                    <td>{{event.item.category.name}}</td>
+                    <td>{{event.owner.name}}</td>
+                    <td><a href="#!/events/{{event.id}}" class="btn btn-info" >View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div></div>
