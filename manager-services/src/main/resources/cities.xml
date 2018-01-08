@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cities>
+  <city>Praha</city>
+  <city>Brno</city>
+  <city>Ostrava</city>
+  <city>Plzeň</city>
+  <city>Liberec</city>
+  <city>Olomouc</city>
+  <city>Ústí nad Labem</city>
+  <city>Hradec Králové</city>
+  <city>České Budějovice</city>
+  <city>Pardubice</city>
+  <city>Havířov</city>
+  <city>Zlín</city>
+  <city>Kladno</city>
+  <city>Most</city>
+  <city>Karviná</city>
+  <city>Opava</city>
+  <city>Frýdek-Místek</city>
+  <city>Karlove Vary</city>
+  <city>Jihlava</city>
+  <city>Teplice</city>
+  <city>Děčín</city>
+  <city>Chomutov</city>
+  <city>Přerov</city>
+  <city>Jablonec nad Nisou</city>
+  <city>Mladá Boleslav</city>
+  <city>Prostějov</city>
+  <city>Třebíč</city>
+  <city>Česká Lípa</city>
+  <city>Třinec</city>
+  <city>Tábor</city>
+  <city>Znojmo</city>
+  <city>Příbram</city>
+  <city>Cheb</city>
+  <city>Orlová</city>
+  <city>Kolín</city>
+  <city>Trutnov</city>
+  <city>Písek</city>
+  <city>Kroměříž</city>
+  <city>Šumperk</city>
+  <city>Vsetín</city>
+  <city>Valašské Meziříčí</city>
+  <city>Litvínov</city>
+  <city>Uherské Hradiště</city>
+  <city>Hodonín</city>
+  <city>Český Těšín</city>
+  <city>Břeclav</city>
+  <city>Krnov</city>
+  <city>Litoměřice</city>
+  <city>Sokolov</city>
+  <city>Nový Jičín</city>
+  <city>Havlíčkův Brod</city>
+  <city>Chrudim</city>
+  <city>Strakonice</city>
+  <city>Kopřivnice</city>
+  <city>Klatovy</city>
+  <city>Žďár nad Sázavou</city>
+  <city>Bohumín</city>
+  <city>Jindřichův Hradec</city>
+  <city>Vyškov</city>
+  <city>Blansko</city>
+  <city>Kutná Hora</city>
+  <city>Náchod</city>
+  <city>Jirkov</city>
+  <city>Mělník</city>
+  <city>Žatec</city>
+  <city>Hranice (okres Přerov)</city>
+  <city>Beroun</city>
+  <city>Louny</city>
+  <city>Otrokovice</city>
+  <city>Kralupy nad Vltavou</city>
+  <city>Kadaň</city>
+  <city>Brandýs nad Labem-Stará Boleslav</city>
+  <city>Ostrov</city>
+  <city>Svitavy</city>
+  <city>Bruntál</city>
+  <city>Uherský Brod</city>
+  <city>Rožnov pod Radhoštěm</city>
+  <city>Jičín</city>
+  <city>Rakovník</city>
+  <city>Neratovice</city>
+  <city>Benešov</city>
+  <city>Pelhřimov</city>
+  <city>Dvůr Králové nad Labem</city>
+  <city>Česká Třebová</city>
+  <city>Bílina</city>
+  <city>Varnsdorf</city>
+  <city>Slaný</city>
+  <city>Klášterec nad Ohří</city>
+  <city>Mariánské Lázně</city>
+  <city>Nymburk</city>
+  <city>Ústí nad Orlicí</city>
+  <city>Turnov</city>
+  <city>Chodov</city>
+  <city>Rokycany</city>
+  <city>Hlučín</city>
+  <city>Poděbrady</city>
+  <city>Zábřeh</city>
+  <city>Šternberk</city>
+  <city>Krupka</city>
+  <city>Říčany</city>
+  <city>Český Krumlov</city>
+  <city>Roudnice nad Labem</city>
+  <city>Aš</city>
+  <city>Tachov</city>
+  <city>Vrchlabí</city>
+  <city>Jaroměř</city>
+  <city>Vysoké Mýto</city>
+  <city>Nový Bor</city>
+  <city>Holešov</city>
+  <city>Vlašim</city>
+  <city>Uničov</city>
+  <city>Jeseník</city>
+  <city>Velké Meziříčí</city>
+  <city>Čelákovice</city>
+  <city>Kyjov</city>
+  <city>Veselí nad Moravou</city>
+  <city>Boskovice</city>
+  <city>Prachatice</city>
+  <city>Rychnov nad Kněžnou</city>
+  <city>Sušice</city>
+  <city>Rumburk</city>
+  <city>Domažlice</city>
+  <city>Frenštát pod Radhoštěm</city>
+  <city>Humpolec</city>
+  <city>Kuřim</city>
+  <city>Moravská Třebová</city>
+  <city>Nové Město na Moravě</city>
+  <city>Litomyšl</city>
+  <city>Lanškroun</city>
+  <city>Čáslav</city>
+  <city>Hlinsko</city>
+  <city>Studénka</city>
+  <city>Litovel</city>
+  <city>Nové Město nad Metují</city>
+  <city>Frýdlant nad Ostravicí</city>
+  <city>Milovice</city>
+  <city>Mohelnice</city>
+  <city>Ivančice</city>
+  <city>Chotěboř</city>
+  <city>Nová Paka</city>
+  <city>Přelouč</city>
+  <city>Štětí</city>
+  <city>Polička</city>
+  <city>Hořice</city>
+  <city>Choceň</city>
+  <city>Lovosice</city>
+  <city>Milevsko</city>
+  <city>Lysá nad Labem</city>
+  <city>Semily</city>
+  <city>Duchcov</city>
+  <city>Příbor</city>
+  <city>Tišnov</city>
+  <city>Třeboň</city>
+  <city>Dobříš</city>
+  <city>Rýmařov</city>
+  <city>Bystřice nad Pernštejnem</city>
+  <city>Červený Kostelec</city>
+  <city>Bystřice pod Hostýnem</city>
+  <city>Nejdek</city>
+  <city>Mnichovo Hradiště</city>
+  <city>Lipník nad Bečvou</city>
+  <city>Týn nad Vltavou</city>
+  <city>Dubí</city>
+  <city>Stříbro</city>
+  <city>Broumov</city>
+  <city>Roztoky</city>
+  <city>Vimperk</city>
+  <city>Dačice</city>
+  <city>Moravské Budějovice</city>
+  <city>Hrádek nad Nisou</city>
+  <city>Frýdlant</city>
+  <city>Sedlčany</city>
+  <city>Bílovec</city>
+  <city>Odry</city>
+  <city>Hostivice</city>
+  <city>Napajedla</city>
+  <city>Benátky nad Jizerou</city>
+  <city>Mikulov</city>
+  <city>Sezimovo Ústí</city>
+  <city>Kaplice</city>
+  <city>Přeštice</city>
+  <city>Soběslav</city>
+  <city>Nový Bydžov</city>
+  <city>Hulín</city>
+  <city>Rychvald</city>
+  <city>Nýřany</city>
+  <city>Vodňany</city>
+  <city>Petřvald</city>
+  <city>Šlapanice</city>
+  <city>Kraslice</city>
+  <city>Dobruška</city>
+  <city>Králův Dvůr</city>
+  <city>Český Brod</city>
+  <city>Vratimov</city>
+  <city>Staré Město (okres Uherské Hradiště)</city>
+  <city>Světlá nad Sázavou</city>
+  <city>Hořovice</city>
+  <city>Slavičín</city>
+  <city>Blatná</city>
+  <city>Letovice</city>
+  <city>Tanvald</city>
+  <city>Kravaře</city>
+  <city>Mimoň</city>
+  <city>Holice</city>
+  <city>Bučovice</city>
+  <city>Františkovy Lázně</city>
+  <city>Veselí nad Lužnicí</city>
+  <city>Kojetín</city>
+  <city>Železný Brod</city>
+  <city>Dubňany</city>
+  <city>Kostelec nad Orlicí</city>
+  <city>Černošice</city>
+  <city>Letohrad</city>
+  <city>Podbořany</city>
+  <city>Hronov</city>
+  <city>Chrastava</city>
+  <city>Týniště nad Orlicí</city>
+  <city>Slavkov u Brna</city>
+  <city>Dobřany</city>
+  <city>Žamberk</city>
+  <city>Vítkov</city>
+  <city>Úvaly</city>
+  <city>Šenov</city>
+  <city>Moravský Krumlov</city>
+  <city>Fulnek</city>
+  <city>Hustopeče</city>
+  <city>Třešť</city>
+  <city>Úpice</city>
+  <city>Brumov-Bylnice</city>
+  <city>Strážnice</city>
+  <city>Lomnice nad Popelkou</city>
+  <city>Třebechovice pod Orebem</city>
+  <city>Jablunkov</city>
+  <city>Horní Slavkov</city>
+  <city>Jilemnice</city>
+  <city>Telč</city>
+  <city>Stochov</city>
+  <city>Šluknov</city>
+  <city>Rosice</city>
+  <city>Odolena Voda</city>
+  <city>Horažďovice</city>
+  <city>Česká Kamenice</city>
+  <city>Týnec nad Sázavou</city>
+  <city>Vrbno pod Pradědem</city>
+  <city>Zubří</city>
+  <city>Planá</city>
+  <city>Kunovice</city>
+  <city>Ledeč nad Sázavou</city>
+  <city>Hradec nad Moravicí</city>
+  <city>Bechyně</city>
+  <city>Chlumec nad Cidlinou</city>
+  <city>Rousínov</city>
+  <city>Kdyně</city>
+  <city>Luhačovice</city>
+  <city>Nové Strašecí</city>
+  <city>Skuteč</city>
+  <city>Česká Skalice</city>
+  <city>Habartov</city>
+  <city>Jílové</city>
+  <city>Polná</city>
+  <city>Doksy</city>
+  <city>Nýrsko</city>
+  <city>Kynšperk nad Ohří</city>
+  <city>Chropyně</city>
+  <city>Valašské Klobouky</city>
+  <city>Náměšť nad Oslavou</city>
+  <city>Velká Bíteš</city>
+  <city>Postoloprty</city>
+  <city>Kosmonosy</city>
+  <city>Bakov nad Jizerou</city>
+  <city>Trhové Sviny</city>
+  <city>Horšovský Týn</city>
+  <city>Bělá pod Bezdězem</city>
+  <city>Hluboká nad Vltavou</city>
+  <city>Holýšov</city>
+  <city>Pacov</city>
+  <city>Protivín</city>
+  <city>Osek</city>
+  <city>Heřmanův Městec</city>
+  <city>Zruč nad Sázavou</city>
+  <city>Třemošná</city>
+  <city>Meziboří</city>
+  <city>Starý Plzenec</city>
+  <city>Vizovice</city>
+  <city>Modřice</city>
+  <city>Rudná</city>
+  <city>Oslavany</city>
+  <city>Vamberk</city>
+  <city>Hostinné</city>
+  <city>Adamov</city>
+  <city>Pohořelice</city>
+  <city>Votice</city>
+  <city>Bojkovice</city>
+  <city>Vracov</city>
+  <city>Chlumec</city>
+  <city>Mníšek pod Brdy</city>
+  <city>Králíky</city>
+  <city>Rožmitál pod Třemšínem</city>
+  <city>Pečky</city>
+  <city>Cvikov</city>
+  <city>Uherský Ostroh</city>
+  <city>Hluk</city>
+  <city>Horní Bříza</city>
+  <city>Jemnice</city>
+  <city>Bzenec</city>
+  <city>Police nad Metují</city>
+  <city>Bystřice</city>
+  <city>Jílové u Prahy</city>
+  <city>Jaroměřice nad Rokytnou</city>
+  <city>Bor</city>
+  <city>Dolní Benešov</city>
+  <city>Slatiňany</city>
+  <city>Blovice</city>
+  <city>Klimkovice</city>
+  <city>Stráž pod Ralskem</city>
+  <city>Lišov</city>
+  <city>Nová Role</city>
+  <city>Kamenický Šenov</city>
+  <city>Zlaté Hory</city>
+  <city>Zdice</city>
+  <city>Unhošť</city>
+  <city>Borovany</city>
+  <city>Jiříkov</city>
+  <city>Kamenice nad Lipou</city>
+  <city>Velké Opatovice</city>
+  <city>Přibyslav</city>
+  <city>Velešín</city>
+  <city>Volary</city>
+  <city>Benešov nad Ploučnicí</city>
+  <city>Paskov</city>
+  <city>Nové Město pod Smrkem</city>
+  <city>Zbýšov</city>
+  <city>Velké Bílovice</city>
+  <city>Brušperk</city>
+  <city>Lom</city>
+  <city>Toužim</city>
+  <city>Nepomuk</city>
+  <city>Planá nad Lužnicí</city>
+  <city>Lanžhot</city>
+  <city>Jablonné v Podještědí</city>
+  <city>Sázava</city>
+  <city>Stod</city>
+  <city>Brtnice</city>
+  <city>Lázně Bělohrad</city>
+  <city>Fryšták</city>
+  <city>Suchdol nad Lužnicí</city>
+  <city>Smržovka</city>
+  <city>Zliv</city>
+  <city>Valtice</city>
+  <city>Libochovice</city>
+  <city>Rájec-Jestřebí</city>
+  <city>Březnice</city>
+  <city>Město Albrechtice</city>
+  <city>Kostelec nad Černými lesy</city>
+  <city>Krásná Lípa</city>
+  <city>Židlochovice</city>
+  <city>Sezemice</city>
+  <city>Kostelec nad Labem</city>
+  <city>Kralovice</city>
+  <city>Žacléř</city>
+  <city>České Velenice</city>
+  <city>Břidličná</city>
+  <city>Štramberk</city>
+  <city>Jáchymov</city>
+  <city>Rotava</city>
+  <city>Lázně Bohdaneč</city>
+  <city>Hanušovice</city>
+  <city>Nová Bystřice</city>
+  <city>Dobřichovice</city>
+  <city>Jablonné nad Orlicí</city>
+  <city>Dobrovice</city>
+  <city>Libčice nad Vltavou</city>
+  <city>Desná</city>
+  <city>Sadská</city>
+  <city>Hrušovany nad Jevišovkou</city>
+  <city>Staňkov</city>
+  <city>Újezd u Brna</city>
+  <city>Moravský Beroun</city>
+  <city>Chrast</city>
+  <city>Třemošnice</city>
+  <city>Kaznějov</city>
+  <city>Ždírec nad Doubravou</city>
+  <city>Řevnice</city>
+  <city>Rajhrad</city>
+  <city>Trmice</city>
+  <city>Chvaletice</city>
+  <city>Opočno</city>
+  <city>Vejprty</city>
+  <city>Loket</city>
+  <city>Mnichovice</city>
+  <city>Velké Pavlovice</city>
+  <city>Uhlířské Janovice</city>
+  <city>Velká Bystřice</city>
+  <city>Teplá</city>
+  <city>Budišov nad Budišovkou</city>
+  <city>Terezín</city>
+  <city>Volyně</city>
+  <city>Loštice</city>
+  <city>Rtyně v Podkrkonoší</city>
+  <city>Žirovnice</city>
+  <city>Slušovice</city>
+  <city>Rokytnice nad Jizerou</city>
+  <city>Velvary</city>
+  <city>Javorník</city>
+  <city>Smiřice</city>
+  <city>Libušín</city>
+  <city>Ivanovice na Hané</city>
+  <city>Hrádek</city>
+  <city>Miroslav</city>
+  <city>Městec Králové</city>
+  <city>Klecany</city>
+  <city>Podivín</city>
+  <city>Košťany</city>
+  <city>Morkovice-Slížany</city>
+  <city>Kostelec na Hané</city>
+  <city>Koryčany</city>
+  <city>Konice</city>
+  <city>Jevíčko</city>
+  <city>Buštěhrad</city>
+  <city>Raspenava</city>
+  <city>Český Dub</city>
+  <city>Velké Hamry</city>
+  <city>Sedlec-Prčice</city>
+  <city>Úštěk</city>
+  <city>Hodkovice nad Mohelkou</city>
+  <city>Zákupy</city>
+  <city>Hejnice</city>
+  <city>Březová</city>
+  <city>Kunštát</city>
+  <city>Mladá Vožice</city>
+  <city>Meziměstí</city>
+  <city>Spálené Poříčí</city>
+  <city>Karolinka</city>
+  <city>Kelč</city>
+  <city>Golčův Jeníkov</city>
+  <city>Plasy</city>
+  <city>Nové Sedlo</city>
+  <city>Rychnov u Jablonce nad Nisou</city>
+  <city>Netolice</city>
+  <city>Počátky</city>
+  <city>Ždánice</city>
+  <city>Nové Hrady</city>
+  <city>Slavonice</city>
+  <city>Dolní Bousov</city>
+  <city>Žlutice</city>
+  <city>Vyšší Brod</city>
+  <city>Zbiroh</city>
+  <city>Luže</city>
+  <city>Chabařovice</city>
+  <city>Bohušovice nad Ohří</city>
+  <city>Tovačov</city>
+  <city>Neveklov</city>
+  <city>Dolní Kounice</city>
+  <city>Dašice</city>
+  <city>Plumlov</city>
+  <city>Rudolfov</city>
+  <city>Sobotka</city>
+  <city>Kryry</city>
+  <city>Horní Benešov</city>
+  <city>Klobouky u Brna</city>
+  <city>Chýnov</city>
+  <city>Nová Včelnice</city>
+  <city>Luby</city>
+  <city>Kardašova Řečice</city>
+  <city>Nechanice</city>
+  <city>Mikulášovice</city>
+  <city>Rokytnice v Orlických horách</city>
+  <city>Janovice nad Úhlavou</city>
+  <city>Hranice (okres Cheb)</city>
+  <city>Mirošov</city>
+  <city>Horní Planá</city>
+  <city>Solnice</city>
+  <city>Svoboda nad Úpou</city>
+  <city>Proseč</city>
+  <city>Žebrák</city>
+  <city>Budyně nad Ohří</city>
+  <city>Kopidlno</city>
+  <city>Borohrádek</city>
+  <city>Horní Jiřetín</city>
+  <city>Město Touškov</city>
+  <city>Plesná</city>
+  <city>Němčice nad Hanou</city>
+  <city>Bochov</city>
+  <city>Ralsko</city>
+  <city>Štíty</city>
+  <city>Hrob</city>
+  <city>Týnec nad Labem</city>
+  <city>Jistebnice</city>
+  <city>Velký Šenov</city>
+  <city>Žandov</city>
+  <city>Horní Jelení</city>
+  <city>Třebenice</city>
+  <city>Hrochův Týnec</city>
+  <city>Veltrusy</city>
+  <city>Hroznětín</city>
+  <city>Smečno</city>
+  <city>Skalná</city>
+  <city>Vroutek</city>
+  <city>Nový Knín</city>
+  <city>Železná Ruda</city>
+  <city>Oloví</city>
+  <city>Horní Cerekev</city>
+  <city>Dolní Poustevna</city>
+  <city>Kouřim</city>
+  <city>Staré Město (okres Šumperk)</city>
+  <city>Zásmuky</city>
+  <city>Černovice</city>
+  <city>Jesenice (okres Rakovník)</city>
+  <city>Bělá nad Radbuzou</city>
+  <city>Jablonec nad Jizerou</city>
+  <city>Dubá</city>
+  <city>Lomnice nad Lužnicí</city>
+  <city>Radnice</city>
+  <city>Hrotovice</city>
+  <city>Březová nad Svitavou</city>
+  <city>Lučany nad Nisou</city>
+  <city>Teplice nad Metují</city>
+  <city>Olešnice</city>
+  <city>Ronov nad Doubravou</city>
+  <city>Plánice</city>
+  <city>Libáň</city>
+  <city>Vlachovo Březí</city>
+  <city>Hoštka</city>
+  <city>Švihov</city>
+  <city>Seč</city>
+  <city>Pyšely</city>
+  <city>Poběžovice</city>
+  <city>Hostomice</city>
+  <city>Nasavrky</city>
+  <city>Harrachov</city>
+  <city>Bystré</city>
+  <city>Rožďalovice</city>
+  <city>Přimda</city>
+  <city>Mirovice</city>
+  <city>Kladruby</city>
+  <city>Bavorov</city>
+  <city>Mýto</city>
+  <city>Lázně Kynžvart</city>
+  <city>Mšeno</city>
+  <city>Kašperské Hory</city>
+  <city>Strmilov</city>
+  <city>Svratka</city>
+  <city>Kožlany</city>
+  <city>Chřibská</city>
+  <city>Husinec</city>
+  <city>Brandýs nad Orlicí</city>
+  <city>Vidnava</city>
+  <city>Strážov</city>
+  <city>Trhový Štěpánov</city>
+  <city>Hostouň</city>
+  <city>Špindlerův Mlýn</city>
+  <city>Abertamy</city>
+  <city>Habry</city>
+  <city>Sedlice</city>
+  <city>Kasejovice</city>
+  <city>Vysoké nad Jizerou</city>
+  <city>Železnice</city>
+  <city>Rovensko pod Troskami</city>
+  <city>Žulová</city>
+  <city>Úsov</city>
+  <city>Všeruby</city>
+  <city>Pilníkov</city>
+  <city>Potštát</city>
+  <city>Nalžovské Hory</city>
+  <city>Mirotice</city>
+  <city>Černošín</city>
+  <city>Manětín</city>
+  <city>Měčín</city>
+  <city>Jevišovice</city>
+  <city>Verneřice</city>
+  <city>Krásná Hora nad Vltavou</city>
+  <city>Osečná</city>
+  <city>Hartmanice</city>
+  <city>Liběchov</city>
+  <city>Bečov nad Teplou</city>
+  <city>Blšany</city>
+  <city>Červená Řečice</city>
+  <city>Bezdružice</city>
+  <city>Vysoké Veselí</city>
+  <city>Miletín</city>
+  <city>Stráž nad Nežárkou</city>
+  <city>Janské Lázně</city>
+  <city>Krásno</city>
+  <city>Pec pod Sněžkou</city>
+  <city>Deštná</city>
+  <city>Stárkov</city>
+  <city>Mašťov</city>
+  <city>Chyše</city>
+  <city>Ledvice</city>
+  <city>Horní Blatná</city>
+  <city>Rabí</city>
+  <city>Úterý</city>
+  <city>Hora Svaté Kateřiny</city>
+  <city>Krásné Údolí</city>
+  <city>Rožmberk nad Vltavou</city>
+  <city>Andělská Hora</city>
+  <city>Výsluní</city>
+  <city>Janov</city>
+  <city>Rejštejn</city>
+  <city>Boží Dar</city>
+  <city>Loučná pod Klínovcem</city>
+  <city>Přebuz</city>
+</cities>

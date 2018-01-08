@@ -3,11 +3,13 @@ package cz.muni.fi.pa165.facades;
 import cz.muni.fi.pa165.ServiceApplicationContext;
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.dto.enums.ItemColor;
+import cz.muni.fi.pa165.enums.StatisticsType;
 import cz.muni.fi.pa165.enums.UserRole;
 import cz.muni.fi.pa165.facade.CategoryFacade;
 import cz.muni.fi.pa165.facade.EventFacade;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.facade.UserFacade;
+import cz.muni.fi.pa165.services.CityService;
 import cz.muni.fi.pa165.services.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -41,6 +43,8 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
     private UserFacade userFacade;
     @Autowired
     private MappingService mappingService;
+    @Autowired
+    private CityService cityService;
 
     private EventDTO lossEvent;
     private EventDTO findEvent;
@@ -236,18 +240,25 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
     }
-    
+
     @Test
     public void testFindEventsWithoutLoss() {
         List<EventDTO> res = eventFacade.findEventsWithoutLoss();
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
     }
-    
+
     @Test
     public void testFindEventsWithoutFind() {
         List<EventDTO> res = eventFacade.findEventsWithoutFind();
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
+    }
+
+    @Test
+    public void testGetStatistics() {
+        List<StatisticsDTO> statistics = eventFacade.getStatistics(StatisticsType.LOSS);
+
+        Assert.assertNotNull(statistics);
     }
 }
