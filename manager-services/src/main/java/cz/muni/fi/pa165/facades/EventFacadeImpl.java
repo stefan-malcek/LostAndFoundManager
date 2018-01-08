@@ -5,10 +5,14 @@ import cz.muni.fi.pa165.dto.EventDTO;
 import cz.muni.fi.pa165.dto.EventFindDTO;
 import cz.muni.fi.pa165.dto.EventLossDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
+import cz.muni.fi.pa165.dto.StatisticsDTO;
+import cz.muni.fi.pa165.dto.StatisticsDTO;
 import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
+import cz.muni.fi.pa165.enums.StatisticsType;
 import cz.muni.fi.pa165.facade.EventFacade;
+import cz.muni.fi.pa165.services.CityService;
 import cz.muni.fi.pa165.services.EventService;
 import cz.muni.fi.pa165.services.ItemService;
 import cz.muni.fi.pa165.services.MappingService;
@@ -41,6 +45,8 @@ public class EventFacadeImpl implements EventFacade {
     @Inject
     private MappingService mappingService;
 
+    @Inject
+    private CityService cityService;
 
     @Override
     public long createEvent(EventCreateDTO eventDTO) {
@@ -232,6 +238,16 @@ public class EventFacadeImpl implements EventFacade {
             return mappingService.mapTo(events, EventDTO.class);
         } catch (Exception ex) {
             throw new LostAndFoundManagerDataAccessException("Cannot find events without find.", ex);
+        }
+    }
+
+    @Override
+    public List<StatisticsDTO> getStatistics(StatisticsType type) {
+        try {
+            List<String> cities = cityService.getCities();
+            return eventService.getStatistics(cities, type);
+        } catch (Exception ex) {
+            throw new LostAndFoundManagerDataAccessException("Cannot count statistics.", ex);
         }
     }
 }

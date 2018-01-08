@@ -2,11 +2,13 @@ package cz.muni.fi.pa165.services;
 
 import cz.muni.fi.pa165.ServiceApplicationContext;
 import cz.muni.fi.pa165.dao.EventDao;
+import cz.muni.fi.pa165.dto.StatisticsDTO;
 import cz.muni.fi.pa165.entities.Category;
 import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.enums.ItemColor;
+import cz.muni.fi.pa165.enums.StatisticsType;
 import cz.muni.fi.pa165.enums.UserRole;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
@@ -95,7 +97,6 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
-
 
     @Test
     public void testCreateEvent() {
@@ -250,7 +251,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
     }
-    
+
     @Test
     public void testFindEventsWithoutLoss() {
         events.add(findEvent);
@@ -260,7 +261,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
     }
-    
+
     @Test
     public void testFindEventsWithoutFind() {
         events.add(lossEvent);
@@ -269,5 +270,26 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         List<Event> res = eventService.findEventsWithoutFind();
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(lossEvent, res.get(0));
+    }
+
+    @Test
+    public void getStatistics_loss_finds() {
+        events.add(lossEvent);
+        when(eventDao.findAll()).thenReturn(events);
+
+        List<String> cities = new ArrayList<String>() {
+            {
+                add("Kladno");
+                add("Most");
+                add("Karviná");
+                add("Brno");
+                add("Frýdek-Místek");
+                add("Karlove Vary");
+                add("Jihlava");
+            }
+        };
+
+        List<StatisticsDTO> res = eventService.getStatistics(cities, StatisticsType.LOSS);
+        Assert.assertEquals(5, res.size());
     }
 }
