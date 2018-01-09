@@ -28,6 +28,7 @@
         <script src="angular/eventDetail.js"></script>
         <script src="angular/eventFind.js"></script>
         <script src="angular/eventLoss.js"></script>
+        <script src="angular/authentication.js"></script>
         <script src="angular/user.js"></script>
         <script src="angular/statistics.js"></script>
     </head>

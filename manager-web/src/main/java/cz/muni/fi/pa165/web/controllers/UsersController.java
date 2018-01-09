@@ -119,8 +119,7 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value = "/{id}/is_admin", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}/is_admin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final boolean isAdministrator(@PathVariable("id") long id) {
         logger.debug("rest isAdministrator()");
         UserDTO user = userFacade.findUserById(id);
