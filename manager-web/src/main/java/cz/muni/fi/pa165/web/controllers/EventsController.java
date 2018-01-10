@@ -16,6 +16,7 @@ import cz.muni.fi.pa165.web.StatisticsTypeEnumConverter;
 import cz.muni.fi.pa165.web.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.web.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.web.rest.ApiUris;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +49,10 @@ public class EventsController {
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         dataBinder.registerCustomEditor(StatisticsType.class, new StatisticsTypeEnumConverter());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(true);
+        dataBinder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
