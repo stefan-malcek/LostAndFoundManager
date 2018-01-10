@@ -25,30 +25,37 @@ lostAndFoundApp.controller('userDetailCtrl', function ($scope, $routeParams, $ht
 });
 
 
-lostAndFoundApp.controller('loginCtrl', function loginCtrl($scope, $http, $location, $rootScope, AuthService) {
+lostAndFoundApp.controller('loginCtrl', function loginCtrl($scope, $http, $location, $rootScope) {
     $scope.user = {
         'email': '',
         'password': ''
     };
-    // function called when submit button is clicked
+
     $scope.login = function (user) {
-        $http({
-            method: 'PUT',
-            url: '/pa165/rest/users/auth',
-            data: user
-        }).then(function success(response) {
+        $http.put('/pa165/rest/users/auth', user)
+            .then(function success(response) {
             if (response.data) {
-                AuthService.login($scope.user.email);
+                $http.get('/pa165/rest/users/by_email/' + user.email)
+                    .then(function (response) {
+                    var userId = response.data.id;
+                    $http.get('/pa165/rest/users/' + userId + '/is_admin')
+                        .then(function (resp) {
+                        $rootScope.currentUser= {
+                            email: user.email,
+                            isAdmin: resp.data
+                        };
+                    })
+                });
                 console.log($scope.user.email + ' logged in');
                 $rootScope.successAlert = 'Successfully logged in';
                 $location.path("/");
             } else {
-                $rootScope.Alert = 'Wrong email or password';
+                $scope.errorAlert = 'Wrong email or password';
                 $location.path("/login");
             }
         }, function error(response) {
             //display error
-            $rootScope.Alert = 'Error during login';
+            $rootScope.errorAlert = 'Error during login';
             console.log("error during login");
             console.log(response);
             $location.path("/login");
