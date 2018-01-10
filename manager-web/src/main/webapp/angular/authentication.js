@@ -1,21 +1,13 @@
 /**
  * @author Adam Bananka
  */
-lostAndFoundApp.factory('AuthService', function AuthService($http, $cookies, $rootScope) {
+lostAndFoundApp.factory('AuthService', function ($http, $cookies, $rootScope) {
     var service = {};
 
-    service.login = login;
-    service.ClearCredentials = ClearCredentials;
-    service.isAuthenticated = isAuthenticated;
-    service.isAdmin = isAdmin;
-    service.getCurrentUserEmail = getCurrentUserEmail;
-
-    return service;
-
-    function login(email) {
+    service.login = function (email) {
         var isAdmin = false;
         $http.get('/pa165/rest/users/by_email/'+ email).then(function (response) {
-           var userId = response.data.id;
+            var userId = response.data.id;
             $http.get('/pa165/rest/users/' + userId + '/is_admin').then(function (resp) {
                 isAdmin = resp.data;
             })
@@ -35,23 +27,26 @@ lostAndFoundApp.factory('AuthService', function AuthService($http, $cookies, $ro
         // var cookieExp = new Date();
         // cookieExp.setDate(cookieExp.getDate() + 7);
         // $cookies.putObject('globals', $rootScope.globals, {expires: cookieExp});
-    }
+    };
 
-    function ClearCredentials() {
+    service.ClearCredentials = function () {
         $rootScope.globals = {};
         // $cookies.remove('globals');
         // $http.defaults.headers.common.Authorization = 'Basic';
-    }
+    };
 
-    function isAuthenticated() {
+    service.isAuthenticated = function () {
         return $rootScope.globals !== {};
-    }
+    };
 
-    function isAdmin() {
-        return isAuthenticated() && $rootScope.globals.currentUser.isAdmin;
-    }
+    service.isAdmin = function () {
+        return service.isAuthenticated() && $rootScope.globals.currentUser.isAdmin;
+    };
 
-    function getCurrentUserEmail() {
+    service.getCurrentUserEmail = function () {
         return $rootScope.globals.currentUser.email;
-    }
+    };
+
+    $rootScope.authService = service;
+    return service;
 });

@@ -33,6 +33,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/statistics', {templateUrl: 'partials/statistics.html', controller: 'statisticsCtrl'}).
             otherwise({redirectTo: '/'});
 });
+lostAndFoundApp.$rootScope.currentUser = null;
 /*
  * alert closing functions defined in root scope to be available in every template
  */
