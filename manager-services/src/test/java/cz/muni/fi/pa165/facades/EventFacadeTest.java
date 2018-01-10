@@ -255,6 +255,7 @@ public class EventFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(lossEvent, res.get(0));
     }
 
+
     @Test
     public void testGetStatistics() {
         List<StatisticsDTO> statistics = eventFacade.getStatistics(StatisticsType.LOSS);

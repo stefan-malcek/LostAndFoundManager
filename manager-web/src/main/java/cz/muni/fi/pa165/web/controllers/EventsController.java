@@ -201,13 +201,14 @@ public class EventsController {
     public final List<EventDTO> getEventsWithoutLoss() {
         logger.debug("rest getEventsWithoutLoss()");
         return eventFacade.findEventsWithoutLoss();
-    }
-
-    @RequestMapping(value = "/without_find", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    }    
+    
+    @RequestMapping(value = "/without_find" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<EventDTO> getEventsWithoutFind() {
         logger.debug("rest getEventsWithoutFind()");
         return eventFacade.findEventsWithoutFind();
     }
+
 
     //Usage /statistics?type=loss
     @RequestMapping(value = "/statistics", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -215,4 +216,5 @@ public class EventsController {
         logger.debug("rest getStatistics()");
         return eventFacade.getStatistics(type);
     }
+
 }
