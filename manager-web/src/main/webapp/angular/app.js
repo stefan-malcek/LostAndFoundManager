@@ -30,11 +30,15 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
             otherwise({redirectTo: '/'});
 });
-lostAndFoundApp.$rootScope.currentUser = null;
+
 /*
  * alert closing functions defined in root scope to be available in every template
  */
 lostAndFoundApp.run(function ($rootScope) {
+    $rootScope.currentUser = {
+        id: 0
+    };
+
     $rootScope.hideSuccessAlert = function () {
         $rootScope.successAlert = undefined;
     };

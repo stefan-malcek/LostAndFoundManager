@@ -59,7 +59,7 @@ public class UsersController {
     @RequestMapping(value = "/{id}/pw", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final UserDTO changeUserPassword(@PathVariable("id") long id, @RequestBody UserAuthenticateDTO user,
-                                            @RequestBody String newPassword) throws Exception {
+            @RequestBody String newPassword) throws Exception {
         logger.debug("rest changeUserPassword()");
         try {
             userFacade.changePassword(user, newPassword);
@@ -97,9 +97,10 @@ public class UsersController {
         return user;
     }
 
-    @RequestMapping(value = "/by_email/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/by_email/{email:.+}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final UserDTO findUserByEmail(@PathVariable("email") String email) throws Exception {
         logger.debug("rest findUserByEmail()", email);
+        System.out.println("\n\n\n\n\nEmail is " + email+" \n\n\n\n\n");
         UserDTO user = userFacade.findUserByEmail(email);
         if (user == null) {
             throw new ResourceNotFoundException();
@@ -109,7 +110,7 @@ public class UsersController {
 
     @RequestMapping(value = "/auth", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final boolean authenticateUser(@RequestBody UserAuthenticateDTO user) throws Exception{
+    public final boolean authenticateUser(@RequestBody UserAuthenticateDTO user) throws Exception {
         logger.debug("rest authenticateUser()");
         try {
             return userFacade.authenticate(user);
