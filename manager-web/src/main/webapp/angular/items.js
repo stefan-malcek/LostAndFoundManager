@@ -78,3 +78,79 @@ lostAndFoundApp.controller('itemReturnCtrl', function ($scope, $rootScope, $http
         });
     };
 });
+
+lostAndFoundApp.controller('itemCreateCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        //set object bound to form fields
+        
+        $scope.colors = ['BLACK', 'GRAY', 'WHITE', 'RED', 'GREEN', 'BLUE',
+        'YELLOW', 'ORANGE', 'BROWN', 'PURPLE'];
+        $scope.categories = {};
+        
+        $http.get('/pa165/rest/items/').then(function (categories) {
+             $scope.categories = categories.data;
+             console.log('Loaded categories for item create');
+         });
+        
+        $scope.item = {
+            'name': '',
+            'category': '',
+            'color': 'BLACK',
+            'description': '',
+            'weight': 0.0,
+            'height': 0,
+            'width': 0,
+            'depth': 0
+        };
+        
+        $scope.event = {
+            'item': $scope.item,
+            'finder': '',
+            'placeOfFind': '',
+            'dateOfFind': '',
+            'owner': '',
+            'placeOfLoss': '',
+            'dateOfLoss': ''
+        };
+        
+        // function called when submit button is clicked, creates item on server
+        $scope.create = function (item) {
+            $http({
+                method: 'POST',
+                url: '/pa165/rest/items/create',
+                data: item
+            }).then(function success(response) {
+                var createdItem = response.data;
+                //display confirmation alert
+               $rootScope.successAlert = 'A new item "' + createdItem.name + '" was created';
+               
+               $scope.createevent = function (event) {
+                   $http({
+                       method: 'POST',
+                       url: '/pa165/rest/items/create',
+                       data: item
+                   }).then(function success(response) {
+                       $rootScope.successAlert = 'Event for new item was created';               
+                   });
+               };
+            
+                //change view to main page
+                $location.path("/");
+            }, function error(response) {
+                //display error
+                console.log("error when creating item");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'PersistenceException':
+                        $rootScope.errorAlert = 'Item with the same attributes already exists ! ';
+                        break;
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create item ! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });

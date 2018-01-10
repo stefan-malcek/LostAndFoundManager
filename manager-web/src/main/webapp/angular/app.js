@@ -9,6 +9,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/', {templateUrl: 'partials/intro.html'}).
             when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
             when('/lostItemList', {templateUrl: 'partials/lostItemList.html', controller: 'lostItemListCtrl'}).
+            when('/items/create', {templateUrl: 'partials/itemCreate.html', controller: 'itemCreateCtrl'}).
             when('/createLostItem', {templateUrl: 'partials/createLostItem.html', controller: 'createLostItemCtrl'}).
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
             when('/admin/items', {templateUrl: 'partials/admin_items.html', controller: 'itemListCtrl'}).

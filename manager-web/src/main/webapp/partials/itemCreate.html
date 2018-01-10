@@ -1,0 +1,71 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3>Create item</h3> 
+        </div>
+
+    </div>
+</div>
+
+<form name="form"  novalidate class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+            <input placeholder="name" id="name" type="text" ng-minlength="3" name="name" class="form-control"
+                   ng-model="item.name" required/>
+            <p class="help-block" ng-show="form.name.$error.required">name is required</p>
+            <p class="help-block" ng-show="form.name.$error.minlength">name must be at least 3 characters</p>
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.category.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Category</label>
+        <div class="col-sm-4">
+            <input placeholder="description" id="name" type="text" name="description" class="form-control" ng-model="item.description" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Color</label>
+        <div class="col-sm-4">
+            <input placeholder="description" id="name" type="text" name="description" class="form-control" ng-model="item.description" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-4">
+            <input placeholder="description" id="name" type="text" name="description" class="form-control" ng-model="item.description" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.weight.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Weight</label>
+        <div class="col-sm-4">
+            <input placeholder="weight" id="weight" type="number" step ="0.01" name="weight" min="0" class="form-control" ng-model="item.weight" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.height.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Height</label>
+        <div class="col-sm-4">
+            <input placeholder="height" id="height" type="number" step ="1" name="height" min="0" class="form-control" ng-model="item.height" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.width.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Width</label>
+        <div class="col-sm-4">
+            <input placeholder="width" id="width" type="number" step ="1" name="width" min="0" class="form-control" ng-model="item.width" />
+        </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': !(form.depth.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Depth</label>
+        <div class="col-sm-4">
+            <input placeholder="depth" id="depth" type="number" step ="1" name="depth" min="0" class="form-control" ng-model="item.depth" />
+        </div>
+    </div>
+    <!-- show disabled button if form is not valid -->
+    <div class="form-group">
+        <label  class="col-sm-2 control-label"></label>
+        <div class="col-sm-4 smallTopPadding">
+            <button ng-disabled="!form.$valid" ng-click="create(item)" class="btn btn-primary" type="submit" >Create item</button>
+        </div>
+            
+    </div>
+
+</form>

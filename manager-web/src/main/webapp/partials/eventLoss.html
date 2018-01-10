@@ -22,5 +22,11 @@
     </div>
     
     <!-- show disabled button if form is not valid -->
-    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="addLoosing(event)">Report loosing</button>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label"></label>
+        <div class="col-sm-4 smallTopPadding">
+            <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="addLoosing(event)">Report loosing</button>
+        </div>
+            
+    </div>
 </form>
