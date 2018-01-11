@@ -1,20 +1,19 @@
 lostAndFoundApp.controller('eventLossCtrl',
         function ($scope, $routeParams, $http, $location, $rootScope) {
-            var itemId = $routeParams.itemId;
-
-            var retrievedItem;
-            $http.get('/pa165/rest/items/' + itemId).then(function (response) {
-                retrievedItem = response.data;
-                console.log(retrievedItem);
+            
+            var eventId = $routeParams.eventId;
+            
+            var retrievedEvent;
+            $http.get('/pa165/rest/events/' + eventId).then(function (response) { 
+                retrievedEvent = response.data;
+                console.log(retrievedEvent);       
             });
 
             var user;
             $http.get('/pa165/rest/users/' + 2).then(function (response) {
                 user = response.data;
-                console.log(retrievedItem);
             });
-
-            // Get owner     
+   
             $scope.event = {
                 placeOfLoss: "Brno",
                 dateOfLoss: new Date(2018, 01, 10, 5, 6, 1, 1)
@@ -22,8 +21,8 @@ lostAndFoundApp.controller('eventLossCtrl',
 
             $scope.addLoosing = function (event) {          
                 var eventData = {
-                    id: 0,
-                    item: retrievedItem,
+                    id: retrievedEvent.id,
+                    item: retrievedEvent.item,
                     owner: user,
                     placeOfLoss: event.placeOfLoss,
                     dateOfLoss: toJSONLocal(event.dateOfLoss)
@@ -34,7 +33,7 @@ lostAndFoundApp.controller('eventLossCtrl',
                 $http({
                     method: 'POST',
                     url: '/pa165/rest/events/add_loosing',
-                    data: eventData,
+                    data: eventData
                 })
                         .then(function success(response) {
                             $rootScope.successAlert = 'Loosing was reported';

@@ -11,28 +11,26 @@
     <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-4">
-            <input placeholder="name" id="name" type="text" ng-minlength="3" name="name" class="form-control"
+            <input placeholder="name" id="name" type="text" ng-minlength="1" name="name" class="form-control"
                    ng-model="item.name" required/>
-            <p class="help-block" ng-show="form.name.$error.required">name is required</p>
-            <p class="help-block" ng-show="form.name.$error.minlength">name must be at least 3 characters</p>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': !(form.category.$valid)}">
         <label for="description" class="col-sm-2 control-label">Category</label>
         <div class="col-sm-4">
-            <input placeholder="description" id="name" type="text" name="description" class="form-control" ng-model="item.description" />
+            <select class="form-control" ng-model="item.category" ng-options="category.name for category in categories"></select>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+    <div class="form-group" ng-class="{'has-error': !(form.color.$valid)}">
         <label for="description" class="col-sm-2 control-label">Color</label>
         <div class="col-sm-4">
-            <input placeholder="description" id="name" type="text" name="description" class="form-control" ng-model="item.description" />
+            <select class="form-control" ng-model="item.color" ng-options="color for color in colors"></select>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+    <div class="form-group" ng-class="{'has-error': !(form.description.$valid)}">
         <label for="description" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-4">
-            <input placeholder="description" id="name" type="text" name="description" class="form-control" ng-model="item.description" />
+            <input placeholder="description" ng-minlength="1" id="description" type="text" name="description" class="form-control" ng-model="item.description" />
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': !(form.weight.$valid)}">

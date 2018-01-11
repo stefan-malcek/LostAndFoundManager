@@ -85,10 +85,11 @@ lostAndFoundApp.controller('itemCreateCtrl',
         
         $scope.colors = ['BLACK', 'GRAY', 'WHITE', 'RED', 'GREEN', 'BLUE',
         'YELLOW', 'ORANGE', 'BROWN', 'PURPLE'];
-        $scope.categories = {};
+    
+        $scope.categories;
         
-        $http.get('/pa165/rest/items/').then(function (categories) {
-             $scope.categories = categories.data;
+        $http.get('/pa165/rest/categories/').then(function (response) {
+             $scope.categories = response.data;
              console.log('Loaded categories for item create');
          });
         
@@ -101,17 +102,7 @@ lostAndFoundApp.controller('itemCreateCtrl',
             'height': 0,
             'width': 0,
             'depth': 0
-        };
-        
-        $scope.event = {
-            'item': $scope.item,
-            'finder': '',
-            'placeOfFind': '',
-            'dateOfFind': '',
-            'owner': '',
-            'placeOfLoss': '',
-            'dateOfLoss': ''
-        };
+        };    
         
         // function called when submit button is clicked, creates item on server
         $scope.create = function (item) {
@@ -120,20 +111,29 @@ lostAndFoundApp.controller('itemCreateCtrl',
                 url: '/pa165/rest/items/create',
                 data: item
             }).then(function success(response) {
-                var createdItem = response.data;
-                //display confirmation alert
-               $rootScope.successAlert = 'A new item "' + createdItem.name + '" was created';
+                var createdItem = response.data;          
+               
+               $scope.event = {
+                   'item': item,
+                   'finder': '',
+                   'placeOfFind': '',
+                   'dateOfFind': '',
+                   'owner': '',
+                   'placeOfLoss': '',
+                   'dateOfLoss': ''
+               };
                
                $scope.createevent = function (event) {
                    $http({
                        method: 'POST',
-                       url: '/pa165/rest/items/create',
-                       data: item
-                   }).then(function success(response) {
-                       $rootScope.successAlert = 'Event for new item was created';               
+                       url: '/pa165/rest/events/create',
+                       data: event
                    });
                };
-            
+               
+                //display confirmation alert
+               $rootScope.successAlert = 'A new item "' + createdItem.name + '" was created';
+               
                 //change view to main page
                 $location.path("/");
             }, function error(response) {

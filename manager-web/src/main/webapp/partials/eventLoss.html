@@ -10,7 +10,7 @@
         <label for="place" class="col-sm-2 control-label">Place of loss</label>
         <div class="col-sm-10">
             <input placeholder="place" id="place" type="text" name="place" class="form-control" ng-model="event.placeOfLoss" required/>
-            <p class="help-block" ng-show="form.place.$error.required">Place of loss is required</p>
+            <p class="help-block" ng-minlength="2" ng-show="form.place.$error.required">Place of loss is required</p>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': !(form.date.$valid)}">
