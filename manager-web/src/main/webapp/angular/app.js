@@ -1,7 +1,7 @@
 'use strict';
 
 /* Defines application and its dependencies */
-var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute']);
+var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute', 'chart.js']);
 
 /* Configures URL fragment routing, e.g. #/product/1  */
 lostAndFoundApp.config(function ($routeProvider) {
@@ -28,6 +28,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
             when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).
             when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
+            when('/statistics', {templateUrl: 'partials/statistics.html', controller: 'statisticsCtrl'}).
             otherwise({redirectTo: '/'});
 });
 /*

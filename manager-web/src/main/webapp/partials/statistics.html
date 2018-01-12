@@ -1,0 +1,25 @@
+<div id="blue">
+    <div class="container">
+        <div class="row centered">
+            <h1>Statistics</h1>
+        </div><!-- /row -->
+    </div> <!-- /container -->
+</div><!-- /blue -->
+<div class="container mt">
+    <div class="row">
+        <div class="col-lg-12 centered">
+            <div class="col-lg-3 vcenter">
+                <h3>Items occurrence by:</h3>
+                <select id="eventTypeComboBox" ng-model="type">
+                    <option ng-repeat="x in eventTypes" value="{{x}}" >{{x}}</option>
+                </select>
+                <div class="spacing"></div>
+            </div>
+            <div class="col-lg-9 vcenter">
+                <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
