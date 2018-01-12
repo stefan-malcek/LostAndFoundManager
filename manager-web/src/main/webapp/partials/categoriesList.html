@@ -15,16 +15,17 @@
                     <th>Caterory name</th>
                     <th>Caterory description</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="category in categories track by $index">
                     <td>{{category.name}}</td>
                     <td>{{category.description}}</td>
-                    <td>
-                        <a href="#!/category/{{category.id}}" class="btn btn-info smallRightMargin" >Detail</a>
-                        <a href="#!/category/edit/{{category.id}}" class="btn btn-warning" >Edit</a>
-                    </td>
+                      <th><a href="#!/category/{{category.id}}" class="btn btn-info" >Detail</a></th>
+                      <th><a href="#!/category/edit/{{category.id}}" class="btn btn-warning" >Edit</a></th>
+                      <th><a href="#!/category/delete/{{category.id}}" class="btn btn-danger" >Delete</a></th>
                 </tr>
             </tbody>
         </table>

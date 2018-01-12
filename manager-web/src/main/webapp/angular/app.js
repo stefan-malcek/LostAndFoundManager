@@ -18,6 +18,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/admin/items/:itemId/return', {templateUrl: 'partials/admin_item_return.html', controller: 'itemReturnCtrl'}).
             when('/categories/create', {templateUrl: 'partials/category_new.html', controller: 'newCategoryCtrl'}).
             when('/category/edit/:categoryId', {templateUrl: 'partials/category_edit.html', controller: 'editCategoryCtrl'}).
+            when('/category/delete/:categoryId', {templateUrl: 'partials/categoriesList.html', controller: 'deleteCategoryCtrl'}).
             when('/events', {templateUrl: 'partials/eventList.html', controller: 'eventListCtrl'}).
             when('/events/without_loss', {templateUrl: 'partials/eventListWithoutLoss.html', controller: 'eventListWithoutLossCtrl'}).
             when('/events/without_find', {templateUrl: 'partials/eventListWithoutFind.html', controller: 'eventListWithoutFindCtrl'}).
