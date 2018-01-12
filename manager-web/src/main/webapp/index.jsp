@@ -14,6 +14,8 @@
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/angular.min.js"></script>
         <script src="assets/js/angular-route.min.js"></script>
+        <script src="assets/js/Chart.min.js"></script>
+        <script src="assets/js/angular-chart.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="angular/app.js"></script>
         <script src="angular/lostItemList.js"></script>
@@ -27,6 +29,7 @@
         <script src="angular/eventFind.js"></script>
         <script src="angular/eventLoss.js"></script>
         <script src="angular/user.js"></script>
+        <script src="angular/statistics.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
@@ -48,10 +51,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#!/categories">Categories</a></li>
-                                <li><a href="#!/items">Items</a></li>
+                                <li><a href="#!/admin/items">Items</a></li>
                                 <li><a href="#!/users">Users</a></li>
                             </ul>
                         </li>
+                        <li><a href="#!/statistics">Statistics</a></li>
                         <li><a href="#!/register">Register</a></li>
                         <li><a href="#!/login">Login</a></li>
                     </ul>
