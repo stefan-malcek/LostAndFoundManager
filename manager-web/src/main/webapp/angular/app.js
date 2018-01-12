@@ -9,6 +9,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/', {templateUrl: 'partials/intro.html'}).
             when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
             when('/lostItemList', {templateUrl: 'partials/lostItemList.html', controller: 'lostItemListCtrl'}).
+            when('/items/admin/create', {templateUrl: 'partials/itemCreate.html', controller: 'itemCreateCtrl'}).
             when('/createLostItem', {templateUrl: 'partials/createLostItem.html', controller: 'createLostItemCtrl'}).
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
             when('/admin/items', {templateUrl: 'partials/admin_items.html', controller: 'itemListCtrl'}).
@@ -22,8 +23,8 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/events/without_loss', {templateUrl: 'partials/eventListWithoutLoss.html', controller: 'eventListWithoutLossCtrl'}).
             when('/events/without_find', {templateUrl: 'partials/eventListWithoutFind.html', controller: 'eventListWithoutFindCtrl'}).
             when('/events/:eventId', {templateUrl: 'partials/eventDetail.html', controller: 'eventDetailCtrl'}).
-            when('/events/add_find/:itemId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
-            when('/events/add_loss/:itemId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
+            when('/events/add_find/:eventId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
+            when('/events/add_loss/:eventId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
             when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'}).
             when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
             when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).

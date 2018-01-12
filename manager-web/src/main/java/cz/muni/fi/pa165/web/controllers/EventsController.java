@@ -16,6 +16,7 @@ import cz.muni.fi.pa165.web.StatisticsTypeEnumConverter;
 import cz.muni.fi.pa165.web.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.web.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.web.rest.ApiUris;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -201,13 +203,14 @@ public class EventsController {
     public final List<EventDTO> getEventsWithoutLoss() {
         logger.debug("rest getEventsWithoutLoss()");
         return eventFacade.findEventsWithoutLoss();
-    }
-
-    @RequestMapping(value = "/without_find", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    }    
+    
+    @RequestMapping(value = "/without_find" ,method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<EventDTO> getEventsWithoutFind() {
         logger.debug("rest getEventsWithoutFind()");
         return eventFacade.findEventsWithoutFind();
     }
+
 
     //Usage /statistics?type=loss
     @RequestMapping(value = "/statistics", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -215,4 +218,5 @@ public class EventsController {
         logger.debug("rest getStatistics()");
         return eventFacade.getStatistics(type);
     }
+
 }

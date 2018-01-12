@@ -141,6 +141,7 @@ public interface EventService {
      * @return  list of desired events
      */
     List<Event> findEventsWithoutFind();
+
     
     List<StatisticsDTO> getStatistics(List<String> cities, 
             StatisticsType type);

@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class EventFindDTO {
     @NotNull
     private UserDTO finder;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateOfFind;
     @NotNull
     @Size(min = 2, max = 256)
@@ -75,9 +77,15 @@ public class EventFindDTO {
             return false;
         }
         EventDTO other = (EventDTO) obj;
-        if (placeOfFind != null ? !placeOfFind.equals(other.getPlaceOfFind()) : other.getPlaceOfFind() != null) return false;
-        if (dateOfFind != null ? !dateOfFind.equals(other.getDateOfFind()) : other.getDateOfFind() != null) return false;
-        if (finder != null ? !finder.equals(other.getFinder()) : other.getFinder() != null) return false;
+        if (placeOfFind != null ? !placeOfFind.equals(other.getPlaceOfFind()) : other.getPlaceOfFind() != null) {
+            return false;
+        }
+        if (dateOfFind != null ? !dateOfFind.equals(other.getDateOfFind()) : other.getDateOfFind() != null) {
+            return false;
+        }
+        if (finder != null ? !finder.equals(other.getFinder()) : other.getFinder() != null) {
+            return false;
+        }
         return Objects.equals(this.item, other.getItem());
     }
 

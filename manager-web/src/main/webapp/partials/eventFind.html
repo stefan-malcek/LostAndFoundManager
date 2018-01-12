@@ -9,8 +9,8 @@
     <div class="form-group" ng-class="{'has-error': !(form.place.$valid)}">
         <label for="place" class="col-sm-2 control-label">Place of find</label>
         <div class="col-sm-10">
-            <input placeholder="place" id="place" type="text" name="place" class="form-control" ng-model="event.PlaceOfFind" required/>
-            <p class="help-block" ng-show="form.place.$error.required">Place of find is required</p>
+            <input placeholder="place" id="place" type="text" name="place" class="form-control" ng-model="event.placeOfFind" required/>
+            <p class="help-block" ng-minlength="2" ng-show="form.place.$error.required">Place of find is required</p>
         </div>
     </div>
     <div class="form-group" ng-class="{'has-error': !(form.date.$valid)}">
@@ -22,5 +22,11 @@
     </div>
     
     <!-- show disabled button if form is not valid -->
-    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="addFinding(event)">Report finding</button>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label"></label>
+        <div class="col-sm-4 smallTopPadding">
+            <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="addFinding(event)">Report finding</button>
+       </div>
+            
+    </div>
 </form>

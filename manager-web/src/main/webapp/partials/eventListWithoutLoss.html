@@ -1,7 +1,7 @@
 <div id="blue">
     <div class="container">
         <div class="row">
-            <h3>List of events without reported loss</h3>
+            <h3>List of demanded events</h3>
         </div><!-- /row -->
     </div> <!-- /container -->
 </div><!-- /blue -->
@@ -23,6 +23,8 @@
                     <td>{{event.item.category.name}}</td>
                     <td>{{event.finder.name}}</td>
                     <td><a href="#!/events/{{event.id}}" class="btn btn-info" >View</a></td>
+                    <td><a href="#!/events/add_loss/{{event.id}}" class="btn btn-info" >Report</a></td>
+
                 </tr>
             </tbody>
         </table>
