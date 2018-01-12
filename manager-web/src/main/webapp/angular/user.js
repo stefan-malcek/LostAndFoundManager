@@ -40,7 +40,7 @@ lostAndFoundApp.controller('loginCtrl', function ($scope, $http, $location, $roo
                 if (response.data) {
                     $http.get('/pa165/rest/users/by_email/' + user.email)
                         .then(function (response) {
-                            console.log('by_email response: ' + response.data.id + response.data.email);
+                            //console.log('by_email response: ' + response.data.id + response.data.email);
                             var userId = response.data.id;
                             $http.get('/pa165/rest/users/' + userId + '/is_admin')
                                 .then(function (resp) {
@@ -56,14 +56,12 @@ lostAndFoundApp.controller('loginCtrl', function ($scope, $http, $location, $roo
                         });
                 } else {
                     $scope.errorAlert = 'Wrong email or password';
-                    $location.path("/login");
                 }
             }, function error(response) {
                 //display error
                 $rootScope.errorAlert = 'Error during login';
                 console.log("error during login");
                 console.log(response);
-                $location.path("/login");
             });
     };
 });
@@ -79,6 +77,51 @@ lostAndFoundApp.controller('logoutCtrl', function ($scope, $location, $rootScope
     }
 });
 
+lostAndFoundApp.controller('userUpdatePasswordCtrl', function ($scope, $rootScope, $http, $location) {
+    $scope.user = {
+        'email': $rootScope.currentUser.email,
+        'password': ''
+    };
+    $scope.newPassword = '';
+    $scope.newPasswordRepeat = '';
+
+    $scope.update = function (user, newPassword, newPasswordRepeat) {
+        if (newPassword === newPasswordRepeat) {
+            var params = {'user': user, 'newPassword': newPassword};
+            $http.put('/pa165/rest/users/' + $rootScope.currentUser.id + '/pw', params)
+                .then(function success(response) {
+                    console.log('user password changed');
+                    $rootScope.successAlert = 'Password successfully updated.';
+                    $location.path('/user/' + $rootScope.currentUser.id);
+                }, function error(response) {
+                    console.log('error changing user password');
+                    console.log(response);
+                })
+        } else {
+            $rootScope.errorAlert = 'new passwords are not same';
+        }
+    };
+});
+
+lostAndFoundApp.controller('userUpdateNameCtrl', function ($scope, $rootScope, $http, $location, $routeParams) {
+    var userId = $routeParams.userId;
+    $scope.user = {
+        'id': userId,
+        'name': ''
+    };
+
+    $scope.update = function (user) {
+        $http.put('/pa165/rest/users/' + user.id, user)
+            .then(function success(response) {
+                console.log('user updated');
+                $rootScope.successAlert = 'User successfully updated.';
+                $location.path('/user/' + user.id);
+            }, function error(response) {
+                console.log('error updating user');
+                console.log(response);
+            })
+    };
+});
 
 lostAndFoundApp.controller('registerCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {

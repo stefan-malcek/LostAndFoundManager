@@ -53,7 +53,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#!/categories">Categories</a></li>
                                     <li><a href="#!/events">Events</a></li>
-                                    <li><a href="#!/items">Items</a></li>
+                                    <li><a href="#!/admin/items">Items</a></li>
                                     <li><a href="#!/users">Users</a></li>
                                 </ul>
                             </li>

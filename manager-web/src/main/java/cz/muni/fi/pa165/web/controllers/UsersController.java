@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.web.controllers;
 
 import cz.muni.fi.pa165.dto.UserAuthenticateDTO;
+import cz.muni.fi.pa165.dto.UserChangePwDTO;
 import cz.muni.fi.pa165.dto.UserDTO;
 import cz.muni.fi.pa165.dto.UserUpdateDTO;
 import cz.muni.fi.pa165.facade.UserFacade;
@@ -58,11 +59,10 @@ public class UsersController {
 
     @RequestMapping(value = "/{id}/pw", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final UserDTO changeUserPassword(@PathVariable("id") long id, @RequestBody UserAuthenticateDTO user,
-            @RequestBody String newPassword) throws Exception {
+    public final UserDTO changeUserPassword(@PathVariable("id") long id, @RequestBody UserChangePwDTO changeDto) throws Exception {
         logger.debug("rest changeUserPassword()");
         try {
-            userFacade.changePassword(user, newPassword);
+            userFacade.changePassword(changeDto.getUser(), changeDto.getNewPassword());
             return userFacade.findUserById(id);
         } catch (Exception ex) {
             logger.debug(ex.getMessage());
