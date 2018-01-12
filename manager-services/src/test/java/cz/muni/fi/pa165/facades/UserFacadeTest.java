@@ -82,7 +82,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests  {
     @Test
     public void testAuthenticate() {        
         UserAuthenticateDTO authUser = new UserAuthenticateDTO();
-        authUser.setId(testUser.getId());
+        authUser.setEmail(testUser.getEmail());
         authUser.setPassword("password");
         
         boolean authenticated = userFacade.authenticate(authUser);
@@ -103,7 +103,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests  {
     @Test
     public void testChangePassword() {
         UserAuthenticateDTO authUser = new UserAuthenticateDTO();
-        authUser.setId(testUser.getId());
+        authUser.setEmail(testUser.getEmail());
         authUser.setPassword("password");
         
         userFacade.changePassword(authUser, "12345");

@@ -19,9 +19,15 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/categories/create', {templateUrl: 'partials/category_new.html', controller: 'newCategoryCtrl'}).
             when('/category/edit/:categoryId', {templateUrl: 'partials/category_edit.html', controller: 'editCategoryCtrl'}).
             when('/events', {templateUrl: 'partials/eventList.html', controller: 'eventListCtrl'}).
+            when('/events/without_loss', {templateUrl: 'partials/eventListWithoutLoss.html', controller: 'eventListWithoutLossCtrl'}).
+            when('/events/without_find', {templateUrl: 'partials/eventListWithoutFind.html', controller: 'eventListWithoutFindCtrl'}).
             when('/events/:eventId', {templateUrl: 'partials/eventDetail.html', controller: 'eventDetailCtrl'}).
             when('/events/add_find/:itemId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
             when('/events/add_loss/:itemId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
+            when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'}).
+            when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
+            when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).
+            when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
             otherwise({redirectTo: '/'});
 });
 /*

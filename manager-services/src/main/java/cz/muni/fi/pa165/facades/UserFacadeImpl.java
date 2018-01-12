@@ -80,10 +80,11 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public void register(UserDTO user, String password) {
+    public Long register(UserDTO user, String password) {
         try {
             User mappedUser = mappingService.mapTo(user, User.class);      
             userService.register(mappedUser, password);
+            return user.getId();
         } catch (Exception e) {
             throw new LostAndFoundManagerDataAccessException("Cannot register user",e);
         } 
@@ -92,7 +93,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public boolean authenticate(UserAuthenticateDTO user) {
         try {
-            User retrievedUser = userService.findUserById(user.getId());
+            User retrievedUser = userService.findUserByEmail(user.getEmail());
             return userService.authenticate(retrievedUser, user.getPassword());
         } catch (Exception e) {
             throw new LostAndFoundManagerDataAccessException("Cannot authenticate user",e);
@@ -112,7 +113,7 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public void changePassword(UserAuthenticateDTO user, String newPassword) {
         try {
-            User retrievedUser = userService.findUserById(user.getId());
+            User retrievedUser = userService.findUserByEmail(user.getEmail());
             userService.changePassword(retrievedUser, user.getPassword(), newPassword);
         } catch (Exception e) {
             throw new LostAndFoundManagerDataAccessException("Cannot change password",e);

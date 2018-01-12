@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.services;
 
+import cz.muni.fi.pa165.dto.StatisticsDTO;
 import cz.muni.fi.pa165.entities.Event;
 import cz.muni.fi.pa165.entities.Item;
 import cz.muni.fi.pa165.entities.User;
+import cz.muni.fi.pa165.enums.StatisticsType;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -125,4 +127,21 @@ public interface EventService {
      * @return  list of desired events
      */
     List<Event> findEventsByDateOfLoss(Date date);
+    
+    /**
+     * Finds events without report about loss.
+     *
+     * @return  list of desired events
+     */
+    List<Event> findEventsWithoutLoss();
+    
+     /**
+     * Finds events without report about find.
+     *
+     * @return  list of desired events
+     */
+    List<Event> findEventsWithoutFind();
+    
+    List<StatisticsDTO> getStatistics(List<String> cities, 
+            StatisticsType type);
 }

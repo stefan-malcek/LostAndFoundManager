@@ -46,6 +46,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Category jewelry = category("Jewelry", "Rings, necklaces...all shiny stuff.");
         Category clothes = category("Clothes", "Hats, jackets...anything you wear.");
         Category cars = category("Cars", "Yep, cars.");
+        Category animals = category("Animals", "Alive or dead.");
         Category others = category("Others", "Everything else ...");
         log.info("Loaded L&F categories.");
 
@@ -62,14 +63,21 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Item batmobile = item("Bat mobile", cars, ItemColor.BLACK, "ehm ... ordinary black car cough", BigDecimal.valueOf(2500), 150, 250, 300, "batmobile.jpg", null);
         Item hand = item("Hand", others, ItemColor.WHITE, "missing hand", BigDecimal.valueOf(1), 200, 50, 30, "hand.jpg", null);
         Item sword = item("Longclaw", jewelry, ItemColor.GRAY, "Valyrian steel sword...please, return fast, White Walkers are coming!", BigDecimal.valueOf(3.5), 125, 15, 4, null, daysBeforeNow(0));
+        Item unicorn = item("Unicorn", jewelry, ItemColor.WHITE, "Fabulous unicorn.", BigDecimal.valueOf(0.05), 5, 4, 3, null, null);
+        Item snake = item("Snake", animals, ItemColor.BLACK, "2 meters long anaconda", BigDecimal.valueOf(5), 15, 200, 15, null, null);
+        Item skoda = item("Skoda 120", cars, ItemColor.BROWN, "Classic car", BigDecimal.valueOf(800), 200, 500, 300, null, null);
+
         log.info("Loaded L&F items.");
 
-        Event ev0 = event(laptop, null, null, null, barry, daysBeforeNow(4), "Botanicka");
-        Event ev1 = event(phone, walt, daysBeforeNow(3), "Klusackova", null, null, null);
-        Event ev2 = event(hat, walt, daysBeforeNow(3), "Kounicova", null, null, null);
-        Event ev3 = event(sword, jon, daysBeforeNow(6), "Klacelova", barry, daysBeforeNow(0), "Cejl");
-        Event ev4 = event(hand, deadpool, daysBeforeNow(0), "Botanicka", null, null, null);
-        Event ev5 = event(batmobile, deadpool, daysBeforeNow(2), "Cejl", walt, daysBeforeNow(1), "Cejl");
+        Event ev0 = event(laptop, null, null, null, barry, daysBeforeNow(4), "Botanicka 38, Brno");
+        Event ev1 = event(phone, walt, daysBeforeNow(3), "Klusackova 21, Brno", null, null, null);
+        Event ev2 = event(hat, walt, daysBeforeNow(3), "Kounicova 10, Teplice", null, null, null);
+        Event ev3 = event(sword, jon, daysBeforeNow(6), "Klacelova 51, Karlove Vary", barry, daysBeforeNow(0), "Cejl 10, Praha");
+        Event ev4 = event(hand, deadpool, daysBeforeNow(0), "Botanicka 68, Brno", null, null, null);
+        Event ev5 = event(batmobile, deadpool, daysBeforeNow(2), "Cejl 1, Praha", walt, daysBeforeNow(1), "Cejl 2, Praha");
+        Event ev6 = event(unicorn, jon, daysBeforeNow(10), "Novakova 1, Nymburk", null, null, null);
+        Event ev7 = event(snake, deadpool, daysBeforeNow(7), "Křídlovecká 21, Holešov", null, null, null);
+        Event ev8 = event(skoda, walt, daysBeforeNow(100), "Štefánikova 97, Karviná", null, null, null);
         log.info("Loaded L&F events.");
     }
 

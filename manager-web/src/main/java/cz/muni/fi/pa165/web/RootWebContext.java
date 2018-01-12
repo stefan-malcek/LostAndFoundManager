@@ -13,6 +13,8 @@ import cz.muni.fi.pa165.sampledata.ManagerWithSampleDataConfiguration;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -29,14 +31,14 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AllowOriginInterceptor()); 
+        registry.addInterceptor(new AllowOriginInterceptor());
     }
-    
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-    
+
     @Bean
     @Primary
     public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
@@ -45,12 +47,8 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
-        
-        //objectMapper.addMixIn(ProductDTO.class, ProductDTOMixin.class);
-        //objectMapper.addMixIn(UserDTO.class,    UserDTOMixin.class);
-        
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
-   
+
         jsonConverter.setObjectMapper(objectMapper);
         return jsonConverter;
     }
@@ -59,4 +57,13 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(customJackson2HttpMessageConverter());
     }
+
+    @Bean
+    public CustomEditorConfigurer customEditorConfigurer() {
+        CustomEditorConfigurer conf = new CustomEditorConfigurer();
+        PropertyEditorRegistrar[] registrars = new PropertyEditorRegistrar[1];
+        registrars[0] = new ConverterBeanRegistrar();
+        conf.setPropertyEditorRegistrars(registrars);
+        return conf;
     }
+}

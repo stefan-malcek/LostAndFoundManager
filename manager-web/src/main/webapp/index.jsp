@@ -26,6 +26,7 @@
         <script src="angular/eventDetail.js"></script>
         <script src="angular/eventFind.js"></script>
         <script src="angular/eventLoss.js"></script>
+        <script src="angular/user.js"></script>
     </head>
     <body style>
         <!-- navigation bar -->
@@ -42,15 +43,17 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse navbar-right">
                     <ul class="nav navbar-nav" role="navigation">
+                        <li><a href="#!/events">Events</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#!/categories">Categories</a></li> link to list of categories
-                                <li><a href="#!/admin/items">Items</a></li>
-                                <li><a href="#!/events">Events</a></li>
+                                <li><a href="#!/categories">Categories</a></li>
+                                <li><a href="#!/items">Items</a></li>
+                                <li><a href="#!/users">Users</a></li>
                             </ul>
                         </li>
-                        <li><a href="#!">Profile</a></li>link to change user details
+                        <li><a href="#!/register">Register</a></li>
+                        <li><a href="#!/login">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,6 +74,7 @@
                     <span>{{successAlert}}</span>
                 </div>
             </div>
+
             <!-- the place where HTML templates are replaced by AngularJS routing -->
             <div ng-view></div>
         </div>
