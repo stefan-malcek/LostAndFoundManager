@@ -241,6 +241,7 @@ public class EventFacadeImpl implements EventFacade {
         }
     }
 
+
     @Override
     public List<StatisticsDTO> getStatistics(StatisticsType type) {
         try {

@@ -1,28 +1,41 @@
 lostAndFoundApp.controller('eventFindCtrl',
-    function ($scope, $routeParams, $http, $location, $rootScope) {  
-        var itemId = $routeParams.itemId;
-        var retrievedItem;
-        $http.get('/pa165/rest/items/' + itemId).then(function (response) { 
-            retrievedItem = response.data;
+    function ($scope, $routeParams, $http, $location, $rootScope) {         
+        
+        var eventId = $routeParams.eventId;
+        
+        var retrievedEvent;
+        $http.get('/pa165/rest/events/' + eventId).then(function (response) { 
+            retrievedEvent = response.data;
+            console.log(retrievedEvent);            
         });
         
-        var retrievedFinder = {id:2, name:"jonSnow", email:"youknow@nothing.ws"};
-        // Get finder   
-                
+         var user;
+         $http.get('/pa165/rest/users/' + 2).then(function (response) {
+             user = response.data;
+         });
+           
+        
         $scope.event = {
-            'item': '',
-            'finder': '',
-            'placeOfFind': '',
-            'dateOfFind': ''
-        };               
-        $scope.addFinding = function (event) {            
-            event.item = retrievedItem;            
-            event.finder = retrievedFinder;       
+            placeOfFind: "Brno",
+            dateOfFind: new Date(2018, 01, 10, 5, 6, 1, 1)
+        };
+        
+        $scope.addFinding = function (event) {
+            var eventData = {
+                id: retrievedEvent.id,
+                item: retrievedEvent.item,
+                owner: user,
+                placeOfFind: event.placeOfFind,
+                dateOfFind: toJSONLocal(event.dateOfFind)
+            };
+            
+            console.log("hello");
+            console.log(eventData);     
             
             $http({
                 method: 'POST',
                 url: '/pa165/rest/events/add_finding',
-                data: event
+                data: eventData
             }).then(function success(response) {            
                 $rootScope.successAlert = 'Finding was reported';                
                 $location.path("/events");
@@ -39,4 +52,10 @@ lostAndFoundApp.controller('eventFindCtrl',
                 }
             });
         };
+        
+        function toJSONLocal(date) {
+            var local = new Date(date);
+            local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+            return local.toJSON().slice(0, 10);
+        }
 });
