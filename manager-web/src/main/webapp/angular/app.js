@@ -28,6 +28,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/events/add_loss/:eventId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
             when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'}).
             when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
+            when('/logout', {templateUrl: 'partials/logout.html', controller: 'logoutCtrl'}).
             when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).
             when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
             when('/statistics', {templateUrl: 'partials/statistics.html', controller: 'statisticsCtrl'}).
@@ -39,7 +40,17 @@ lostAndFoundApp.config(function ($routeProvider) {
  */
 lostAndFoundApp.run(function ($rootScope) {
     $rootScope.currentUser = {
-        id: 0
+        id: undefined,
+        email: undefined,
+        isAdmin: false
+    };
+
+    $rootScope.isAuthenticated = function () {
+        return $rootScope.currentUser.id !== undefined;
+    };
+
+    $rootScope.isAdmin = function () {
+        return $rootScope.isAuthenticated() && $rootScope.currentUser.isAdmin;
     };
 
     $rootScope.hideSuccessAlert = function () {
