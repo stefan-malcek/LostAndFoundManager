@@ -126,22 +126,15 @@ lostAndFoundApp.controller('newCategoryCtrl',
             }).then(function success(response) {
                 var createdCategory = response.data;
                $rootScope.successAlert = 'A category was deleted';
-                $location.path("/categories");
+                   $location.path("/categories");
+     
             }, function error(response) {
                 //display error
                 console.log("error when creating category");
                 console.log(response);
-                switch (response.data.code) {
-                    case 'PersistenceException':
-                        $rootScope.errorAlert = 'Category with the same name already exists ! ';
-                        break;
-                    case 'InvalidRequestException':
-                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
-                        break;
-                    default:
-                        $rootScope.errorAlert = 'Cannot create category ! Reason given by the server: '+response.data.message;
-                        break;
-                }
+                $rootScope.errorAlert = 'Category wasnt deleted because it contains items! ';
+                    $location.path("/categories");
             });
+        
        
          });
