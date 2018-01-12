@@ -115,3 +115,26 @@ lostAndFoundApp.controller('newCategoryCtrl',
             });
         };
     });
+    
+     lostAndFoundApp.controller('deleteCategoryCtrl', function ($scope, $routeParams, $http, $location, $rootScope) {
+         debugger;
+        // function called when submit button is clicked, creates category on server
+ 
+            $http({
+                method: 'DELETE',
+                url: '/pa165/rest/categories/' + $routeParams.categoryId,
+            }).then(function success(response) {
+                var createdCategory = response.data;
+               $rootScope.successAlert = 'A category was deleted';
+                   $location.path("/categories");
+     
+            }, function error(response) {
+                //display error
+                console.log("error when creating category");
+                console.log(response);
+                $rootScope.errorAlert = 'Category wasnt deleted because it contains items! ';
+                    $location.path("/categories");
+            });
+        
+       
+         });
