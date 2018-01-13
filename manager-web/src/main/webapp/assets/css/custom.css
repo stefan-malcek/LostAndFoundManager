@@ -31,17 +31,19 @@ body {
 table tr td:last-child {
     text-align: right;
 }
+.alertBack {
+    background-color: #00b3fe;
+    width: 100%;
+}
 
 .row {
     margin-right: 0px;
     margin-left: 0px;
 }
 .alert {
-    position: absolute;
-    top: 190px;
-    left: 10%;
-    width: 80%; 
+    margin-top: 20px;
 }
+
 .smallTopPadding {
     margin-top: 20px;
 }
@@ -53,4 +55,15 @@ table tr td:last-child {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.smallTopPaddingDiv 
+{
+    padding-top: 8px;
+}
+#eventTypeComboBox {
+    display: inline;
 }

@@ -86,10 +86,15 @@ a:focus {
 	BOOTSTRAP MODIFICATIONS & TWEAKS
 ################################################################# */
 .navbar {
-	min-height: 70px;
-	padding-top: 10px;
-	margin-bottom: 0px;
+    height: 50px;
+    top: 0px;
+    width: 100%;
+    position: relative;
+    float: left;
+    margin-bottom:0px !important;
 }
+
+
 
 .navbar-brand {
 	font-family: 'Raleway', sans-serif;
@@ -180,21 +185,27 @@ a:focus {
 }
 
 .mtb {
-	margin-top: 80px;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+
+.mb {
 	margin-bottom: 80px;
 }
 
-.mb {
-	margin-bottom: 60px;
-}
-
 .mt {
-	margin-top: 60px;
+	margin-top: 20px;
 }
 
 .hline {
 	border-bottom: 2px solid #384452;
 }
+.view {
+    float: left;
+    width: 100%;
+}
+
 
 .hline-w {
 	border-bottom: 2px solid #ffffff;
@@ -205,12 +216,12 @@ a:focus {
 ################################################################# */
 
 #headerwrap {
-	background-color: #00b3fe;
-	min-height: 550px;
-	padding-top: 100px;
-	padding-bottom: 0px;
-	text-align: center;
+    background-color: #00b3fe;
+    min-height: 450px;
+    padding-bottom: 0px;
+    text-align: center;
 }
+
 
 #headerwrap h3, h5 {
 	color: white;
@@ -362,8 +373,6 @@ a:focus {
 
 #blue {
 	background: #00b3fe;
-	margin-top: 60px;
-	margin-bottom: 80px;
 	padding-top: 25px;
 	padding-bottom: 25px;
 }

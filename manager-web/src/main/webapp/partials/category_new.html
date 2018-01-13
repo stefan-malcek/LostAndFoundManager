@@ -3,11 +3,11 @@
         <div class="row">
             <h3>Create category</h3> 
         </div>
-
     </div>
 </div>
-
-<form name="form"  novalidate class="form-horizontal">
+<div class="container mtb ng-scope">
+    <div class="row">
+        <form name="form"  novalidate class="form-horizontal">
     <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
         <label for="name" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-4">
@@ -28,8 +28,8 @@
         <label  class="col-sm-2 control-label"></label>
         <div class="col-sm-4 smallTopPadding">
             <button ng-disabled="!form.$valid" ng-click="create(category)" class="btn btn-primary" type="submit" >Create category</button>
-        </div>
-            
+        </div>          
     </div>
-
-</form>
+    </form>      
+</div>    
+</div>

@@ -71,10 +71,10 @@
                         </ul>
                     </div>
                 </div>
+                            <!-- Bootstrap-styled alerts, visible when $rootScope.xxxAlert is defined -->
             </nav>
-
-            <!-- Bootstrap-styled alerts, visible when $rootScope.xxxAlert is defined -->
-            <div class="container centered">
+            <div class="clearfix"></div>
+            <div class="container centered alertBack">
                 <div ng-show="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" aria-label="Close" ng-click="hideWarningAlert()"> <span aria-hidden="true">&times;</span></button>
                     <span>{{warningAlert}}</span>
@@ -88,14 +88,14 @@
                     <span>{{successAlert}}</span>
                 </div>
             </div>
-
+<div class="clearfix"></div>
             <!-- the place where HTML templates are replaced by AngularJS routing -->
-            <div ng-view></div>
+            <div ng-view class="view"></div>
         </div>
-    </body>
-    <div id="footerwrap">
+        <div id="footerwrap">
         <div class="container">
             <p>&copy;&nbsp;Masaryk University</p>
         </div>
     </div>
+    </body>
 </html>
