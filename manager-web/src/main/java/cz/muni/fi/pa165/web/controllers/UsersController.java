@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.web.controllers;
 
-import cz.muni.fi.pa165.dto.UserAuthenticateDTO;
-import cz.muni.fi.pa165.dto.UserChangePwDTO;
-import cz.muni.fi.pa165.dto.UserDTO;
-import cz.muni.fi.pa165.dto.UserUpdateDTO;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.facade.UserFacade;
 import cz.muni.fi.pa165.web.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.web.exceptions.ResourceAlreadyExistingException;
@@ -33,10 +30,10 @@ public class UsersController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final UserDTO registerUser(@RequestBody UserDTO user, @RequestBody String password) throws Exception {
+    public final UserDTO registerUser(@RequestBody UserRegisterDTO registerDTO) throws Exception {
         logger.debug("rest registerUser()");
         try {
-            Long id = userFacade.register(user, password);
+            Long id = userFacade.register(registerDTO.getUser(), registerDTO.getPassword());
             return userFacade.findUserById(id);
         } catch (Exception ex) {
             logger.debug(ex.getMessage());

@@ -1,7 +1,8 @@
 /**
  * @author Adam Bananka
  */
-lostAndFoundApp.controller('usersListCtrl', function ($scope, $http) {
+lostAndFoundApp.controller('usersListCtrl', function ($scope, $http, $rootScope) {
+    $rootScope.hideSuccessAlert();
     $http.get('/pa165/rest/users/').then(function (response) {
         var users = response.data;
         console.log('AJAX loaded all users');
@@ -26,6 +27,7 @@ lostAndFoundApp.controller('userDetailCtrl', function ($scope, $routeParams, $ht
 
 
 lostAndFoundApp.controller('loginCtrl', function ($scope, $http, $location, $rootScope) {
+    $rootScope.hideSuccessAlert();
     //console.log('id ' + $rootScope.currentUser.id + ' mail ' + $rootScope.currentUser.email +' admin ' +  $rootScope.currentUser.isAdmin);
     $scope.user = {
         'email': '',
@@ -125,38 +127,28 @@ lostAndFoundApp.controller('userUpdateNameCtrl', function ($scope, $rootScope, $
 
 lostAndFoundApp.controller('registerCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
-        //set object bound to form fields
         $scope.user = {
             'name': '',
             'email': '',
             'userRole': 'MEMBER'
         };
         $scope.password = '';
-        $scope.register = function (user, password) {
-            var params = {'user': user, 'password': password};
-            $http({
-                method: 'POST',
-                url: '/pa165/rest/users/register',
-                params: params
-            }).then(function success(response) {
-                console.log('registered');
-                var createdProduct = response.data;
-                //display confirmation alert
-                $rootScope.successAlert = 'A new product "' + createdProduct.name + '" was created';
-                //change view to list of products
-                $location.path("/");
-            }, function error(response) {
-                //display error
-                console.log("error when registering");
-                console.log(response);
-                switch (response.data.code) {
-                    case 'InvalidRequestException':
-                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
-                        break;
-                    default:
-                        $rootScope.errorAlert = 'Cannot create product ! Reason given by the server: ' + response.data.message;
-                        break;
-                }
-            });
+        $scope.passwordRepeat = '';
+
+        $scope.register = function (user, password, passwordRepeat) {
+            if (password === passwordRepeat) {
+                var params = {'user': user, 'password': password};
+                $http.post('/pa165/rest/users/register', params)
+                    .then(function success(response) {
+                        console.log('registered' + user.email);
+                        $rootScope.successAlert = 'Successfully registered! Now you can log in.';
+                        $location.path("/");
+                    }, function error(response) {
+                        console.log("error when registering");
+                        console.log(response);
+                    });
+            } else {
+
+            }
         };
     });
