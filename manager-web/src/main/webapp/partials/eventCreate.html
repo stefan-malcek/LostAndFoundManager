@@ -1,0 +1,56 @@
+<div id="blue">
+    <div class="container">
+        <div class="row">
+            <h3 ng-if="lost === false" >Report finding of item -  {{item.name}}</h3> 
+            <h3 ng-if="lost === true" >Report loss of item - {{item.name}}</h3> 
+        </div>
+    </div>
+</div>
+<div class="container mtb ng-scope">
+    <div class="row">
+        <form name="form"  novalidate class="form-horizontal">
+            <div ng-if="lost=== true" >
+                <div class="form-group" ng-class="{'has-error': !(form.place.$valid)}">
+                    <label for="placeOfLoss" class="col-sm-2 control-label">Place of loss</label>
+                    <div class="col-sm-4">
+                        <input placeholder="placeOfLoss" id="placeOfLoss" type="text" name="placeOfLoss" class="form-control" ng-model="eventCreate.placeOfLoss" required/>
+                        <p class="help-block" ng-minlength="2" ng-show="form.place.$error.required">Place of loss is required</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': !(form.date.$valid)}">
+                    <label for="dateOfLoss" class="col-sm-2 control-label">Date of loss</label>
+                    <div class="col-sm-4">
+                        <input placeholder="dateOfLoss" id="dateOfLoss" type="date" name="dateOfLoss" class="form-control" ng-model="eventCreate.dateOfLoss" required/>
+                        <p class="help-block" ng-show="form.date.$error.required">Date of loss is required</p>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="lost === false" >
+                <div class="form-group" ng-class="{'has-error': !(form.place.$valid)}">
+                    <label for="placeOfFind" class="col-sm-2 control-label">Place of find</label>
+                    <div class="col-sm-4">
+                        <input placeholder="placeOfFind" id="placeOfFind" type="text" name="placeOfFind" class="form-control" ng-model="eventCreate.placeOfFind" required/>
+                        <p class="help-block" ng-minlength="2" ng-show="form.place.$error.required">Place of find is required</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': !(form.date.$valid)}">
+                    <label for="dateOfFind" class="col-sm-2 control-label">Date of find</label>
+                    <div class="col-sm-4">            
+                        <input placeholder="dateOfFind" id="dateOfFind" type="date" name="dateOfFind" class="form-control" ng-model="eventCreate.dateOfFind" required/>
+                        <p class="help-block" ng-show="form.date.$error.required">Date of find is required</p>
+                    </div>
+                </div>
+            </div>
+            <!-- show disabled button if form is not valid -->
+            <div class="form-group">
+                <label  class="col-sm-2 control-label"></label>
+                <div class="col-sm-4 smallTopPadding" ng-if="lost === true">
+                    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="create(eventCreate,lost)">Report loosing</button>
+                </div>
+                 <div class="col-sm-4 smallTopPadding" ng-if="lost === false">
+                    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="create(eventCreate,lost)">Report finding</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -6,4 +6,3 @@ lostAndFoundApp.controller('eventDetailCtrl', function ($scope, $http, $routePar
         console.log('AJAX loaded detail of event ');
     });
 });
- 

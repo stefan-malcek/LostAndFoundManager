@@ -112,6 +112,17 @@ public class ItemsController {
             throw new InvalidParameterException();
         }
     }
+    
+   @RequestMapping(value = "haveEvent/{id}/", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public final boolean haveEvent(@PathVariable("id") long id) throws Exception {
+        logger.debug("rest haveEvent()");
+        try {
+            return false;
+        } catch (Exception ex) {
+            logger.debug(ex.getMessage());
+            throw new InvalidParameterException();
+        }
+    }
 
     @RequestMapping(value = "/{id}/return", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final void returnItem(@PathVariable("id") long id) throws Exception {

@@ -23,6 +23,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/events', {templateUrl: 'partials/eventList.html', controller: 'eventListCtrl'}).
             when('/events/without_loss', {templateUrl: 'partials/eventListWithoutLoss.html', controller: 'eventListWithoutLossCtrl'}).
             when('/events/without_find', {templateUrl: 'partials/eventListWithoutFind.html', controller: 'eventListWithoutFindCtrl'}).
+            when('/events/create/:itemId/:lost', {templateUrl: 'partials/eventCreate.html', controller: 'eventCreateCtrl'}).
             when('/events/:eventId', {templateUrl: 'partials/eventDetail.html', controller: 'eventDetailCtrl'}).
             when('/events/add_find/:eventId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
             when('/events/add_loss/:eventId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).

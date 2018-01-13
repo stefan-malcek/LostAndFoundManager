@@ -51,8 +51,7 @@ public class EventsController {
         dataBinder.registerCustomEditor(StatisticsType.class, new StatisticsTypeEnumConverter());
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final EventDTO createEvent(@RequestBody EventCreateDTO eventCreate) throws Exception {
         logger.debug("rest createEvent()");
         try {
