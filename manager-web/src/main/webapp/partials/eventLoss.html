@@ -4,29 +4,32 @@
         </div><!-- /row -->
     </div> <!-- /container -->
 </div><!-- /blue -->
+<div class="container mtb ng-scope">
+    <div class="row">
+        <form name="form"  novalidate class="form-horizontal">   
+            <div class="form-group" ng-class="{'has-error': !(form.place.$valid)}">
+                <label for="place" class="col-sm-2 control-label">Place of loss</label>
+                <div class="col-sm-4">
+                    <input placeholder="place" id="place" type="text" name="place" class="form-control" ng-model="event.placeOfLoss" required/>
+                    <p class="help-block" ng-minlength="2" ng-show="form.place.$error.required">Place of loss is required</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': !(form.date.$valid)}">
+                <label for="date" class="col-sm-2 control-label">Date of loss</label>
+                <div class="col-sm-4">
+                    <input placeholder="date" id="date" type="date" name="date" class="form-control" ng-model="event.dateOfLoss" required/>
+                    <p class="help-block" ng-show="form.date.$error.required">Date of loss is required</p>
+                </div>
+            </div>
 
-<form name="form"  novalidate class="form-horizontal">   
-    <div class="form-group" ng-class="{'has-error': !(form.place.$valid)}">
-        <label for="place" class="col-sm-2 control-label">Place of loss</label>
-        <div class="col-sm-10">
-            <input placeholder="place" id="place" type="text" name="place" class="form-control" ng-model="event.placeOfLoss" required/>
-            <p class="help-block" ng-minlength="2" ng-show="form.place.$error.required">Place of loss is required</p>
-        </div>
+            <!-- show disabled button if form is not valid -->
+            <div class="form-group">
+                <label  class="col-sm-2 control-label"></label>
+                <div class="col-sm-4 smallTopPadding">
+                    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="addLoosing(event)">Report loosing</button>
+                </div>
+
+            </div>
+        </form>
     </div>
-    <div class="form-group" ng-class="{'has-error': !(form.date.$valid)}">
-        <label for="date" class="col-sm-2 control-label">Date of loss</label>
-        <div class="col-sm-10">
-            <input placeholder="date" id="date" type="date" name="date" class="form-control" ng-model="event.dateOfLoss" required/>
-            <p class="help-block" ng-show="form.date.$error.required">Date of loss is required</p>
-        </div>
-    </div>
-    
-    <!-- show disabled button if form is not valid -->
-    <div class="form-group">
-        <label  class="col-sm-2 control-label"></label>
-        <div class="col-sm-4 smallTopPadding">
-            <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="addLoosing(event)">Report loosing</button>
-        </div>
-            
-    </div>
-</form>
+</div>
