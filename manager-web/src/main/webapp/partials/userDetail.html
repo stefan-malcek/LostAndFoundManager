@@ -11,8 +11,18 @@
         <div class="col-lg-10 col-lg-offset-1 centered">
             <div class="col-lg-5 col-lg-offset-1">
                 <div class="thumbnail">
-                    <p><b>Name:</b> {{user.name}}</p>
+                    <p><b>UserName:</b> {{user.name}}</p>
                     <p><b>E-mail:</b> {{user.email}}</p>
+                </div>
+            </div>
+            <div ng-if="currentUser.id === user.id" class="col-lg-2 col-lg-offset-1">
+                <div class="row">
+                    <p>
+                        <a href="#!/user/{{user.id}}/update" class="btn btn-info smallRightMargin" >Update name</a>
+                    </p>
+                    <p>
+                        <a href="#!/user/{{user.id}}/password" class="btn btn-info smallRightMargin" >Change password</a>
+                    </p>
                 </div>
             </div>
         </div>

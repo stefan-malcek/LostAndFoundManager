@@ -26,17 +26,35 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/events/:eventId', {templateUrl: 'partials/eventDetail.html', controller: 'eventDetailCtrl'}).
             when('/events/add_find/:eventId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
             when('/events/add_loss/:eventId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
-            when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'}).
-            when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
+            when('/register', {templateUrl: 'partials/userRegister.html', controller: 'registerCtrl'}).
+            when('/login', {templateUrl: 'partials/userLogin.html', controller: 'loginCtrl'}).
+            when('/logout', {templateUrl: 'partials/userLogout.html', controller: 'logoutCtrl'}).
             when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).
             when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
+            when('/user/:userId/update', {templateUrl: 'partials/userUpdateName.html', controller: 'userUpdateNameCtrl'}).
+            when('/user/:userId/password', {templateUrl: 'partials/userUpdatePassword.html', controller: 'userUpdatePasswordCtrl'}).
             when('/statistics', {templateUrl: 'partials/statistics.html', controller: 'statisticsCtrl'}).
             otherwise({redirectTo: '/'});
 });
+
 /*
  * alert closing functions defined in root scope to be available in every template
  */
 lostAndFoundApp.run(function ($rootScope) {
+    $rootScope.currentUser = {
+        id: undefined,
+        email: undefined,
+        isAdmin: false
+    };
+
+    $rootScope.isAuthenticated = function () {
+        return $rootScope.currentUser.id !== undefined;
+    };
+
+    $rootScope.isAdmin = function () {
+        return $rootScope.isAuthenticated() && $rootScope.currentUser.isAdmin;
+    };
+
     $rootScope.hideSuccessAlert = function () {
         $rootScope.successAlert = undefined;
     };
