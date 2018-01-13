@@ -51,13 +51,13 @@ public class EventsController {
         dataBinder.registerCustomEditor(StatisticsType.class, new StatisticsTypeEnumConverter());
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public final EventDTO createEvent(@RequestBody EventCreateDTO eventCreate) throws Exception {
         logger.debug("rest createEvent()");
         try {
             Long id = eventFacade.createEvent(eventCreate);
-            return eventFacade.findEventById(id);
+            EventDTO event = eventFacade.findEventById(id);
+            return event;
         } catch (Exception ex) {
             logger.debug(ex.getMessage());
             throw new ResourceAlreadyExistingException();

@@ -94,7 +94,7 @@ lostAndFoundApp.controller('newCategoryCtrl',
             }).then(function success(response) {
                 var createdCategory = response.data;
                 //display confirmation alert
-               $rootScope.successAlert = 'A categpry "' + createdCategory.name + '" was updated';
+               $rootScope.successAlert = 'A category "' + createdCategory.name + '" was updated';
                 //change view to list of products
                 $location.path("/categories");
             }, function error(response) {

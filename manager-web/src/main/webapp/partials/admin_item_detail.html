@@ -27,11 +27,17 @@
                 <p><b>Height:</b> {{item.height}}cm</p>
                 <p><b>Width:</b> {{item.width}}cm</p>
                 <p><b>Depth:</b> {{item.depth}}cm</p>
-                <p ng-if="item.returned !== null"><b>Returned:</b> {{date | date:'mediumDate'}}</p>
-                <p ng-if="item.returned === null">
-                    <br/>
-                    <a href="#!/admin/items/{{item.id}}/return" class="btn btn-info" ng-click="resetAlers()">Return</a>
-                </p>
+                <div ng-if="haveEvent === true">
+                    <p ng-if="item.returned !== null"><b>Returned:</b> {{date| date:'mediumDate'}}</p>
+                    <p ng-if="item.returned === null">
+                        <br/>
+                        <a href="#!/admin/items/{{item.id}}/return" class="btn btn-info" ng-click="resetAlers()">Return</a>
+                    </p>
+                </div>
+                <div ng-if="haveEvent === false">
+                   <a href="#!/events/create/{{item.id}}/{{true}}" class="btn btn-danger" ng-click="resetAlers()">Report item lost</a>
+                   <a href="#!/events/create/{{item.id}}/{{false}}" class="btn btn-success" ng-click="resetAlers()">Report item found</a>
+                </div>
             </div>
         </div>
     </div> 

@@ -21,6 +21,10 @@ lostAndFoundApp.controller('itemDetailCtrl', function ($scope, $rootScope, $http
         $scope.date = new Date(item.returned);
         console.log(item);
     });
+    $http.get('/pa165/rest/items/haveEvent/' + itemId+ '/').then(function (response) {
+        $scope.haveEvent = response.data;
+        console.log($scope.haveEvent);
+    });
 
     $scope.resetAlers = function () {
         $rootScope.successAlert = undefined;
@@ -113,29 +117,11 @@ lostAndFoundApp.controller('itemCreateCtrl',
             }).then(function success(response) {
                 var createdItem = response.data;          
                
-               $scope.event = {
-                   'item': item,
-                   'finder': '',
-                   'placeOfFind': '',
-                   'dateOfFind': '',
-                   'owner': '',
-                   'placeOfLoss': '',
-                   'dateOfLoss': ''
-               };
-               
-               $scope.createevent = function (event) {
-                   $http({
-                       method: 'POST',
-                       url: '/pa165/rest/events/create',
-                       data: event
-                   });
-               };
-               
                 //display confirmation alert
                $rootScope.successAlert = 'A new item "' + createdItem.name + '" was created';
-               
                 //change view to main page
-                $location.path("/");
+                console.log(createdItem.id);
+                $location.path("/admin/items/"+createdItem.id);
             }, function error(response) {
                 //display error
                 console.log("error when creating item");

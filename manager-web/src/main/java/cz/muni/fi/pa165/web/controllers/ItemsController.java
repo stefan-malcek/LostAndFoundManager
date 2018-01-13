@@ -5,9 +5,11 @@
  */
 package cz.muni.fi.pa165.web.controllers;
 
+import cz.muni.fi.pa165.dto.EventDTO;
 import cz.muni.fi.pa165.dto.ItemCreateDTO;
 import cz.muni.fi.pa165.dto.ItemDTO;
 import cz.muni.fi.pa165.dto.QuestionsDTO;
+import cz.muni.fi.pa165.facade.EventFacade;
 import cz.muni.fi.pa165.facade.ItemFacade;
 import cz.muni.fi.pa165.web.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.web.exceptions.ResourceAlreadyExistingException;
@@ -36,6 +38,9 @@ public class ItemsController {
 
     @Inject
     private ItemFacade itemFacade;
+    
+    @Inject
+    private EventFacade eventFacade;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -107,6 +112,21 @@ public class ItemsController {
         logger.debug("rest canBeReturned()");
         try {
             return itemFacade.canBeReturned(id, questions);
+        } catch (Exception ex) {
+            logger.debug(ex.getMessage());
+            throw new InvalidParameterException();
+        }
+    }
+    
+   @RequestMapping(value = "haveEvent/{id}/", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public final boolean haveEvent(@PathVariable("id") long id) throws Exception {
+        logger.debug("rest haveEvent()");
+        try {
+            
+            for(EventDTO event : eventFacade.findAllEvents()) {
+                  if(event.getId() == id)  return true;
+            }
+            return false;
         } catch (Exception ex) {
             logger.debug(ex.getMessage());
             throw new InvalidParameterException();

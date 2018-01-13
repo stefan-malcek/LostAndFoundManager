@@ -28,8 +28,6 @@ lostAndFoundApp.controller('eventLossCtrl',
                     placeOfLoss: event.placeOfLoss,
                     dateOfLoss: toJSONLocal(event.dateOfLoss)
                 };
-
-                console.log("hello");
                 console.log(eventData);
                 $http({
                     method: 'POST',

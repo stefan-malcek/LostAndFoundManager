@@ -8,22 +8,27 @@ package cz.muni.fi.pa165.dto;
 import java.util.Date;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  *
  * @author Šimon Baláž
  */
 public class EventCreateDTO {
+
     private long id;
 
     @NotNull
     private ItemDTO item;
 
     private UserDTO owner;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateOfLoss;
+
     private String placeOfLoss;
 
     private UserDTO finder;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateOfFind;
     private String placeOfFind;
 
@@ -103,12 +108,24 @@ public class EventCreateDTO {
             return false;
         }
         EventDTO other = (EventDTO) obj;
-        if (placeOfFind != null ? !placeOfFind.equals(other.getPlaceOfFind()) : other.getPlaceOfFind() != null) return false;
-        if (placeOfLoss != null ? !placeOfLoss.equals(other.getPlaceOfLoss()) : other.getPlaceOfLoss() != null) return false;
-        if (dateOfLoss != null ? !dateOfLoss.equals(other.getDateOfLoss()) : other.getDateOfLoss() != null) return false;
-        if (dateOfFind != null ? !dateOfFind.equals(other.getDateOfFind()) : other.getDateOfFind() != null) return false;
-        if (finder != null ? !finder.equals(other.getFinder()) : other.getFinder() != null) return false;
-        if (owner != null ? !owner.equals(other.getOwner()) : other.getOwner() != null) return false;
+        if (placeOfFind != null ? !placeOfFind.equals(other.getPlaceOfFind()) : other.getPlaceOfFind() != null) {
+            return false;
+        }
+        if (placeOfLoss != null ? !placeOfLoss.equals(other.getPlaceOfLoss()) : other.getPlaceOfLoss() != null) {
+            return false;
+        }
+        if (dateOfLoss != null ? !dateOfLoss.equals(other.getDateOfLoss()) : other.getDateOfLoss() != null) {
+            return false;
+        }
+        if (dateOfFind != null ? !dateOfFind.equals(other.getDateOfFind()) : other.getDateOfFind() != null) {
+            return false;
+        }
+        if (finder != null ? !finder.equals(other.getFinder()) : other.getFinder() != null) {
+            return false;
+        }
+        if (owner != null ? !owner.equals(other.getOwner()) : other.getOwner() != null) {
+            return false;
+        }
         return Objects.equals(this.item, other.getItem());
     }
 
@@ -127,6 +144,5 @@ public class EventCreateDTO {
 
         return result;
     }
-    
-    
+
 }
