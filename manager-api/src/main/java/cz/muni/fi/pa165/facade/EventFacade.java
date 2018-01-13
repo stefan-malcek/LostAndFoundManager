@@ -143,4 +143,5 @@ public interface EventFacade {
     List<EventDTO> findEventsWithoutFind();
 
     List<StatisticsDTO> getStatistics(StatisticsType type);
+
 }

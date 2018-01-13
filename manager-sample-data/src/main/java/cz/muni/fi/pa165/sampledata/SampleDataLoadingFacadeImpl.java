@@ -50,11 +50,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Category others = category("Others", "Everything else ...");
         log.info("Loaded L&F categories.");
 
-        User admin = user("admin", "admin@lostandfound.com", "javajesuper", UserRole.ADMINISTRATOR);
+        User admin = user("admin", "admin@lostandfound.cz", "javajesuper", UserRole.ADMINISTRATOR);
         User jon = user("jonSnow", "youknow@nothing.ws", "lordCommander", UserRole.MEMBER);
-        User walt = user("waltWhite", "heisenberg@bluestuff.com", "methBoss737", UserRole.MEMBER);
-        User barry = user("barryAllen", "flash@starlabs.com", "runBarryRun", UserRole.MEMBER);
-        User deadpool = user("deadpool", "deadpool@unicorns.com", "deadpool", UserRole.MEMBER);
+        User walt = user("waltWhite", "heisenberg@bluestuff.cz", "methBoss737", UserRole.MEMBER);
+        User barry = user("barryAllen", "flash@starlabs.cz", "runBarryRun", UserRole.MEMBER);
+        User deadpool = user("deadpool", "deadpool@unicorns.cz", "deadpool", UserRole.MEMBER);
         log.info("Loaded L&F users.");
 
         Item laptop = item("MacBook", electro, ItemColor.GRAY, "MacBook Pro 2017 13\"", BigDecimal.valueOf(1.4), 2, 30, 21, null, null);

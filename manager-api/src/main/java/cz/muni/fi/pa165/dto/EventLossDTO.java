@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.Objects;
  * @author Adam Bananka
  */
 public class EventLossDTO {
+
     private long id;
 
     @NotNull
@@ -18,6 +20,7 @@ public class EventLossDTO {
     @NotNull
     private UserDTO owner;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateOfLoss;
     @NotNull
     @Size(min = 2, max = 256)
@@ -75,9 +78,15 @@ public class EventLossDTO {
             return false;
         }
         EventDTO other = (EventDTO) obj;
-        if (placeOfLoss != null ? !placeOfLoss.equals(other.getPlaceOfLoss()) : other.getPlaceOfLoss() != null) return false;
-        if (dateOfLoss != null ? !dateOfLoss.equals(other.getDateOfLoss()) : other.getDateOfLoss() != null) return false;
-        if (owner != null ? !owner.equals(other.getOwner()) : other.getOwner() != null) return false;
+        if (placeOfLoss != null ? !placeOfLoss.equals(other.getPlaceOfLoss()) : other.getPlaceOfLoss() != null) {
+            return false;
+        }
+        if (dateOfLoss != null ? !dateOfLoss.equals(other.getDateOfLoss()) : other.getDateOfLoss() != null) {
+            return false;
+        }
+        if (owner != null ? !owner.equals(other.getOwner()) : other.getOwner() != null) {
+            return false;
+        }
         return Objects.equals(this.item, other.getItem());
     }
 

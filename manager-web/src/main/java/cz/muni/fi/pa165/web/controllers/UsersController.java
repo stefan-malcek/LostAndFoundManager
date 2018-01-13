@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.web.controllers;
 
-import cz.muni.fi.pa165.dto.UserAuthenticateDTO;
-import cz.muni.fi.pa165.dto.UserDTO;
-import cz.muni.fi.pa165.dto.UserUpdateDTO;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.facade.UserFacade;
 import cz.muni.fi.pa165.web.exceptions.InvalidParameterException;
 import cz.muni.fi.pa165.web.exceptions.ResourceAlreadyExistingException;
@@ -32,10 +30,10 @@ public class UsersController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final UserDTO registerUser(@RequestBody UserDTO user, @RequestBody String password) throws Exception {
+    public final UserDTO registerUser(@RequestBody UserRegisterDTO registerDTO) throws Exception {
         logger.debug("rest registerUser()");
         try {
-            Long id = userFacade.register(user, password);
+            Long id = userFacade.register(registerDTO.getUser(), registerDTO.getPassword());
             return userFacade.findUserById(id);
         } catch (Exception ex) {
             logger.debug(ex.getMessage());
@@ -58,11 +56,10 @@ public class UsersController {
 
     @RequestMapping(value = "/{id}/pw", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final UserDTO changeUserPassword(@PathVariable("id") long id, @RequestBody UserAuthenticateDTO user,
-                                            @RequestBody String newPassword) throws Exception {
+    public final UserDTO changeUserPassword(@PathVariable("id") long id, @RequestBody UserChangePwDTO changeDto) throws Exception {
         logger.debug("rest changeUserPassword()");
         try {
-            userFacade.changePassword(user, newPassword);
+            userFacade.changePassword(changeDto.getUser(), changeDto.getNewPassword());
             return userFacade.findUserById(id);
         } catch (Exception ex) {
             logger.debug(ex.getMessage());
@@ -97,9 +94,10 @@ public class UsersController {
         return user;
     }
 
-    @RequestMapping(value = "/by_email/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/by_email/{email:.+}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final UserDTO findUserByEmail(@PathVariable("email") String email) throws Exception {
         logger.debug("rest findUserByEmail()", email);
+        System.out.println("\n\n\n\n\nEmail is " + email+" \n\n\n\n\n");
         UserDTO user = userFacade.findUserByEmail(email);
         if (user == null) {
             throw new ResourceNotFoundException();
@@ -109,7 +107,7 @@ public class UsersController {
 
     @RequestMapping(value = "/auth", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final boolean authenticateUser(@RequestBody UserAuthenticateDTO user) throws Exception{
+    public final boolean authenticateUser(@RequestBody UserAuthenticateDTO user) throws Exception {
         logger.debug("rest authenticateUser()");
         try {
             return userFacade.authenticate(user);
@@ -119,8 +117,7 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value = "/{id}/is_admin", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}/is_admin", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final boolean isAdministrator(@PathVariable("id") long id) {
         logger.debug("rest isAdministrator()");
         UserDTO user = userFacade.findUserById(id);

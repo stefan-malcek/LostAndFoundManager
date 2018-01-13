@@ -261,7 +261,7 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(1, res.size());
         Assert.assertEquals(findEvent, res.get(0));
     }
-
+    
     @Test
     public void testFindEventsWithoutFind() {
         events.add(lossEvent);
@@ -292,4 +292,5 @@ public class EventServiceTest extends AbstractTestNGSpringContextTests {
         List<StatisticsDTO> res = eventService.getStatistics(cities, StatisticsType.LOSS);
         Assert.assertEquals(5, res.size());
     }
+
 }

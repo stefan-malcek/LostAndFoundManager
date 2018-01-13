@@ -1,7 +1,7 @@
 'use strict';
 
 /* Defines application and its dependencies */
-var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute']);
+var lostAndFoundApp = angular.module('lostAndFoundApp', ['ngRoute', 'chart.js']);
 
 /* Configures URL fragment routing, e.g. #/product/1  */
 lostAndFoundApp.config(function ($routeProvider) {
@@ -9,6 +9,7 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/', {templateUrl: 'partials/intro.html'}).
             when('/lostItem', {templateUrl: 'partials/lostItem.html'}).
             when('/lostItemList', {templateUrl: 'partials/lostItemList.html', controller: 'lostItemListCtrl'}).
+            when('/items/admin/create', {templateUrl: 'partials/itemCreate.html', controller: 'itemCreateCtrl'}).
             when('/createLostItem', {templateUrl: 'partials/createLostItem.html', controller: 'createLostItemCtrl'}).
             when('/foundItemList', {templateUrl: 'partials/foundItemList.html', controller: 'foundItemListCtrl'}).
             when('/admin/items', {templateUrl: 'partials/admin_items.html', controller: 'itemListCtrl'}).
@@ -23,18 +24,37 @@ lostAndFoundApp.config(function ($routeProvider) {
             when('/events/without_loss', {templateUrl: 'partials/eventListWithoutLoss.html', controller: 'eventListWithoutLossCtrl'}).
             when('/events/without_find', {templateUrl: 'partials/eventListWithoutFind.html', controller: 'eventListWithoutFindCtrl'}).
             when('/events/:eventId', {templateUrl: 'partials/eventDetail.html', controller: 'eventDetailCtrl'}).
-            when('/events/add_find/:itemId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
-            when('/events/add_loss/:itemId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
-            when('/register', {templateUrl: 'partials/register.html', controller: 'registerCtrl'}).
-            when('/login', {templateUrl: 'partials/login.html', controller: 'loginCtrl'}).
+            when('/events/add_find/:eventId', {templateUrl: 'partials/eventFind.html', controller: 'eventFindCtrl'}).
+            when('/events/add_loss/:eventId', {templateUrl: 'partials/eventLoss.html', controller: 'eventLossCtrl'}).
+            when('/register', {templateUrl: 'partials/userRegister.html', controller: 'registerCtrl'}).
+            when('/login', {templateUrl: 'partials/userLogin.html', controller: 'loginCtrl'}).
+            when('/logout', {templateUrl: 'partials/userLogout.html', controller: 'logoutCtrl'}).
             when('/users', {templateUrl: 'partials/userList.html', controller: 'usersListCtrl'}).
             when('/user/:userId', {templateUrl: 'partials/userDetail.html', controller: 'userDetailCtrl'}).
+            when('/user/:userId/update', {templateUrl: 'partials/userUpdateName.html', controller: 'userUpdateNameCtrl'}).
+            when('/user/:userId/password', {templateUrl: 'partials/userUpdatePassword.html', controller: 'userUpdatePasswordCtrl'}).
+            when('/statistics', {templateUrl: 'partials/statistics.html', controller: 'statisticsCtrl'}).
             otherwise({redirectTo: '/'});
 });
+
 /*
  * alert closing functions defined in root scope to be available in every template
  */
 lostAndFoundApp.run(function ($rootScope) {
+    $rootScope.currentUser = {
+        id: undefined,
+        email: undefined,
+        isAdmin: false
+    };
+
+    $rootScope.isAuthenticated = function () {
+        return $rootScope.currentUser.id !== undefined;
+    };
+
+    $rootScope.isAdmin = function () {
+        return $rootScope.isAuthenticated() && $rootScope.currentUser.isAdmin;
+    };
+
     $rootScope.hideSuccessAlert = function () {
         $rootScope.successAlert = undefined;
     };
