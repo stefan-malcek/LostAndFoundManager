@@ -24,8 +24,9 @@ body {
 }
 
 #eventTypeComboBox{
-    font-size: 20px; 
+    font-size: 18px; 
     width: 100px; 
+    display: inline;
 }
 
 table tr td:last-child {
@@ -63,7 +64,4 @@ h1, .h1, h2, .h2, h3, .h3 {
 .smallTopPaddingDiv 
 {
     padding-top: 8px;
-}
-#eventTypeComboBox {
-    display: inline;
 }

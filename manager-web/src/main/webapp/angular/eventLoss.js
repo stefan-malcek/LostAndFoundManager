@@ -1,25 +1,26 @@
 lostAndFoundApp.controller('eventLossCtrl',
         function ($scope, $routeParams, $http, $location, $rootScope) {
-            
+
             var eventId = $routeParams.eventId;
-            
+
             var retrievedEvent;
-            $http.get('/pa165/rest/events/' + eventId).then(function (response) { 
+            $http.get('/pa165/rest/events/' + eventId).then(function (response) {
                 retrievedEvent = response.data;
-                console.log(retrievedEvent);       
+                console.log(retrievedEvent);
             });
 
             var user;
-            $http.get('/pa165/rest/users/' + 2).then(function (response) {
+            $http.get('/pa165/rest/users/' + $rootScope.currentUser.id).then(function (response) {
                 user = response.data;
             });
-   
+            console.log($rootScope.currentUser.id);
+
             $scope.event = {
-                placeOfLoss: "Brno",
-                dateOfLoss: new Date(2018, 01, 10, 5, 6, 1, 1)
+                placeOfLoss: "",
+                dateOfLoss: new Date()
             };
 
-            $scope.addLoosing = function (event) {          
+            $scope.addLoosing = function (event) {
                 var eventData = {
                     id: retrievedEvent.id,
                     item: retrievedEvent.item,
