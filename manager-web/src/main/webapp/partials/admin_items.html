@@ -6,7 +6,7 @@
     </div> <!-- /container -->
 </div><!-- /blue -->
 
-<div class="container">
+<div class="container mtb ng-scope">
     <div class="row">
         <table class="table">
             <thead>
@@ -28,7 +28,7 @@
                     <td ng-if="item.returned === null"></td>
                     <td ng-if="item.returned !== null">{{formatDate(item.returned) | date:'mediumDate'}}</td>
                     <td><a href="#!/admin/items/{{item.id}}" class="btn btn-info" >View</a></td>
-            </tr>
+                </tr>
             </tbody>
         </table>
     </div></div>

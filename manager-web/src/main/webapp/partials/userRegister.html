@@ -5,12 +5,12 @@
         </div><!-- /row -->
     </div> <!-- /container -->
 </div><!-- /blue -->
-
+<div class="container mtb ng-scope">
+    <div class="row">
 <form name="form" novalidate class="form-horizontal">
-    <div class="col-lg-5 col-lg-offset-2 centered">
         <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
             <label for="name" class="col-sm-2 control-label">Name</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input placeholder="name" id="name" type="text" ng-minlength="2" name="name" class="form-control"
                        ng-model="user.name" required/>
                 <p class="help-block" ng-show="form.name.$error.required">name is required</p>
@@ -20,7 +20,7 @@
 
         <div class="form-group" ng-class="{'has-error': !(form.email.$valid)}">
             <label for="email" class="col-sm-2 control-label">E-mail</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input placeholder="e-mail" id="email" type="email" name="email" class="form-control"
                        ng-model="user.email" required/>
                 <p class="help-block" ng-show="form.email.$error.required">email is required</p>
@@ -29,7 +29,7 @@
 
         <div class="form-group" ng-class="{'has-error': !(form.password.$valid)}">
             <label for="password" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input placeholder="password" id="password" type="password" name="password" ng-minlength="6" class="form-control"
                        ng-model="password" required/>
                 <p class="help-block" ng-show="form.password.$error.required">password is required</p>
@@ -39,7 +39,7 @@
 
         <div class="form-group" ng-class="{'has-error': !(form.passwordRepeat.$valid)}">
             <label for="passwordRepeat" class="col-sm-2 control-label">Repeat password</label>
-            <div class="col-sm-10">
+            <div class="col-sm-4">
                 <input placeholder="repeat password" id="passwordRepeat" type="password" name="passwordRepeat" ng-minlength="6" class="form-control"
                        ng-model="passwordRepeat" required/>
                 <p class="help-block" ng-show="form.passwordRepeat.$error.required">repeated password is required</p>
@@ -48,7 +48,16 @@
         </div>
 
         <!-- show disabled button if form is not valid -->
-        <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="register(user, password, passwordRepeat)">Register
+        
+        <div class="form-group">
+        <label  class="col-sm-2 control-label"></label>
+        <div class="col-sm-4 smallTopPadding">
+              <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="register(user, password, passwordRepeat)">Register
         </button>
+        </div>
+            
     </div>
+      
 </form>
+        </div>    
+</div>

@@ -6,22 +6,25 @@
 
     </div>
 </div>
-
-<form name="form"  novalidate class="form-horizontal">
-    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
-        <label for="name" class="col-sm-2 control-label">User name</label>
-        <div class="col-sm-4">
-            <input placeholder="name" id="name" type="text" ng-minlength="2" name="name" class="form-control"
-                   ng-model="user.name" required/>
-            <p class="help-block" ng-show="form.name.$error.required">name is required</p>
-            <p class="help-block" ng-show="form.name.$error.minLength">name must be at least 2 characters</p>
-        </div>
+<div class="container mtb ng-scope">
+    <div class="row">
+        <form name="form"  novalidate class="form-horizontal">
+            <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+                <label for="name" class="col-sm-2 control-label">User name</label>
+                <div class="col-sm-4">
+                    <input placeholder="name" id="name" type="text" ng-minlength="2" name="name" class="form-control"
+                           ng-model="user.name" required/>
+                    <p class="help-block" ng-show="form.name.$error.required">name is required</p>
+                    <p class="help-block" ng-show="form.name.$error.minLength">name must be at least 2 characters</p>
+                </div>
+            </div>
+            <!-- show disabled button if form is not valid -->
+            <div class="form-group">
+                <label  class="col-sm-2 control-label"></label>
+                <div class="col-sm-4 smallTopPadding">
+                    <button ng-disabled="!form.$valid" ng-click="update(user)" class="btn btn-primary" type="submit" >Update user</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <!-- show disabled button if form is not valid -->
-    <div class="form-group">
-        <label  class="col-sm-2 control-label"></label>
-        <div class="col-sm-4 smallTopPadding">
-            <button ng-disabled="!form.$valid" ng-click="update(user)" class="btn btn-primary" type="submit" >Update user</button>
-        </div>
-    </div>
-</form>
+</div>
