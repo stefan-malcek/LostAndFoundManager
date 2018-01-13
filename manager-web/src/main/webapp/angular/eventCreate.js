@@ -24,10 +24,10 @@ lostAndFoundApp.controller('eventCreateCtrl',  function ($scope, $routeParams, $
                     item:  $scope.item,
                     owner: null,
                     finder: null,
-                    placeOfLoss: eventCreate.placeOfLoss,
+                    placeOfLoss: eventCreate.placeOfLoss === "" ? null : eventCreate.placeOfLoss,
                     dateOfLoss: toJSONLocal(eventCreate.dateOfLoss),
                     dateOfFind: toJSONLocal(eventCreate.dateOfFind),
-                    placeOfFind: eventCreate.placeOfFind
+                    placeOfFind: eventCreate.placeOfFind === "" ? null : eventCreate.placeOfFind
                 };
             if(lost===true) {
                 eventData.owner = $rootScope.currentUser;
@@ -40,7 +40,8 @@ lostAndFoundApp.controller('eventCreateCtrl',  function ($scope, $routeParams, $
                 url: '/pa165/rest/events/create',
                 data: eventData
             }).then(function success(response) {
-                 console.log("fuuhu");
+                   $location.path("/admin/items/"+$scope.item.id);
+                   $rootScope.successAlert = 'Event created!';
             }, function error(response) {
                 switch (response.data.code) {
                     case 'PersistenceException':
